@@ -1,8 +1,8 @@
-on: 
+on:
   push:
     branches:
       - main
-      
+
 name: Build and deploy GH Pages
 jobs:
   build:
@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3.0.0
+      - run: echo blog.rqda.wtf > static/CNAME
       - name: build_and_deploy
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
