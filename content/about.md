@@ -1,11 +1,21 @@
 +++
 title = "About me"
-date = 2023-09-19
+date = 2023-09-18
 template = "terminal/templates/page.html"
 +++
 
-# hi
-CTFをしています。pwn🐘が好きです。 たまにblockchainもやります。
+I'm pwnable.
+
 <!-- more -->
-- CTF (pwn)
-- 低レイヤ
+
+## Interests
+
+- CTF (pwn,blockchain)
+- Neovim
+- Arch linux
+
+## Contacts
+
+-  Email: `info@rqda.wtf`
+-  GitHub: [@rqdaA](https://github.com/rqdaA)
+-  Twitter: [@907903](https://twitter.com/907903)
