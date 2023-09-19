@@ -1,10 +1,41 @@
-{% extends "base.html" %}
+{% extends "terminal/templates/index.html" %}
 
-{% block content %}
-<h1 class="title">
-    This is my blog!!
-</h1>
+{% block extra_head %}
+{% if config.extra.logo_icon %}
+<link rel="stylesheet" href="{{ get_url(path="icon.css", trailing_slash=false) | safe }}">
+{% endif %}
+{% endblock %}
 
-<p>click <a href="{{ get_url(path='@/blog/_index.md') }}">here</a> to see my posts!</p>
 
-{% endblock content %}
+{% block header %}
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            {% if config.extra.logo_icon %}
+            <img src="{{ config.extra.logo_icon | safe }}" alt="">
+            {% endif %}
+
+            {%- if config.extra.logo_home_link %}
+            {% set logo_link = config.extra.logo_home_link %}
+            {% else %}
+            {% set logo_link = config.base_url %}
+            {% endif -%}
+            <a href="{{ logo_link | safe }}" style="text-decoration: none;">
+                <div class="logo">
+                    {% block logo_content %}
+                    {%- if config.extra.logo_text %}
+                    {{ config.extra.logo_text }}
+                    {% else %}
+                    Terminimal theme
+                    {% endif -%}
+                    {% endblock logo_content %}
+                </div>
+            </a>
+        </div>
+    </div>
+
+    {% block header_menu %}
+    {{ menu_macros::menu(config=config, current_path=current_path) }}
+    {% endblock header_menu %}
+</header>
+{% endblock header %}

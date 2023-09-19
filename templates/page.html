@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="post">
+    {{ post_macros::header(page=page) }}
+    {% if page.toc %}
+    <h1>Table of Content</h1>
+    <ul>
+        {% for h1 in page.toc %}
+        <li>
+            <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
+            {% if h1.children %}
+            <ul>
+                {% for h2 in h1.children %}
+                <li>
+                    <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    <hr>
+    {% endif %}
+
+    {{ post_macros::content(page=page, summary=false) }}
+    {{ post_macros::earlier_later(page=page) }}
+</div>
+{% endblock content %}
