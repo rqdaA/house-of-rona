@@ -33,7 +33,7 @@ menu_items = [
 ]
 logo_text = "House-of-Rona"
 logo_icon = "https://github.com/rqdaA.png"
-favicon = "/images/favicon.ico"
+favicon = "/images/favicon.png"
 favicon_mimetype = "image/png"
 # Whether to show links to earlier and later posts
 # on each post page (defaults to true).
@@ -44,5 +44,3 @@ enable_post_view_navigation = true
 # Defaults to "Thanks for reading! Read other posts?"
 post_view_navigation_prompt = "Other posts"
 page_titles = "combined"
-
-use_full_hack_font = true
