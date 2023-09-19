@@ -23,7 +23,7 @@ highlight_code = true
 [extra]
 accent_color = "green-auto"
 background_color = "dark"
-copyright_html = "&#169 2023 rona"
+copyright_html = "&#169 2023 rona 🐈"
 menu_items = [
     { name = "tags", url = "$BASE_URL/tags" },
     { name = "󰄛whoami", url = "$BASE_URL/about" },
