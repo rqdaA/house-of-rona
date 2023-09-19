@@ -1,0 +1,13 @@
+.footnote {
+  &-definition {
+    display: flex;
+  }
+
+  &-definition-label {
+    &::after {
+      content: ": ";
+    }
+
+    margin: auto 10px auto 0;
+  }
+}

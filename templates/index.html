@@ -1,8 +1,9 @@
 {% extends "terminal/templates/index.html" %}
 
 {% block extra_head %}
+<link rel="stylesheet" href="{{ get_url(path='footnote.css', trailing_slash=false) | safe }}">
 {% if config.extra.logo_icon %}
-<link rel="stylesheet" href="{{ get_url(path="icon.css", trailing_slash=false) | safe }}">
+<link rel="stylesheet" href="{{ get_url(path='icon.css', trailing_slash=false) | safe }}">
 {% endif %}
 {% endblock %}
 
