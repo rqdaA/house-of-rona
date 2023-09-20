@@ -16,6 +16,6 @@ I'm pwnable.
 
 ## Contacts
 
--  Email: `info[at]rqda.wtf`
--  GitHub: [@rqdaA](https://github.com/rqdaA)
--  Twitter: [@907903](https://twitter.com/907903)
+- {{ nerdfont(name="cod-mail") }} Email: `info[at]rqda.wtf`
+- {{ nerdfont(name="cod-github") }}GitHub: [@rqdaA](https://github.com/rqdaA)
+- {{ nerdfont(name="cod-twitter") }}Twitter: [@907903](https://twitter.com/907903)

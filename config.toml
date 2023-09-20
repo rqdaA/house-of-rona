@@ -25,11 +25,11 @@ accent_color = "green-auto"
 background_color = "dark"
 copyright_html = "&#169 2023 rona 🐈"
 menu_items = [
-    { name = "tags", url = "$BASE_URL/tags" },
-    { name = "󰄛whoami", url = "$BASE_URL/about" },
+    { name = "<i class='nf nf-oct-tag'></i>tags", url = "$BASE_URL/tags" },
+    { name = "<i class='nf nf-dev-github_alt'></i>whoami", url = "$BASE_URL/about" },
     # set newtab to true to make the link open in new tab
-    { name = "github", url = "https://github.com/rqdaA", newtab = true },
-    { name = "twitter", url = "https://twitter.com/907903", newtab = true },
+    { name = "<i class='nf nf-cod-github_inverted'></i>github", url = "https://github.com/rqdaA", newtab = true },
+    { name = "<i class='nf nf-cod-twitter'></i>twitter", url = "https://twitter.com/907903", newtab = true },
 ]
 logo_text = "House-of-Rona"
 logo_icon = "https://github.com/rqdaA.png"
