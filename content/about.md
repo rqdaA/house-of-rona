@@ -1,5 +1,6 @@
 +++
 title = "About me"
+description = "pwn🐘に気持ちがあります"
 date = 2023-09-18
 template = "terminal/templates/page.html"
 +++
