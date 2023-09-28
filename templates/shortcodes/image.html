@@ -1,0 +1,7 @@
+{% if path -%}
+{% set image = resize_image(path=page.colocated_path ~ path, width=800, height=300, op="fit" ) %}
+<div class="inserted_img">
+    <img src="{{ image.url }}" alt=""/>
+    {% if caption -%}<p>{{ caption }}</p>{% endif -%}
+</div>
+{% endif -%}

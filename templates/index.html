@@ -3,7 +3,10 @@
 {% block extra_head %}
 <meta name="google-site-verification" content="I4O4hRvGX4CkU3wvuZTczjjZFLuG3YINxBvx2be_tHY">
 <link rel="stylesheet" href="{{ get_url(path='footnote.css', trailing_slash=false) | safe }}">
+<link rel="stylesheet" href="{{ get_url(path='page.css', trailing_slash=false) | safe }}">
 <link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@907903">
 {% if config.extra.logo_icon -%}
 <link rel="stylesheet" href="{{ get_url(path='icon.css', trailing_slash=false) | safe }}">
 {% endif -%}
