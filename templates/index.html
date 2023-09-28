@@ -1,11 +1,20 @@
 {% extends "terminal/templates/index.html" %}
 
 {% block extra_head %}
+<meta name="google-site-verification" content="I4O4hRvGX4CkU3wvuZTczjjZFLuG3YINxBvx2be_tHY">
 <link rel="stylesheet" href="{{ get_url(path='footnote.css', trailing_slash=false) | safe }}">
 <link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
-{% if config.extra.logo_icon %}
+{% if config.extra.logo_icon -%}
 <link rel="stylesheet" href="{{ get_url(path='icon.css', trailing_slash=false) | safe }}">
-{% endif %}
+{% endif -%}
+<meta author="Rona (rqdaA)">
+{% if page.description -%}
+<meta description="{{ page.description }}">
+{% elif page.summary -%}
+<meta description="{{ page.summary }}">
+{% else -%}
+<meta description="Rona's Blog">
+{% endif -%}
 {% endblock %}
 
 
@@ -41,3 +50,53 @@
     {% endblock header_menu %}
 </header>
 {% endblock header %}
+
+{% block content %}
+<div class="posts">
+    {%- if paginator %}
+    {%- set show_pages = paginator.pages -%}
+    {% else %}
+    {%- set show_pages = section.pages -%}
+    {% endif -%}
+
+    {%- for page in show_pages %}
+    <div class="post on-list">
+        {{ post_macros::header(page=page) }}
+        <div class="post-content">
+            {%- if page.description %}
+            {{ page.description | safe }}
+            {%- elif page.summary %}
+            {{ page.summary | safe }}
+            {%- endif %}
+        </div>
+        <div>
+            <!-- &#xFE0E; -- force text style - some devices render this as emoji -->
+            <a class="read-more button" href="{{ page.permalink | safe }}">
+                <span class="button__text">Read more</span>&nbsp;
+                <span class="button__icon">&#8617;&#xFE0E;</span>
+            </a>
+        </div>
+    </div>
+    {% endfor -%}
+    <div class="pagination">
+        <div class="pagination__buttons">
+            {%- if paginator.previous %}
+            <span class="button previous">
+                        <a href="{{ paginator.previous | safe }}">
+                            <span class="button__icon">←</span>&nbsp;
+                            <span class="button__text">Newer posts</span>
+                        </a>
+                    </span>
+            {% endif -%}
+            {%- if paginator.next %}
+            <span class="button next">
+                        <a href="{{ paginator.next | safe }}">
+                            <span class="button__text">Older posts</span>&nbsp;
+                            <span class="button__icon">→</span>
+                        </a>
+                    </span>
+            {% endif -%}
+        </div>
+    </div>
+</div>
+{% endblock content %}
