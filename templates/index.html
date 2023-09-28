@@ -1,24 +1,28 @@
 {% extends "terminal/templates/index.html" %}
 
 {% block extra_head %}
-<meta name="google-site-verification" content="I4O4hRvGX4CkU3wvuZTczjjZFLuG3YINxBvx2be_tHY">
 <link rel="stylesheet" href="{{ get_url(path='footnote.css', trailing_slash=false) | safe }}">
 <link rel="stylesheet" href="{{ get_url(path='page.css', trailing_slash=false) | safe }}">
 <link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@907903">
+
+<meta name="google-site-verification" content="I4O4hRvGX4CkU3wvuZTczjjZFLuG3YINxBvx2be_tHY">
 {% if config.extra.logo_icon -%}
 <link rel="stylesheet" href="{{ get_url(path='icon.css', trailing_slash=false) | safe }}">
 {% endif -%}
-<meta author="Rona (rqdaA)">
-{% if page.description -%}
-<meta description="{{ page.description }}">
-{% elif page.summary -%}
-<meta description="{{ page.summary }}">
-{% else -%}
-<meta description="Rona's Blog">
-{% endif -%}
-{% endblock %}
+
+{% block seo_head %}
+<meta property="og:title" content="House-of-Rona">
+<meta property="og:image" content="/images/icon.jpg">
+<meta property="og:description" content="Rona's Blog">
+<meta name="twitter:site" content="@907903">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="House-of-Rona">
+<meta name="twitter:image" content="/images/icon.jpg">
+<meta property="author" content="Rona (rqdaA)">
+<meta property="description" content="Rona's Blog">
+{% endblock seo_head %}
+
+{% endblock extra_head %}
 
 
 {% block header %}

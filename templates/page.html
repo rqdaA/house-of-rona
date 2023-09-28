@@ -4,6 +4,26 @@
 {{ title_macros::title(page_title=page.title, main_title=config.title) }}
 {%- endblock -%}
 
+{% block seo_head %}
+<meta property="og:title" content="{{ page.title }} | House-of-Rona">
+<meta property="og:image" content="/images/icon.jpg">
+<meta name="twitter:site" content="@907903">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page.title }} | House-of-Rona">
+<meta name="twitter:image" content="/images/icon.jpg">
+<meta property="author" content="Rona (rqdaA)">
+{% if page.description -%}
+<meta property="description" content="{{ page.description }}">
+<meta property="og:description" content="{{ page.description }}">
+{% elif page.summary -%}
+<meta property="description" content="{{ page.summary }}">
+<meta property="og:description" content="{{ page.summary }}">
+{% else -%}
+<meta property="description" content="Rona's Blog">
+<meta property="og:description" content="Rona's Blog">
+{% endif -%}
+{% endblock %}
+
 {% block content %}
 <div class="post">
     {{ post_macros::header(page=page) }}
