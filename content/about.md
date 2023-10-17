@@ -5,7 +5,7 @@ date = 2023-09-18
 template = "terminal/templates/page.html"
 +++
 
-I'm pwnable.
+食べて寝るだけ。
 
 <!-- more -->
 
