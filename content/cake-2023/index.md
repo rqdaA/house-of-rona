@@ -1,7 +1,7 @@
 +++
 title = "CakeCTF 2023"
 date = 2023-11-19
-description = "CTFを始めて1年が立ちました"
+description = "CTFを始めて1年が経ちました"
 [taxonomies]
 tags = ["pwn", "C++", "Buffer Overflow", "ROP"]
 +++
