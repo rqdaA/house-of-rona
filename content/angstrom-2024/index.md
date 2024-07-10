@@ -1,7 +1,7 @@
 +++
 title = "Angstorm 2024"
 date = 2024-05-30
-description = ""
+description = "heap問はいいぞ"
 [taxonomies]
 tags = ["pwn", "heap"]
 +++
@@ -476,7 +476,7 @@ void alloc() {
 	// ----------
 	// VULN ABOVE !!!!!!
 	// ----------
-	
+
 	printf("chunk allocated at index: %d\n", idx);
 	chunks[idx++] = chunk;
 }
@@ -514,7 +514,7 @@ int main() {
 	menu();
 	for(;;) {
 		printf("your choice: ");
-		switch(readint()) { 
+		switch(readint()) {
 		case 1:
 			alloc();
 			break;
