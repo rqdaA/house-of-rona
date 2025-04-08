@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>2025年のpwn問を全部解くチャレンジ | House-of-Rona</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://blog.rqda.wtf/style.css">
+    <link rel="stylesheet" href="https://blog.rqda.wtf/color/green-auto.css">
+
+        <link rel="stylesheet" href="https://blog.rqda.wtf/color/background_dark.css">
+    
+    <link rel="stylesheet" href="https://blog.rqda.wtf/font-hack-subset.css">
+
+        <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+    
+<link rel="stylesheet" href="https://blog.rqda.wtf/footnote.css">
+<link rel="stylesheet" href="https://blog.rqda.wtf/page.css">
+<link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
+
+<meta name="google-site-verification" content="I4O4hRvGX4CkU3wvuZTczjjZFLuG3YINxBvx2be_tHY">
+<link rel="stylesheet" href="https://blog.rqda.wtf/icon.css">
+
+<meta property="og:title" content="2025年のpwn問を全部解くチャレンジ | House-of-Rona">
+<meta property="og:image" content="https://github.com/rqdaA.png">
+<meta name="twitter:site" content="@907903">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="2025年のpwn問を全部解くチャレンジ | House-of-Rona">
+<meta name="twitter:image" content="https://github.com/rqdaA.png">
+<meta property="author" content="Rona (rqdaA)">
+<meta property="description" content="打倒keymoon">
+<meta property="og:description" content="打倒keymoon">
+
+
+</head>
+
+<body class="">
+<div class="container">
+    
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            
+            <img src="https://github.com/rqdaA.png" alt="">
+            
+            
+            <a href="https://blog.rqda.wtf" style="text-decoration: none;">
+                <div class="logo">
+                    
+                    House-of-Rona
+                    
+                </div>
+            </a>
+        </div>
+    </div>
+
+    
+    <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://blog.rqda.wtf/tags"><i class='nf nf-oct-tag'></i>tags</a></li>
+            
+                <li><a href="https://blog.rqda.wtf/about"><i class='nf nf-dev-github_alt'></i>whoami</a></li>
+            
+                <li><a href="https://github.com/rqdaA" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-github_inverted'></i>github</a></li>
+            
+                <li><a href="https://twitter.com/907903" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-twitter'></i>twitter</a></li>
+            </ul>
+        </nav>
+    
+    
+    
+</header>
+
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="https://blog.rqda.wtf/pwn-2025/">2025年のpwn問を全部解くチャレンジ</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2025-03-20
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/pwn/">#pwn</a></span>
+    
+
+    
+    <h1>Table of Content</h1>
+    <ul>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/pwn-2025/#dui-xiang-tonaruwen-ti">対象となる問題</a>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/pwn-2025/#kalmarctf-3-7-3-9">KalmarCTF (3&#x2F;7 - 3&#x2F;9)</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/pwn-2025/#merger">Merger</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/pwn-2025/#decore">decore</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/pwn-2025/#loadall-js">loadall.js</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/pwn-2025/#kalmarvm">KalmarVM</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/pwn-2025/#maestro-revenge">Maestro Revenge</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/pwn-2025/#tpctf-3-8-3-10">tpctf (3&#x2F;8 - 3&#x2F;10)</a>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/pwn-2025/#utctf-3-14-3-16">utctf (3&#x2F;14 - 3&#x2F;16)</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/pwn-2025/#tic-tac-toe">Tic Tac Toe</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/pwn-2025/#retirement-plan">RETirement Plan</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/pwn-2025/#secbof">secbof</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/pwn-2025/#e-corp-part-2">E-Corp Part 2</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/pwn-2025/#alpacahack-round-10-3-23">AlpacaHack round 10 (3&#x2F;23)</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/pwn-2025/#oyster">Oyster</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/pwn-2025/#kangaroo">Kangaroo</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/pwn-2025/#takahashi">Takahashi</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/pwn-2025/#giraffe-ko">giraffe.ko</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+    <hr>
+    
+
+    
+        <div class="post-content">
+            <p><a href="https://ptr-yudai.hatenablog.com/entry/2019/07/01/143652">https://ptr-yudai.hatenablog.com/entry/2019/07/01/143652</a>にインスパイアされました。
+順次追加予定。</p>
+<h1 id="dui-xiang-tonaruwen-ti">対象となる問題</h1>
+<ul>
+<li>問題のバイナリがある</li>
+<li>writeupが見つかる or 自分で解ける</li>
+</ul>
+<hr />
+<h1 id="kalmarctf-3-7-3-9">KalmarCTF (3/7 - 3/9)</h1>
+<h2 id="merger">Merger</h2>
+<p>To be updated</p>
+<h2 id="decore">decore</h2>
+<p>To be updated</p>
+<h2 id="loadall-js">loadall.js</h2>
+<p>To be updated</p>
+<h2 id="kalmarvm">KalmarVM</h2>
+<p>To be updated</p>
+<h2 id="maestro-revenge">Maestro Revenge</h2>
+<p>To be updated</p>
+<hr />
+<h1 id="tpctf-3-8-3-10">tpctf (3/8 - 3/10)</h1>
+<p><a href="/tpctf-2025">writeup</a></p>
+<hr />
+<h1 id="utctf-3-14-3-16">utctf (3/14 - 3/16)</h1>
+<h2 id="tic-tac-toe">Tic Tac Toe</h2>
+<p>Stack BoFでuserが勝ったかどうかのフラグを書き換えることができる <br />
+<a href="https://blog.rqda.wtf/pwn-2025/./utctf_ticcatcoe.py">solver</a></p>
+<h2 id="retirement-plan">RETirement Plan</h2>
+<p>StackがRWXかつStack BoFがあるのでshellcode書くだけ <br />
+<a href="https://blog.rqda.wtf/pwn-2025/./utctf_retirement.py">solver</a></p>
+<h2 id="secbof">secbof</h2>
+<p>Stack BoFがあるのでROPでOpen Read Write (ORW)やるだけ<br />
+<a href="https://blog.rqda.wtf/pwn-2025/./utctf_secbof.py">solver</a></p>
+<h2 id="e-corp-part-2">E-Corp Part 2</h2>
+<p>To be updated</p>
+<hr />
+<h1 id="alpacahack-round-10-3-23">AlpacaHack round 10 (3/23)</h1>
+<h2 id="oyster">Oyster</h2>
+<p>0文字のパスワードを入力すると<code>cred.err</code>が0クリアされるので、<code>system(&quot;/bin/sh&quot;)</code>に到達できる。</p>
+<p><a href="https://blog.rqda.wtf/pwn-2025/./alpaca_r10_oyster.py">solver</a></p>
+<h2 id="kangaroo">Kangaroo</h2>
+<p><code>index = - (0x10000000000000000 / 72)</code>を入力するとOverflowが発生する。<code>-256204778801521543</code>を与えたところ<code>fn_clear</code>が書き換えられた。</p>
+<p><code>fn_clear</code>を<code>printf@plt</code>に向けることでFSBが可能になったので、これを用いてlibcをleakした。これで<code>system</code>関数のアドレスが得られたので、<code>fn_clear</code>を<code>system</code>関数に向けることでshellを得た。</p>
+<p><a href="https://blog.rqda.wtf/pwn-2025/./alpaca_r10_kangraroo.py">solver</a></p>
+<h2 id="takahashi">Takahashi</h2>
+<p>C++の<code>priority_queue</code>が使われている。構造体はvectorと変わらないようです。(vectorの構造とexploit方法は <a href="https://ptr-yudai.hatenablog.com/entry/2021/11/30/235732">C++のpwn/revで使うSTLコンテナの構造とバグパターン一覧</a>を参照)</p>
+<p>無限回、任意のタイミングでpushとpopができるということはすなわちheap上でのAAWを意味する。このプリミティブを用いて<code>tcache_per_thread</code>を書き換えることで<code>tcache poisoning</code>をして、priority_queueを破壊し、メンバをGOTに向けることでGOT Overwriteをした。</p>
+<p><a href="https://blog.rqda.wtf/pwn-2025/./alpaca_r10_takahashi.py">solver</a></p>
+<h2 id="giraffe-ko">giraffe.ko</h2>
+
+        </div>
+
+    
+        <div class="pagination">
+            <div class="pagination__title">
+                <span class="pagination__title-h">Other posts</span>
+                <hr />
+            </div>
+            <div class="pagination__buttons">
+                    <span class="button previous">
+                        <a href="https://blog.rqda.wtf/tpctf-2025/">
+                            <span class="button__icon">←</span>&nbsp;
+                            <span class="button__text">TPCTF 2025</span>
+                        </a>
+                    </span>
+                
+                
+                    <span class="button next">
+                        <a href="https://blog.rqda.wtf/dreamhack-inv-2025/">
+                            <span class="button__text">Writeup of DreamHack Invitational 2025</span>&nbsp;
+                            <span class="button__icon">→</span>
+                        </a>
+                    </span>
+                </div>
+        </div>
+    
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user">&#169 2023 Rona 🐈</div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>
