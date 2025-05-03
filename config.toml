@@ -25,7 +25,7 @@ highlight_code = true
 [extra]
 accent_color = "green-auto"
 background_color = "dark"
-copyright_html = "&#169 2023 Rona 🐈"
+copyright_html = "&#169 2025 Rona 🐈"
 menu_items = [
     { name = "<i class='nf nf-oct-tag'></i>tags", url = "$BASE_URL/tags" },
     { name = "<i class='nf nf-dev-github_alt'></i>whoami", url = "$BASE_URL/about" },
