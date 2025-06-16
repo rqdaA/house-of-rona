@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
+    <title>House-of-Rona - C++</title>
+    <subtitle>Ronaの雑記</subtitle>
+    <link href="https://blog.rqda.wtf/tags/c/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://blog.rqda.wtf"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2023-11-19T00:00:00+00:00</updated>
+    <id>https://blog.rqda.wtf/tags/c/atom.xml</id>
+    <entry xml:lang="ja">
+        <title>CakeCTF 2023</title>
+        <published>2023-11-19T00:00:00+00:00</published>
+        <updated>2023-11-19T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://blog.rqda.wtf/cake-2023/" type="text/html"/>
+        <id>https://blog.rqda.wtf/cake-2023/</id>
+        
+        <summary type="html">&lt;p&gt;CakeCTFにTPCとして参加しました。&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="ja">
+        <title>vsctf 2023 | llm-wrapper</title>
+        <published>2023-09-29T00:00:00+00:00</published>
+        <updated>2023-09-29T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://blog.rqda.wtf/vsctf-2023/" type="text/html"/>
+        <id>https://blog.rqda.wtf/vsctf-2023/</id>
+        
+        <summary type="html">&lt;p&gt;C++の問題が解きたかったので、&lt;a href=&quot;https:&#x2F;&#x2F;ctftime.org&#x2F;event&#x2F;2053&quot;&gt;vsctf&lt;&#x2F;a&gt;のllm-wrapperを解きました。&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+</feed>

