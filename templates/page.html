@@ -7,7 +7,7 @@
 {% block seo_head %}
 <meta property="og:title" content="{{ page.title }} | House-of-Rona">
 <meta property="og:image" content="https://github.com/rqdaA.png">
-<meta name="twitter:site" content="@907903">
+<meta name="twitter:site" content="@rqda_A">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ page.title }} | House-of-Rona">
 <meta name="twitter:image" content="https://github.com/rqdaA.png">
@@ -48,7 +48,7 @@
     <hr>
     {% endif %}
 
-    {{ post_macros::content(page=page, summary=false) }}
+    {{ post_macros::content(page=page, summary=false, show_only_description=false) }}
     {{ post_macros::earlier_later(page=page) }}
 </div>
 {% endblock content %}

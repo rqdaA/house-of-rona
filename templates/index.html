@@ -4,6 +4,24 @@
 <link rel="stylesheet" href="{{ get_url(path='footnote.css', trailing_slash=false) | safe }}">
 <link rel="stylesheet" href="{{ get_url(path='page.css', trailing_slash=false) | safe }}">
 <link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (typeof renderMathInElement === "function") {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\(", right: "\\)", display: false},
+                {left: "\\[", right: "\\]", display: true}
+            ],
+            throwOnError: false
+        });
+    }
+});
+</script>
 
 <meta name="google-site-verification" content="I4O4hRvGX4CkU3wvuZTczjjZFLuG3YINxBvx2be_tHY">
 {% if config.extra.logo_icon -%}
@@ -14,7 +32,7 @@
 <meta property="og:title" content="House-of-Rona">
 <meta property="og:image" content="https://github.com/rqdaA.png">
 <meta property="og:description" content="Rona's Blog">
-<meta name="twitter:site" content="@907903">
+<meta name="twitter:site" content="@rqda_A">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="House-of-Rona">
 <meta name="twitter:image" content="https://github.com/rqdaA.png">

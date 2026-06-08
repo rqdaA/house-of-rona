@@ -17,9 +17,9 @@ taxonomies = [
 ]
 
 [markdown]
-# Whether to do syntax highlighting
-# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
-highlight_code = true
+# Syntax highlighting
+[markdown.highlighting]
+theme = "github-dark"
 
 
 [extra]
@@ -31,7 +31,7 @@ menu_items = [
     { name = "<i class='nf nf-dev-github_alt'></i>whoami", url = "$BASE_URL/about" },
     # set newtab to true to make the link open in new tab
     { name = "<i class='nf nf-cod-github_inverted'></i>github", url = "https://github.com/rqdaA", newtab = true },
-    { name = "<i class='nf nf-cod-twitter'></i>twitter", url = "https://twitter.com/907903", newtab = true },
+    { name = "<i class='nf nf-cod-twitter'></i>twitter", url = "https://twitter.com/rqda_A", newtab = true },
 ]
 logo_text = "House-of-Rona"
 logo_icon = "https://github.com/rqdaA.png"
