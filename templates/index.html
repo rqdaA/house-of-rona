@@ -10,15 +10,32 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    if (typeof renderMathInElement === "function") {
-        renderMathInElement(document.body, {
-            delimiters: [
-                {left: "$$", right: "$$", display: true},
-                {left: "\\(", right: "\\)", display: false},
-                {left: "\\[", right: "\\]", display: true}
-            ],
-            throwOnError: false
-        });
+    const renderKaTeX = () => {
+        if (typeof renderMathInElement === "function") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\(", right: "\\)", display: false},
+                    {left: "\\[", right: "\\]", display: true}
+                ],
+                ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+                throwOnError: false
+            });
+            return true;
+        }
+        return false;
+    };
+
+    if (!renderKaTeX()) {
+        const id = setInterval(function () {
+            if (renderKaTeX()) {
+                clearInterval(id);
+            }
+        }, 100);
+        setTimeout(function () {
+            clearInterval(id);
+        }, 3000);
     }
 });
 </script>
@@ -83,6 +100,28 @@ document.addEventListener("DOMContentLoaded", function () {
     {% else %}
     {%- set show_pages = section.pages -%}
     {% endif -%}
+
+    {% for subsection_path in section.subsections %}
+    {% set subsection = get_section(path=subsection_path) %}
+    {% if not subsection.draft %}
+    <div class="post on-list">
+        <h1 class="post-title"><a href="{{ subsection.permalink | safe }}">{{ subsection.title }}</a></h1>
+        <div class="post-meta-inline">
+            {{ post_macros::date(page=subsection) }}
+        </div>
+
+        {{ post_macros::tags(page=subsection) }}
+
+        <div class="post-content">
+            {% if subsection.description %}
+            {{ subsection.description | safe }}
+            {% elif subsection.summary %}
+            {{ subsection.summary | safe }}
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    {% endfor -%}
 
     {%- for page in show_pages %}
     <div class="post on-list">
