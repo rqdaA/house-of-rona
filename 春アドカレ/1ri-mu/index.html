@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title> 1日目 線形代数B | House-of-Rona</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="robots" content="noodp"/>
+
+    <link rel="stylesheet" href="https://blog.rqda.wtf/style.css">
+    <link rel="stylesheet" href="https://blog.rqda.wtf/color/green-auto.css">
+
+        <link rel="stylesheet" href="https://blog.rqda.wtf/color/background_dark.css">
+    
+    <link rel="stylesheet" href="https://blog.rqda.wtf/font-hack-subset.css">
+
+    <meta name="description" content=" 1日目 線形代数B">
+
+    <meta property="og:description" content=" 1日目 線形代数B">
+    <meta property="og:title" content=" 1日目 線形代数B | House-of-Rona">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://blog.rqda.wtf/春アドカレ/1ri-mu/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content=" 1日目 線形代数B">
+    <meta name="twitter:title" content=" 1日目 線形代数B | House-of-Rona">
+    <meta property="twitter:domain" content="blog.rqda.wtf">
+    <meta property="twitter:url" content="https://blog.rqda.wtf/春アドカレ/1ri-mu/">
+
+                <link rel="alternate" type="application/atom+xml" title="House-of-Rona Atom Feed" href="https://blog.rqda.wtf/atom.xml" />
+                <link rel="alternate" type="application/rss+xml" title="House-of-Rona RSS Feed" href="https://blog.rqda.wtf/rss.xml" />
+        <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+    
+<link rel="stylesheet" href="https://blog.rqda.wtf/footnote.css">
+<link rel="stylesheet" href="https://blog.rqda.wtf/page.css">
+<link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const renderKaTeX = () => {
+        if (typeof renderMathInElement === "function") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\(", right: "\\)", display: false},
+                    {left: "\\[", right: "\\]", display: true}
+                ],
+                ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+                throwOnError: false
+            });
+            return true;
+        }
+        return false;
+    };
+
+    if (!renderKaTeX()) {
+        const id = setInterval(function () {
+            if (renderKaTeX()) {
+                clearInterval(id);
+            }
+        }, 100);
+        setTimeout(function () {
+            clearInterval(id);
+        }, 3000);
+    }
+});
+</script>
+
+<meta name="google-site-verification" content="I4O4hRvGX4CkU3wvuZTczjjZFLuG3YINxBvx2be_tHY">
+<link rel="stylesheet" href="https://blog.rqda.wtf/icon.css">
+
+<meta property="og:title" content=" 1日目 線形代数B | House-of-Rona">
+<meta property="og:image" content="https://github.com/rqdaA.png">
+<meta name="twitter:site" content="@rqda_A">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content=" 1日目 線形代数B | House-of-Rona">
+<meta name="twitter:image" content="https://github.com/rqdaA.png">
+<meta property="author" content="Rona (rqdaA)">
+<meta property="description" content=" 1日目 線形代数B">
+<meta property="og:description" content=" 1日目 線形代数B">
+
+
+</head>
+
+<body class="">
+<div class="container">
+    
+<header class="header">
+    <div class="header__inner">
+        <div class="header__logo">
+            
+            <img src="https://github.com/rqdaA.png" alt="">
+            
+            
+            <a href="https://blog.rqda.wtf" style="text-decoration: none;">
+                <div class="logo">
+                    
+                    House-of-Rona
+                    
+                </div>
+            </a>
+        </div>
+    </div>
+
+    
+    <nav class="menu">
+            <ul class="menu__inner">
+                <li><a href="https://blog.rqda.wtf/tags"><i class='nf nf-oct-tag'></i>tags</a></li>
+            
+                <li><a href="https://blog.rqda.wtf/about"><i class='nf nf-dev-github_alt'></i>whoami</a></li>
+            
+                <li><a href="https://github.com/rqdaA" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-github_inverted'></i>github</a></li>
+            
+                <li><a href="https://twitter.com/rqda_A" target="_blank" rel="noopener noreferrer"><i class='nf nf-cod-twitter'></i>twitter</a></li>
+            </ul>
+        </nav>
+    
+    
+    
+</header>
+
+
+    <div class="content">
+        
+<div class="post">
+    
+    <h1 class="post-title"><a href="https://blog.rqda.wtf/春アドカレ/1ri-mu/"> 1日目 線形代数B</a></h1>
+    <div class="post-meta-inline">
+        
+    <span class="post-date">
+            2026-06-08
+        </span>
+
+    </div>
+
+    
+
+    
+    <h1>Table of Content</h1>
+    <ul>
+        
+        <li>
+            <a href="https://blog.rqda.wtf/春アドカレ/1ri-mu/#xian-xing-dai-shu-b">線形代数B</a>
+            
+            <ul>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/春アドカレ/1ri-mu/#yan-xi-1">演習1</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/春アドカレ/1ri-mu/#yan-xi-2">演習2</a>
+                </li>
+                
+                <li>
+                    <a href="https://blog.rqda.wtf/春アドカレ/1ri-mu/#yan-xi-3">演習3</a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+    </ul>
+    <hr>
+    
+
+    <div class="post-content">
+            <h1 id="xian-xing-dai-shu-b">線形代数B</h1>
+<p>期末が6/22(月)にあるらしい。</p>
+<h2 id="yan-xi-1">演習1</h2>
+<p>$$
+W=
+\left\lbrace
+\begin{pmatrix}
+x\\
+y
+\end{pmatrix}
+\in\mathbb{R}^2
+\mid
+x+y=1
+\right\rbrace
+$$
+$$
+W \text{ は } \mathbb{R}^2 \text{ の部分空間であるか否かを答えよ。}
+$$</p>
+<p>集合Wが部分空間であるためには</p>
+<ol>
+<li>W の中の2つのベクトルを足しても、また W の中に入ること</li>
+<li>W の中のベクトルを実数倍しても、また W の中に入ること</li>
+</ol>
+<p>の2つを満たす必要がある。</p>
+<p>ここで、
+$$
+\begin{pmatrix}
+0\\
+1
+\end{pmatrix} \in W
+$$</p>
+<p>$$
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix} \in W
+$$
+なので、両者ともにWの中のベクトルであるが、これら2つを足すと</p>
+<p>$$
+\begin{pmatrix}
+1\\
+1
+\end{pmatrix} \notin W
+$$
+となり、1を満たさない。よって、Wは$\mathbb{R}^2$の部分空間ではない。</p>
+<h2 id="yan-xi-2">演習2</h2>
+<p>$$
+\text{次のベクトルが1次独立であるか否かを答えよ。なお、}i\text{ は虚数単位である。}
+$$</p>
+<p>$$
+(1)\quad
+\begin{pmatrix}
+1\\
+i\\
+i-1
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+2i\\
+-i-2\\
+i+1
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+i+1\\
+-2\\
+-4
+\end{pmatrix}
+$$</p>
+<p>$$
+(2)\quad
+\begin{pmatrix}
+1\\
+i\\
+i-1
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+2i\\
+-i-2\\
+i+1
+\end{pmatrix},
+\quad
+\begin{pmatrix}
+i+1\\
+-2\\
+4
+\end{pmatrix}
+$$</p>
+<p>暗記事項として</p>
+<p>$\text{ベクトルが1次独立} \Rightarrow \text{ベクトルを並べた行列の行列式が0でない}$</p>
+<p>があるらしい。</p>
+<p>これを使う。サラスの公式で行列式を計算すると
+$$
+\begin{vmatrix}
+1 &amp; 2i &amp; i+1\\
+i &amp; -i-2 &amp; -2\\
+i-1 &amp; i+1 &amp; -4
+\end{vmatrix}
+= 8i
+$$</p>
+<p>よって (1)は一次独立。</p>
+<p>同じようにして</p>
+<p>$$
+\begin{vmatrix}
+1 &amp; 2i &amp; i+1\\
+i &amp; -i-2 &amp; -2\\
+i-1 &amp; i+1 &amp; 4
+\end{vmatrix}
+= 0
+$$</p>
+<p>よって(2)は一次従属。</p>
+<h2 id="yan-xi-3">演習3</h2>
+<p>\[
+\mathbf{v}_1=
+\begin{pmatrix}
+1\\
+1\\
+0
+\end{pmatrix},
+\quad
+\mathbf{v}_2=
+\begin{pmatrix}
+0\\
+1\\
+1
+\end{pmatrix},
+\quad
+\mathbf{v}_3=
+\begin{pmatrix}
+1\\
+2\\
+1
+\end{pmatrix}
+\]
+\[
+(1)\quad
+\langle \mathbf{v}_1,\mathbf{v}_2\rangle
+\text{ を集合の式で表せ。}
+\]
+\[
+(2)\quad
+\langle \mathbf{v}_3\rangle
+\text{ を集合の式で表せ。}
+\]
+\[
+(3)\quad
+\langle \mathbf{v}_1,\mathbf{v}_2\rangle
+\text{ と }
+\langle \mathbf{v}_3\rangle
+\text{ の関係を答えよ。}
+\]</p>
+<p>$\langle \rangle$ はその中のベクトルたちで作れるすべての1次結合の集合を表すらしい。</p>
+<p>katexの書き方がめんどくさそうかつそんなに難しくなさそう。</p>
+
+        </div>
+
+    
+</div>
+
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer__inner">
+                <div class="copyright copyright--user">&#169 2025 Rona 🐈</div>
+            </div>
+    </footer>
+    
+
+</div>
+</body>
+
+</html>
