@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title>House-of-Rona - life</title>
+      <link>https://blog.rqda.wtf</link>
+      <description>Ronaの雑記</description>
+      <generator>Zola</generator>
+      <language>ja</language>
+      <atom:link href="https://blog.rqda.wtf/tags/life/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Thu, 20 Aug 2026 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>生茶 ジャスミン香る緑茶がうまい</title>
+          <pubDate>Thu, 20 Aug 2026 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://blog.rqda.wtf/namacha/</link>
+          <guid>https://blog.rqda.wtf/namacha/</guid>
+          <description xml:base="https://blog.rqda.wtf/namacha/">&lt;p&gt;この夏おすすめのドリンク1選&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;products.kirin.co.jp&#x2F;softdrink&#x2F;softdrink&#x2F;detail.html?id=8856&quot;&gt;https:&#x2F;&#x2F;products.kirin.co.jp&#x2F;softdrink&#x2F;softdrink&#x2F;detail.html?id=8856&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</description>
+      </item>
+    </channel>
+</rss>

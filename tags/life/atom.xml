@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
+    <title>House-of-Rona - life</title>
+    <subtitle>Ronaの雑記</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://blog.rqda.wtf/tags/life/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.rqda.wtf"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-08-20T00:00:00+00:00</updated>
+    <id>https://blog.rqda.wtf/tags/life/atom.xml</id>
+    <entry xml:lang="ja">
+        <title>生茶 ジャスミン香る緑茶がうまい</title>
+        <published>2026-08-20T00:00:00+00:00</published>
+        <updated>2026-08-20T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.rqda.wtf/namacha/"/>
+        <id>https://blog.rqda.wtf/namacha/</id>
+        
+        <content type="html" xml:base="https://blog.rqda.wtf/namacha/">&lt;p&gt;この夏おすすめのドリンク1選&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;products.kirin.co.jp&#x2F;softdrink&#x2F;softdrink&#x2F;detail.html?id=8856&quot;&gt;https:&#x2F;&#x2F;products.kirin.co.jp&#x2F;softdrink&#x2F;softdrink&#x2F;detail.html?id=8856&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
