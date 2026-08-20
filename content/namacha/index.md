@@ -1,11 +1,11 @@
 +++
-title = "生茶 ジャスミン香る緑茶がうまい"
+title = "この夏おすすめのドリンク1選"
 date = 2026-08-20
-description = "この夏おすすめのドリンク1選"
+description = ""
 [taxonomies]
 tags = ["life"]
 +++
 
-この夏おすすめのドリンク1選
+生茶 ジャスミン香る緑茶
 
 [https://products.kirin.co.jp/softdrink/softdrink/detail.html?id=8856](https://products.kirin.co.jp/softdrink/softdrink/detail.html?id=8856)
